@@ -1,13 +1,18 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  const currentPath = usePathname();
+  console.log(currentPath);
+  console.log(new Date().getFullYear());
   const links = [
     { label: "Home", href: "/" },
-    { label: "Coming soon", href: "/" },
-    { label: "Food and drinks", href: "/" },
-    { label: "Tickets", href: "/" },
-    { label: "Cinemas", href: "/" },
-    { label: "Schedule", href: "/" },
+    { label: "Coming soon", href: "/movies" },
+    { label: "Food and drinks", href: "#" },
+    { label: "Tickets", href: "#" },
+    { label: "Cinemas", href: "#" },
+    { label: "Schedule", href: "#" },
   ];
   return (
     <div>
@@ -37,7 +42,11 @@ const Navbar = () => {
             return (
               <li key={index}>
                 <Link
-                  className="text-sm text-gray-400 hover:text-gray-500"
+                  className={`${
+                    link.href === currentPath
+                      ? "text-blue-900"
+                      : "text-gray-400"
+                  } text-lg hover:text-gray-500`}
                   href={link.href}
                 >
                   {link.label}
@@ -77,14 +86,8 @@ const Navbar = () => {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
+                <path strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </button>
           </div>
@@ -120,7 +123,7 @@ const Navbar = () => {
               </a>
             </div>
             <p className="my-4 text-xs text-center text-gray-400">
-              <span>Copyright © 2021</span>
+              <span>Copyright © {new Date().getFullYear()}</span>
             </p>
           </div>
         </nav>
