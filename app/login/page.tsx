@@ -43,7 +43,7 @@ const login = () => {
               </div>
               <div className="w-full lg:w-auto px-4">
                 <a
-                  className="inline-block font-extrabold hover:underline"
+                  className="inline-block font-extrabold hover:underline text-blue-500"
                   href="#"
                 >
                   Forgot password?
@@ -55,7 +55,7 @@ const login = () => {
             </button>
             <p className="text-center font-extrabold">
               Don&rsquo;t have an account yet?{" "}
-              <a className="text-red-500 hover:underline" href="#">
+              <a className="text-blue-500 hover:underline" href="#">
                 Click here
               </a>
             </p>
