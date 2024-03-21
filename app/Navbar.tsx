@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import logo from "/public/images/logo.png";
@@ -6,7 +7,7 @@ import Image from "next/image";
 
 const Navbar = () => {
   const currentPath = usePathname();
-  console.log(new Date().getFullYear());
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const links = [
     { label: "Home", href: "/" },
     { label: "Coming soon", href: "/movies" },
@@ -15,22 +16,29 @@ const Navbar = () => {
     { label: "Cinemas", href: "#" },
     { label: "Schedule", href: "#" },
   ];
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div>
-      <nav className="relative px-4 py-4 flex justify-between items-center bg-white">
+      <nav className="relative px-4 py-4 flex justify-between items-center bg-white transition duration-300 ease-in-out">
         <a className="text-3xl font-bold leading-none" href="#">
-         
-            <Image
-              style={{
-                maxWidth: "5rem",
-                height: "5rem",
-              }}
-              src={logo}
-              alt="logo"
-            />
+          <Image
+            style={{
+              maxWidth: "5rem",
+              height: "5rem",
+            }}
+            src={logo}
+            alt="logo"
+          />
         </a>
         <div className="lg:hidden">
-          <button className="navbar-burger flex items-center text-blue-600 p-3">
+          <button
+            className="navbar-burger flex items-center text-blue-600 p-3"
+            onClick={toggleMenu}
+          >
             <svg
               className="block h-4 w-4 fill-current"
               viewBox="0 0 20 20"
@@ -41,7 +49,11 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
-        <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
+        <ul
+          className={`${
+            isMenuOpen ? "block" : "hidden"
+          } lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6`}
+        >
           {links.map((link, index) => {
             return (
               <li key={index}>
@@ -60,22 +72,26 @@ const Navbar = () => {
           })}
         </ul>
         <a
-          className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+          className={
+            isMenuOpen
+              ? "hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+              : "lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+          }
           href="/login"
         >
           Sign In
         </a>
         <a
-          className="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+          className={
+            isMenuOpen
+              ? "hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+              : "lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+          }
           href="/signup"
         >
           Sign up
         </a>
       </nav>
-      <div className="navbar-menu relative z-50 hidden">
-        <div className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
-        
-      </div>
     </div>
   );
 };
