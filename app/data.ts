@@ -2,6 +2,19 @@ import cinema1 from "/public/cinema/cinema1.jpg";
 import cinema2 from "/public/cinema/cinema2.png";
 import cinema3 from "/public/cinema/cinema3.jpg";
 import cinema4 from "/public/cinema/cinema4.jpg";
+
+export interface Movie {
+  id: number;
+  poster: StaticImageData;
+  title: string;
+  genre: string;
+  cast: string[];
+  director: string;
+  description: string;
+  releasedYear: number;
+  rating: number;
+  showTime: string[];
+}
 export const list = [
   {
     id: 1,
@@ -45,6 +58,7 @@ import movie6 from '/public/movies/movie6.jpg';
 import movie7 from '/public/movies/movie7.jpg';
 import movie8 from '/public/movies/movie8.jpg';
 import movie10 from '/public/movies/movie10.jpg';
+import { StaticImageData } from "next/image";
 export const movies = [
   {
     id: 1,
