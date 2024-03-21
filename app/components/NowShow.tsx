@@ -49,7 +49,7 @@ const NowShow = () => {
         </nav>
 
         {movies.map((movie) => {
-          return <MovieCard {...movie} />;
+          return <MovieCard {...movie} key={movie.id}/>;
         })}
       </div>
     </section>
