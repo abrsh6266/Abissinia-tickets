@@ -1,5 +1,5 @@
 import cinema1 from "/public/cinema/cinema1.jpg";
-import cinema2 from "/public/cinema/cinema2.png";
+import cinema2 from "/public/cinema/cinema2.jpg";
 import cinema3 from "/public/cinema/cinema3.jpg";
 import cinema4 from "/public/cinema/cinema4.jpg";
 
