@@ -8,7 +8,7 @@ interface Props {
     movieId: string;
   };
 }
-const page = ({ params }: Props) => {
+const Details = ({ params }: Props) => {
   const [id, setId] = useState(params.movieId);
   const [movie, setMovie] = useState(() => {
     return movies.find((m) => m.id.toString() === id);
@@ -19,4 +19,4 @@ const page = ({ params }: Props) => {
   return <h1>page not found</h1>;
 };
 
-export default page;
+export default Details;
