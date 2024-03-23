@@ -1,10 +1,10 @@
-'use client'
+"use client";
 import { useState } from "react";
 import { movie } from "../data";
 import MovieCard from "./MovieCard";
 
 const NowShow = () => {
-  const [movies,setMovies]  = useState(movie)
+  const [movies, setMovies] = useState(movie);
   return (
     <section className="bg-white py-8">
       <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
@@ -52,7 +52,7 @@ const NowShow = () => {
         </nav>
 
         {movies.map((movie) => {
-          return <MovieCard {...movie} key={movie.id}/>;
+          return <MovieCard {...movie} key={movie.id} />;
         })}
       </div>
     </section>

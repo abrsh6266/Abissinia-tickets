@@ -56,13 +56,13 @@ const Navbar = () => {
         >
           {links.map((link, index) => {
             return (
-              <li key={index}>
+              <li key={index} className={isMenuOpen?"mt-6":""}>
                 <Link
                   className={`${
                     link.href === currentPath
-                      ? "text-green-500"
+                      ? "bg-black text-white rounded-xl"
                       : ""
-                  } p-2 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer`}
+                  } p-2 hover:bg-black hover:text-white hover:rounded-xl duration-200 cursor-pointer`}
                   href={link.href}
                 >
                   {link.label}
