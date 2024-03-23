@@ -29,7 +29,7 @@ const MovieDetail = ({
     showTime,
   };
   return (
-    <div className="container m-auto grid grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-4">
+    <div className="container m-auto md:grid lg:grid md:pl-4 md:grid-cols-5 lg:grid-cols-8 gap-4">
       <div className="col-span-full my-2">
       <a
               className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
