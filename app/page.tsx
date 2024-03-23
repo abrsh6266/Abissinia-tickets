@@ -3,7 +3,7 @@ import NowShow from "./components/NowShow";
 export default function Home() {
   return (
     <div>
-      <SlickCarousel />
+      <SlickCarousel/>
       <NowShow />
     </div>
   );
