@@ -31,7 +31,7 @@ const MovieInfoCard = ({
             <dt className="text-sm font-medium text-gray-500">Cast</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {cast.map((c) => {
-                return <span>{c}, </span>;
+                return <span key={c}>{c}, </span>;
               })}
             </dd>
           </div>
