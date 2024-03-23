@@ -15,12 +15,12 @@ const MovieDetail = ({
     director,
     showTime,
   }: Movie) => {
-  return <div className=" m-auto ml-2 grid lg:grid-cols-2">
+  return <div className=" sm:m-auto ml-2 md:ml-8 grid md:grid-cols-2">
+    <div className="relative lg:w-64 lg:h-96 sm:w-32 sm:h-64">
+        <Image className="absolute top-0 left-0 w-full h-full object-cover" src={poster} alt={title} />
+    </div>
     <div>
         <h1 className="text-2xl">{title}</h1>
-    </div>
-    <div className="relative w-64 h-64">
-        <Image className="absolute top-0 left-0 w-full h-full object-cover" src={poster} alt={title} />
     </div>
   </div>;
 };

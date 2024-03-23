@@ -10,7 +10,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const links = [
     { label: "Home", href: "/" },
-    { label: "Coming soon", href: "/movies" },
+    { label: "Coming soon", href: "/movies/1" },
     { label: "Food and drinks", href: "#" },
     { label: "Tickets", href: "#" },
     { label: "Cinemas", href: "#" },
@@ -60,9 +60,9 @@ const Navbar = () => {
                 <Link
                   className={`${
                     link.href === currentPath
-                      ? "text-green-500 text-2xl"
+                      ? "text-green-500"
                       : ""
-                  } p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer`}
+                  } p-2 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer`}
                   href={link.href}
                 >
                   {link.label}
@@ -74,8 +74,8 @@ const Navbar = () => {
         <a
           className={
             isMenuOpen
-              ? "hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
-              : "lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+              ? "hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-400 hover:bg-gray-600 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+              : "lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-400 hover:bg-gray-600 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
           }
           href="/login"
         >
