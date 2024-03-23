@@ -59,7 +59,7 @@ import movie7 from '/public/movies/movie7.jpg';
 import movie8 from '/public/movies/movie8.jpg';
 import movie10 from '/public/movies/movie10.jpg';
 import { StaticImageData } from "next/image";
-export const movies = [
+export const movie = [
   {
     id: 1,
     poster: movie1,

@@ -1,7 +1,10 @@
-import { movies } from "../data";
+'use client'
+import { useState } from "react";
+import { movie } from "../data";
 import MovieCard from "./MovieCard";
 
 const NowShow = () => {
+  const [movies,setMovies]  = useState(movie)
   return (
     <section className="bg-white py-8">
       <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
