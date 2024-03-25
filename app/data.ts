@@ -13,7 +13,10 @@ export interface Movie {
   description: string;
   releasedYear: number;
   rating: number;
-  showTime: [{ day: string; times: string[] }];
+  showTime: {
+    day: string;
+    times: string[];
+  }[];
 }
 export const list = [
   {
@@ -59,7 +62,7 @@ import movie7 from "/public/movies/movie7.jpg";
 import movie8 from "/public/movies/movie8.jpg";
 import movie10 from "/public/movies/movie10.jpg";
 import { StaticImageData } from "next/image";
-export const movie = [
+export const movie: Movie[] = [
   {
     id: 1,
     poster: movie1,
@@ -72,7 +75,6 @@ export const movie = [
     releasedYear: 2018,
     rating: 8.4,
     showTime: [
-      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
       { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
       { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
     ],
@@ -89,7 +91,6 @@ export const movie = [
     releasedYear: 2010,
     rating: 8.8,
     showTime: [
-      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
       { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
       { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
     ],
@@ -107,7 +108,6 @@ export const movie = [
     rating: 9.0,
     showTime: [
       { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
-      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
       { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
     ],
   },
@@ -124,7 +124,6 @@ export const movie = [
     rating: 8.6,
     showTime: [
       { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
-      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
       { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
     ],
   },
@@ -141,8 +140,8 @@ export const movie = [
     rating: 9.3,
     showTime: [
       { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
-      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
       { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
+      { day: "Tuesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
     ],
   },
   {
@@ -159,7 +158,6 @@ export const movie = [
     showTime: [
       { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
       { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
-      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
     ],
   },
   {
@@ -176,7 +174,6 @@ export const movie = [
     showTime: [
       { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
       { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
-      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
     ],
   },
   {
@@ -193,7 +190,7 @@ export const movie = [
     showTime: [
       { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
       { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
-      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
+      { day: "Sunday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
     ],
   },
   {
@@ -210,7 +207,7 @@ export const movie = [
     showTime: [
       { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
       { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
-      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
+      { day: "Sunday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
     ],
   },
 ];

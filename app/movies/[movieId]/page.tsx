@@ -14,7 +14,7 @@ const Details = ({ params }: Props) => {
     return movies.find((m) => m.id.toString() === id);
   });
   if (movie) {
-    return <MovieDetail {...movie} />;
+    return <MovieDetail movie={movie} />;
   }
   return <h1>page not found</h1>;
 };
