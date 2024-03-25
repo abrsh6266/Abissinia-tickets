@@ -13,7 +13,7 @@ export interface Movie {
   description: string;
   releasedYear: number;
   rating: number;
-  showTime: string[];
+  showTime: [{ day: string; times: string[] }];
 }
 export const list = [
   {
@@ -71,7 +71,11 @@ export const movie = [
       "Teen Miles Morales becomes the Spider-Man of his universe, and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
     releasedYear: 2018,
     rating: 8.4,
-    showTime: ["2:00 PM", "5:00 PM", "8:00 PM"],
+    showTime: [
+      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
+      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
+      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
+    ],
   },
   {
     id: 2,
@@ -84,7 +88,11 @@ export const movie = [
       "A thief who enters the dreams of others to steal secrets from their subconscious.",
     releasedYear: 2010,
     rating: 8.8,
-    showTime: ["1:30 PM", "4:30 PM", "7:30 PM"],
+    showTime: [
+      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
+      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
+      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
+    ],
   },
   {
     id: 3,
@@ -97,7 +105,11 @@ export const movie = [
       "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
     releasedYear: 2008,
     rating: 9.0,
-    showTime: ["1:45 PM", "4:45 PM", "7:45 PM"],
+    showTime: [
+      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
+      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
+      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
+    ],
   },
   {
     id: 4,
@@ -110,7 +122,11 @@ export const movie = [
       "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
     releasedYear: 2014,
     rating: 8.6,
-    showTime: ["2:15 PM", "5:15 PM", "8:15 PM"],
+    showTime: [
+      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
+      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
+      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
+    ],
   },
   {
     id: 5,
@@ -123,7 +139,11 @@ export const movie = [
       "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
     releasedYear: 1994,
     rating: 9.3,
-    showTime: ["1:15 PM", "4:15 PM", "7:15 PM"],
+    showTime: [
+      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
+      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
+      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
+    ],
   },
   {
     id: 6,
@@ -136,7 +156,11 @@ export const movie = [
       "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
     releasedYear: 1972,
     rating: 9.2,
-    showTime: ["1:00 PM", "4:00 PM", "7:00 PM"],
+    showTime: [
+      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
+      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
+      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
+    ],
   },
   {
     id: 7,
@@ -149,7 +173,11 @@ export const movie = [
       "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
     releasedYear: 1994,
     rating: 8.9,
-    showTime: ["1:20 PM", "4:20 PM", "7:20 PM"],
+    showTime: [
+      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
+      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
+      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
+    ],
   },
   {
     id: 8,
@@ -162,7 +190,11 @@ export const movie = [
       "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
     releasedYear: 1999,
     rating: 8.7,
-    showTime: ["1:40 PM", "4:40 PM", "7:40 PM"],
+    showTime: [
+      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
+      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
+      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
+    ],
   },
   {
     id: 10,
@@ -175,6 +207,10 @@ export const movie = [
       "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
     releasedYear: 2003,
     rating: 8.9,
-    showTime: ["2:30 PM", "5:30 PM", "8:30 PM"],
+    showTime: [
+      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
+      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
+      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
+    ],
   },
 ];

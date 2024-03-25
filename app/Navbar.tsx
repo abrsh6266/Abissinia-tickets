@@ -12,7 +12,7 @@ const Navbar = () => {
     { label: "Home", href: "/" },
     { label: "Coming soon", href: "/movies/1" },
     { label: "Food and drinks", href: "#" },
-    { label: "Tickets", href: "#" },
+    { label: "Tickets", href: "/film-showtimes-tickets" },
     { label: "Cinemas", href: "#" },
     { label: "Schedule", href: "#" },
   ];

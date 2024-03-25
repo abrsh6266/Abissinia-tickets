@@ -33,9 +33,7 @@ const MovieDetail = ({
     <>
       <div className="container m-auto md:grid lg:grid md:pl-4 md:grid-cols-5 lg:grid-cols-8 gap-4">
         <div className="ml-2 col-span-full my-2">
-          <h1
-            className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
-          >
+          <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl ">
             Movie Detail
           </h1>
         </div>
@@ -50,26 +48,21 @@ const MovieDetail = ({
           <MovieInfoCard {...movie} />
         </div>
         <div className="ml-2 col-span-full my-2">
-          <h1
-            className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
-          >
+          <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl ">
             Movie Schedule
           </h1>
         </div>
       </div>
       <div className="m-auto lg:flex sm: gap-4">
-      <div className="lg:col-start-4 lg:col-span-2 my-4 mx-4">
-        <h1 className="tile-marker">Monday</h1>
-        <MovieSchedule showTime={showTime}/>
-      </div>
-      <div className="lg:col-start-4 lg:col-span-2 my-4 mx-4">
-        <h1 className="tile-marker">Tuesday</h1>
-        <MovieSchedule showTime={showTime}/>
-      </div>
-      <div className="lg:col-start-4 lg:col-span-2 my-4 mx-4">
-        <h1 className="tile-marker">Wednesday</h1>
-        <MovieSchedule showTime={showTime}/>
-      </div>
+        {showTime.map((time, index) => {
+          const { day, times   } = time;
+          return (
+            <div key={day} className="lg:col-start-4 lg:col-span-2 my-4 mx-4">
+              <h1 className="tile-marker">{time.day}</h1>
+              <MovieSchedule showTime={times} />
+            </div>
+          );
+        })}
       </div>
     </>
   );

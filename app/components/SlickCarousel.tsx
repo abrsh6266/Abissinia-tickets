@@ -20,7 +20,7 @@ const SlickCarousel = () => {
   };
   return (
     <section>
-      <Slider {...settings} className="overflow-x-hidden">
+      <Slider {...settings} >
         {people.map((p) => {
           const { name, image, id, quote, title } = p;
           return (
