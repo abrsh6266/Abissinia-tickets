@@ -4,7 +4,7 @@ import SectionTitle from "../components/SectionTitle";
 import { Movie, movie } from "../data";
 import MovieDetail from "../components/MovieDetail";
 
-const page = () => {
+const Page = () => {
   const [movies, setMovies] = useState(movie);
   const handleFilter = (e: any) => {
     if (e.target.value != "") {
@@ -54,4 +54,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
