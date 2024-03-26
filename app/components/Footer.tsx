@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { links, socials } from "../data";
 
 const Footer = () => {
@@ -9,12 +10,12 @@ const Footer = () => {
           {links.map((link, index) => {
             return (
               <div key={index} className="px-5 py-2">
-                <a
+                <Link
                   href={link.href}
                   className="text-base leading-6 text-gray-500 hover:text-gray-900"
                 >
                   {link.label}
-                </a>
+                </Link>
               </div>
             );
           })}
@@ -23,7 +24,7 @@ const Footer = () => {
           {socials.map((social) => {
             const { url, id, name, icon } = social;
             return (
-              <a
+              <Link
                 key={id}
                 href={url}
                 className="text-gray-400 hover:text-gray-500"
@@ -34,7 +35,7 @@ const Footer = () => {
                 >
                   {icon}
                 </p>
-              </a>
+              </Link>
             );
           })}
         </div>

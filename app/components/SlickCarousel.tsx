@@ -19,7 +19,7 @@ const SlickCarousel = () => {
     pauseOnHover: true,
   };
   return (
-    <section className=" overflow-hidden">
+    <section className=" overflow-hidden bg-gradient-to-r from-gray-500 via-gray-500 to-gray-500">
       <Slider {...settings} >
         {people.map((p) => {
           const { name, image, id, quote, title } = p;
