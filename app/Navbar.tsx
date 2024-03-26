@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <div>
       <nav className="relative px-4 py-4 flex justify-between items-center bg-white transition duration-300 ease-in-out">
-        <a className="text-3xl font-bold leading-none" href="#">
+        <Link className="text-3xl font-bold leading-none" href="/">
           <Image
             style={{
               maxWidth: "5rem",
@@ -26,7 +26,7 @@ const Navbar = () => {
             src={logo}
             alt="logo"
           />
-        </a>
+        </Link>
         <div className="lg:hidden">
           <button
             className="navbar-burger flex items-center text-blue-600 p-3"
