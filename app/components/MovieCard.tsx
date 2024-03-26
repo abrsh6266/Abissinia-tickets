@@ -16,7 +16,7 @@ const MovieCard = ({
 }: Movie) => {
   return (
     <>
-      <div className="mx-auto my-4 w-80 h-auto border border-white shadow-lg rounded-lg cursor-pointer transition duration-500 transform hover:border-black hover:scale-105 active:scale-95 active:rotate-1  items-center justify-center font-bold">
+      <div className="mx-auto gap-4 my-4 w-80 h-auto border border-white shadow-lg rounded-lg cursor-pointer transition duration-500 transform hover:border-black hover:scale-105 active:scale-95 active:rotate-1  items-center justify-center font-bold">
         <div className="relative w-full h-96">
           <Image
             alt={title}

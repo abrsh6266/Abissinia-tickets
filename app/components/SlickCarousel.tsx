@@ -19,7 +19,7 @@ const SlickCarousel = () => {
     pauseOnHover: true,
   };
   return (
-    <section>
+    <section className=" overflow-hidden">
       <Slider {...settings} >
         {people.map((p) => {
           const { name, image, id, quote, title } = p;
@@ -31,7 +31,7 @@ const SlickCarousel = () => {
                   alt={name}
                   className="object-cover w-full h-full"
                 />
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white p-4 bg-black bg-opacity-50">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white bg-black bg-opacity-50">
                   <p className="text-xl">{quote}</p>
                 </div>
               </div>
