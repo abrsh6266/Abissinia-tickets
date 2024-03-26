@@ -4,11 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import logo from "/public/images/logo.png";
 import Image from "next/image";
-import {links} from './data'
+import { links } from "./data";
+import { FaTimes } from "react-icons/fa";
 const Navbar = () => {
   const currentPath = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -32,14 +32,18 @@ const Navbar = () => {
             className="navbar-burger flex items-center text-blue-600 p-3"
             onClick={toggleMenu}
           >
-            <svg
-              className="block h-4 w-4 fill-current"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>Mobile menu</title>
-              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-            </svg>
+            {isMenuOpen ? (
+              <FaTimes />
+            ) : (
+              <svg
+                className="block h-4 w-4 fill-current"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Mobile menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+              </svg>
+            )}
           </button>
         </div>
         <ul
@@ -49,13 +53,11 @@ const Navbar = () => {
         >
           {links.map((link, index) => {
             return (
-              <li key={index} className={isMenuOpen?"mt-6":""}>
+              <li key={index} className={isMenuOpen ? "mt-6" : ""}>
                 <Link
                   className={`${
-                    link.href === currentPath
-                      ? "bg-black text-white rounded-xl"
-                      : ""
-                  } p-2 hover:bg-black hover:text-white hover:rounded-xl duration-200 cursor-pointer`}
+                    link.href === currentPath ? "text-blue-600 rounded-xl" : ""
+                  } p-2 hover:text-blue-600 text-2xl sm:text-xl hover:rounded-xl duration-200 cursor-pointer`}
                   href={link.href}
                 >
                   {link.label}
