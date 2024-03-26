@@ -37,7 +37,7 @@ const Page = () => {
           </label>
         </div>
       </div>
-      <div className="md:m-20 m-2 max-w-lg italic text-2xl">
+      <div className="md:text-2xl sm:text-xl md:m-20 m-2 max-w-lg italic ">
         <p>
           Film schedule is updated and published on a weekly basis every Monday
           evening. You do not need to print the tickets - just present them to

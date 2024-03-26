@@ -4,18 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import logo from "/public/images/logo.png";
 import Image from "next/image";
-
+import {links} from './data'
 const Navbar = () => {
   const currentPath = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const links = [
-    { label: "Home", href: "/" },
-    { label: "Coming soon", href: "/movies/1" },
-    { label: "Food and drinks", href: "#" },
-    { label: "Tickets", href: "/film-showtimes-tickets" },
-    { label: "Cinemas", href: "#" },
-    { label: "Schedule", href: "#" },
-  ];
+  
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);

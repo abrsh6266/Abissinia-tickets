@@ -1,7 +1,58 @@
+"use client";
+import {
+  FaFacebook,
+  FaGithub,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+} from "react-icons/fa";
 import cinema1 from "/public/cinema/cinema1.jpg";
 import cinema2 from "/public/cinema/cinema2.jpg";
 import cinema3 from "/public/cinema/cinema3.jpg";
 import cinema4 from "/public/cinema/cinema4.jpg";
+
+export const socials = [
+  {
+    id: 10,
+    name:"Linkdin",
+    url: "https://www.linkedin.com/in/abrham-belayineh-190658258/",
+    icon: <FaLinkedin />,
+  },
+  {
+    id: 3,
+    name:"Github",
+    url: "https://www.github.com/abrsh6266",
+    icon: <FaGithub />,
+  },
+
+  {
+    id: 33,
+    name:"Instagram",
+    url: "https://www.instagram.com/umabrshxovll/",
+    icon: <FaInstagram />,
+  },
+  {
+    id: 1,
+    name:"Facebook",
+    url: "https://www.facebook.com/profile.php?id=100034253550916",
+    icon: <FaFacebook />,
+  },
+  {
+    id: 2,
+    name:"Twitter",
+    url: "https://www.twitter.com",
+    icon: <FaTwitter />,
+  },
+];
+
+export const links = [
+  { label: "Home", href: "/" },
+  { label: "Coming soon", href: "/movies/1" },
+  { label: "Food and drinks", href: "#" },
+  { label: "Tickets", href: "/film-showtimes-tickets" },
+  { label: "Cinemas", href: "#" },
+  { label: "Schedule", href: "#" },
+];
 
 export interface Movie {
   id: number;
