@@ -22,7 +22,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     const timeout = setTimeout(() => {
       // Simulate loading time (e.g., 2 seconds)
       setLoading(false); // Update loading state when timeout expires
-    }, 2000); // Adjust timeout duration as needed
+    }, 4000); // Adjust timeout duration as needed
 
     return () => clearTimeout(timeout); // Cleanup timeout on unmount
   }, []);
