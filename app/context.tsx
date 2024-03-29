@@ -1,11 +1,13 @@
 "use client";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { Movie } from "./data";
 interface AppContextType {
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   searchMovies: Movie[];
   setSearchMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
+  loading:boolean;
+  setLoading:React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const appContext = createContext<AppContextType | null>(null);
@@ -15,13 +17,24 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchMovies, setSearchMovies] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      // Simulate loading time (e.g., 2 seconds)
+      setLoading(false); // Update loading state when timeout expires
+    }, 2000); // Adjust timeout duration as needed
+
+    return () => clearTimeout(timeout); // Cleanup timeout on unmount
+  }, []);
   return (
     <appContext.Provider
       value={{
         searchTerm,
         setSearchTerm,
         searchMovies, 
-        setSearchMovies
+        setSearchMovies,
+        loading, 
+        setLoading,
       }}
     >
       {children}

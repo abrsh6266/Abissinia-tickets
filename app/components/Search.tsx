@@ -19,7 +19,7 @@ const Search = () => {
               className="font-bold uppercase rounded-full  w-full py-4 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
               type="text"
               name="search"
-              placeholder="Search"
+              placeholder="Search Movies"
             />
             <div className="bg-gray-600 p-2 hover:bg-blue-400 cursor-pointer mx-2 rounded-full">
               <button type="submit">
