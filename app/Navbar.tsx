@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <div>
+    <div className={loading ? "mt-30" : ""}>
       {!loading && (
         <nav className="relative px-4 py-4 flex justify-between items-center bg-white transition duration-300 ease-in-out">
           <Link className="text-3xl font-bold leading-none" href="/">
