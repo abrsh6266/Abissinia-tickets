@@ -22,7 +22,7 @@ const MovieCard = ({
             alt={title}
             className="absolute top-0 left-0 w-full h-full object-cover"
             src={poster}
-            layout="fill"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
         </div>
         <div className="p-2">

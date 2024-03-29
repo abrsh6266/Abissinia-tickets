@@ -19,6 +19,7 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
             className="absolute top-0 left-0 w-full h-full object-cover"
             src={movie.poster}
             alt={movie.title}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
         </div>
         <div className="row-start-4 row-end-5 md:row-start-2 md:row-end-3 col-span-2 md:col-span-3 lg:col-span-5">
