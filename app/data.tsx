@@ -6,10 +6,20 @@ import {
   FaLinkedin,
   FaTwitter,
 } from "react-icons/fa";
+
+// cinemas
 import cinema1 from "/public/cinema/cinema1.jpg";
 import cinema2 from "/public/cinema/cinema2.jpg";
 import cinema3 from "/public/cinema/cinema3.jpg";
 import cinema4 from "/public/cinema/cinema4.jpg";
+
+//drinks
+import popcorn from "/public/snacks/popcorn.jpg";
+import burger from "/public/snacks/cheeseburger.jpg";
+import pizza from "/public/snacks/pizza.jpg";
+import soda from "/public/snacks/soft-drinks.jpg";
+import water from "/public/snacks/bottled-water.jpg";
+import fries from "/public/snacks/fries.jpg";
 
 export const socials = [
   {
@@ -48,7 +58,7 @@ export const socials = [
 export const links = [
   { label: "Home", href: "/" },
   { label: "Coming soon", href: "/movies/1" },
-  { label: "Food and drinks", href: "#" },
+  { label: "Food and drinks", href: "/food-drink" },
   { label: "Tickets", href: "/film-showtimes-tickets" },
   { label: "Cinemas", href: "#" },
   { label: "Schedule", href: "#" },
@@ -69,6 +79,15 @@ export interface Movie {
     times: string[];
   }[];
 }
+
+export interface SnackAndDrink {
+  id: number;
+  name: string;
+  type: string;
+  price: number;
+  image: StaticImageData;
+}
+
 export const list = [
   {
     id: 1,
@@ -260,5 +279,52 @@ export const movie: Movie[] = [
       { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
       { day: "Sunday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
     ],
+  },
+];
+
+//food and drink data
+
+export const snackAndDrinkData: SnackAndDrink[] = [
+  {
+    id: 1,
+    name: "Popcorn",
+    type: "Snack",
+    price: 5,
+    image: popcorn,
+  },
+  {
+    id: 2,
+    name: "Burger",
+    type: "Snack",
+    price: 8,
+    image: burger,
+  },
+  {
+    id: 3,
+    name: "Pizza",
+    type: "Snack",
+    price: 10,
+    image: pizza,
+  },
+  {
+    id: 4,
+    name: "Soda",
+    type: "Drink",
+    price: 3,
+    image: soda,
+  },
+  {
+    id: 5,
+    name: "Water",
+    type: "Drink",
+    price: 2,
+    image: water,
+  },
+  {
+    id: 6,
+    name: "Fries",
+    type: "Snack",
+    price: 4,
+    image: fries,
   },
 ];
