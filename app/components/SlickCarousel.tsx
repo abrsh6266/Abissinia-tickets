@@ -20,27 +20,29 @@ const SlickCarousel = () => {
     pauseOnHover: true,
   };
   return (
-    <section className=" overflow-hidden bg-gradient-to-b from-white via-gray-500 to-gray-500">
+    <section className="overflow-hidden bg-black rounded-lg">
       <Search />
-      <Slider {...settings} >
-        {people.map((p) => {
-          const { name, image, id, quote, title } = p;
-          return (
-            <article key={id}>
-              <div className="bg-gradient-to-b from-gray-400 via-gray-500 to-gray-500 relative w-full h-96 mb-4 mx-1 rounded-lg shadow-lg">
-                <Image
-                  src={image}
-                  alt={name}
-                  className="bg-gray-500 object-cover w-full h-full"
-                />
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white bg-black bg-opacity-50">
-                  <p className="text-xl">{quote}</p>
+      <div className="carousel-wrapper">
+        <Slider {...settings}>
+          {people.map((p) => {
+            const { name, image, id, quote, title } = p;
+            return (
+              <article key={id}>
+                <div className="bg-black relative ml-4 mr-4 md:ml-10 border border-red-900 md:mr-10 h-96 mb-4 mx-1 rounded-lg shadow-lg">
+                  <Image
+                    src={image}
+                    alt={name}
+                    className="bg-black object-cover w-full h-full rounded-lg"
+                  />
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white bg-black bg-opacity-50 rounded-lg">
+                    <p className="text-xl">{quote}</p>
+                  </div>
                 </div>
-              </div>
-            </article>
-          );
-        })}
-      </Slider>
+              </article>
+            );
+          })}
+        </Slider>
+      </div>
     </section>
   );
 };

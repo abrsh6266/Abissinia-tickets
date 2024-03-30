@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <>
       {!loading && (
-        <section className="bg-white">
+        <section className="bg-gradient-to-t from-gray-500 via-gray-700 to-black mt-20">
           <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
             <nav className="flex flex-wrap justify-center -mx-5 -my-2">
               {links.map((link, index) => {
@@ -16,7 +16,7 @@ const Footer = () => {
                   <div key={index} className="px-5 py-2">
                     <Link
                       href={link.href}
-                      className="text-base leading-6 text-gray-500 hover:text-gray-900"
+                      className="text-base leading-6 text-gray-300 hover:text-blue-500"
                     >
                       {link.label}
                     </Link>
@@ -31,7 +31,7 @@ const Footer = () => {
                   <Link
                     key={id}
                     href={url}
-                    className="text-gray-400 hover:text-gray-500"
+                    className="text-gray-100 hover:text-gray-200"
                   >
                     <span className="sr-only">{name}</span>
                     <p className="w-8 h-8">{icon}</p>
@@ -39,7 +39,7 @@ const Footer = () => {
                 );
               })}
             </div>
-            <p className="mt-8 text-base leading-6 text-center text-gray-400">
+            <p className="mt-8 text-base leading-6 text-center text-gray-100">
               © {new Date().getFullYear()} Abissinia Tickets, Inc. All rights
               reserved.
             </p>

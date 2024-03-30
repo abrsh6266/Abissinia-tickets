@@ -4,15 +4,13 @@ import Image from "next/image";
 import MovieInfoCard from "./MovieInfoCard";
 import MovieSchedule from "./MovieSchedule";
 import { Movie } from "../data";
+import SectionTitle from "./SectionTitle";
 
 const MovieDetail = ({ movie }: { movie: Movie }) => {
   return (
     <>
-      <div className="container m-auto md:grid lg:grid md:pl-4 md:grid-cols-5 lg:grid-cols-8 gap-4">
+      <div className=" container m-auto md:grid lg:grid md:pl-4 md:grid-cols-5 lg:grid-cols-8 gap-4">
         <div className="ml-2 col-span-full my-2">
-          <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl ">
-            Movie Detail
-          </h1>
         </div>
         <div className="relative tile row-start-2 row-end-5 col-span-1 md:col-span-2 lg:col-span-3 max-h-96 h-96 mt-8">
           <Image
@@ -26,8 +24,8 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
           <MovieInfoCard {...movie} />
         </div>
         <div className="ml-2 col-span-full my-2">
-          <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl ">
-            Movie Schedule
+          <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-200 text-xl ">
+            Schedules
           </h1>
         </div>
       </div>
@@ -36,7 +34,7 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
           const { day, times } = time;
           return (
             <div key={day} className="lg:col-start-4 lg:col-span-2 my-4 mx-4">
-              <h1 className="tile-marker">{time.day}</h1>
+              <h1 className="text-center text-gray-200">{time.day}</h1>
               <MovieSchedule showTime={times} />
             </div>
           );

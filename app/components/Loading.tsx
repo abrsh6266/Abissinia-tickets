@@ -49,7 +49,7 @@ const Loading = () => {
             strokeLinecap="round" // Changed to camelCase
           ></circle>
         </svg>
-        <p className="font-mono text-2xl ml-2">Abissinia Tickets</p>
+        <p className="font-mono text-2xl ml-2 text-white">Abissinia Tickets</p>
       </div>
     );
   };

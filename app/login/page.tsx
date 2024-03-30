@@ -4,7 +4,7 @@ import logo from "/public/images/logo.png";
 
 const login = () => {
   return (
-    <div className="py-26 bg-white">
+    <div className="py-26 bg-black text-gray-100">
       <div className="container px-4 mx-auto ">
         <div className="max-w-lg mx-auto border-4 border-gray-600 rounded-lg">
           <div className="text-center mb-8">
@@ -50,7 +50,7 @@ const login = () => {
                 </a>
               </div>
             </div>
-            <button className="inline-block w-full py-4 px-6 mb-6 text-center text-lg leading-6 text-white font-extrabold bg-black hover:bg-gray-600 border-3 border-indigo-900 shadow rounded transition duration-200">
+            <button className="inline-block w-full py-4 px-6 mb-6 text-center text-lg leading-6 text-white font-extrabold bg-gray-400 hover:bg-gray-600 border-3 border-indigo-900 shadow rounded transition duration-200">
               Login
             </button>
             <p className="text-center font-extrabold">
