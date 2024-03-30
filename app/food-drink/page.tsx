@@ -11,11 +11,11 @@ const Page = () => {
     <>
       {snacks.map((snack) => (
         <section className="py-20" id="about">
-          <div className="align-element grid md:grid-cols-2 items-center gap-16">
+          <div className="align-element grid grid-cols-2 items-center gap-16">
             <article>
               <h1></h1>
 
-              <div className="relative tile row-start-2 row-end-5 col-span-1 md:col-span-2 lg:col-span-3 max-h-96 h-96 mt-8">
+              <div>
                 <Image
                   width={200}
                   height={200}
@@ -30,10 +30,10 @@ const Page = () => {
               <p className="text-base font-semibold text-gray-500">
                 {snack.type}
               </p>
-              <div className="mt-20 ml-2 relative h-10 w-72 min-w-[200px]">
+              <div className="mt-20 ml-2 relative h-10 w-40 min-w-[200px]">
                 <select
                   onChange={() => console.log("value")}
-                  className="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 empty:!bg-gray-900 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                  className="h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 empty:!bg-gray-900 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                   style={{ color: "#fff" }}
                 >
                   <option style={{ color: "#000" }} value={0}>0 - 0ETB</option>
