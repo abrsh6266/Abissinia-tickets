@@ -9,7 +9,7 @@ const Page = () => {
   return (
     <>
       {snacks.map((snack) => (
-        <SnackAndDrinks snack={snack} />
+        <SnackAndDrinks key={snack.id} snack={snack} />
       ))}
     </>
   );
