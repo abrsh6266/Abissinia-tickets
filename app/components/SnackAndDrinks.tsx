@@ -4,7 +4,7 @@ import { SnackAndDrink } from "../data";
 
 const SnackAndDrinks = ({ snack }: { snack: SnackAndDrink }) => {
   return (
-    <section className="py-20" id="about">
+    <section className="py-20 overflow-x-hidden" id="about">
       <div className="align-element grid grid-cols-2 items-center gap-16">
         <article>
           <h1></h1>
@@ -22,7 +22,7 @@ const SnackAndDrinks = ({ snack }: { snack: SnackAndDrink }) => {
         <div>
           <h3 className="mt-6 text-4xl text-gray-200">{snack.name}</h3>
           <p className="text-base font-semibold text-gray-500">{snack.type}</p>
-          <div className="mt-20 ml-2 relative h-10 w-40 min-w-[200px]">
+          <div className="mt-20 ml-2 relative h-10 min-w-[100px] max-w-[200px]">
             <select
               onChange={() => console.log("value")}
               className="h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 empty:!bg-gray-900 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
