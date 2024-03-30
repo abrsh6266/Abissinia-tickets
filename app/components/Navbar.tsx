@@ -32,7 +32,7 @@ const Navbar = () => {
           </Link>
           <ul
             className={`${
-              isMenuOpen ? "block ml-24" : "hidden"
+              isMenuOpen ? "block ml-20" : "hidden"
             } lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6`}
           >
             {links.map((link, index) => {
