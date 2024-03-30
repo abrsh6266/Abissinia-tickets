@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { snackAndDrinkData, SnackAndDrink } from "../data";
 import { useState } from "react";
-import SectionTitle from "../components/SectionTitle";
 
 const Page = () => {
   const [snacks, setSnacks] = useState<SnackAndDrink[]>(snackAndDrinkData);
