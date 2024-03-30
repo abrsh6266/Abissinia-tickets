@@ -32,7 +32,7 @@ const Navbar = () => {
           </Link>
           <ul
             className={`${
-              isMenuOpen ? "block" : "hidden"
+              isMenuOpen ? "block ml-24" : "hidden"
             } lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6`}
           >
             {links.map((link, index) => {
@@ -41,7 +41,7 @@ const Navbar = () => {
                   key={index}
                   className={
                     isMenuOpen
-                      ? "mt-6 hover:text-blue-500 text-white"
+                      ? "mt-6 w-40 hover:text-blue-500  text-white"
                       : "hover:text-blue-500 text-white"
                   }
                 >
@@ -60,7 +60,7 @@ const Navbar = () => {
             })}
           </ul>
           <div className="grid grid-cols-3 lg:flex gap-4">
-            <a
+            <Link
               className={
                 isMenuOpen
                   ? "hidden"
@@ -69,8 +69,8 @@ const Navbar = () => {
               href="/login"
             >
               Sign In
-            </a>
-            <a
+            </Link>
+            <Link
               className={
                 isMenuOpen
                   ? "hidden"
@@ -79,7 +79,7 @@ const Navbar = () => {
               href="/signup"
             >
               Sign up
-            </a>
+            </Link>
             <div className="lg:hidden">
               <button
                 className="text-2xl navbar-burger flex items-center text-[#ffffff] p-3"
@@ -93,7 +93,6 @@ const Navbar = () => {
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <title>Mobile menu</title>
                     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
                   </svg>
                 )}
