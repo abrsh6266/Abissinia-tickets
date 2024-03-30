@@ -10,6 +10,7 @@ import { useGlobalContext } from "./context";
 const Navbar = () => {
   const { loading } = useGlobalContext();
   const currentPath = usePathname();
+  console.log(currentPath);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -18,7 +19,7 @@ const Navbar = () => {
 
   return (
     <div className={loading ? " h-44" : ""}>
-      {!loading && (
+      {!(loading && "/" === currentPath) && (
         <nav className="relative px-4 py-16 flex justify-between items-center bg-gradient-to-b from-gray-500 via-gray-700 to-black transition duration-300 ease-in-out">
           <Link className="font-bold leading-none" href="/">
             <Image
@@ -37,7 +38,14 @@ const Navbar = () => {
           >
             {links.map((link, index) => {
               return (
-                <li key={index} className={isMenuOpen ? "mt-6 hover:text-blue-500 text-white" : "hover:text-blue-500 text-white"}>
+                <li
+                  key={index}
+                  className={
+                    isMenuOpen
+                      ? "mt-6 hover:text-blue-500 text-white"
+                      : "hover:text-blue-500 text-white"
+                  }
+                >
                   <Link
                     className={`${
                       link.href === currentPath
@@ -52,48 +60,47 @@ const Navbar = () => {
               );
             })}
           </ul>
-          <div className="grid grid-cols-3 lg:flex">
-          <a
-            className={
-              isMenuOpen
-                ? "hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-white hover:bg-gray-600 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
-                : "lg:inline-block lg:ml-auto lg:mr-3 mr-2 py-2 px-6 bg-white hover:bg-gray-600 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
-            }
-            href="/login"
-          >
-            Sign In
-          </a>
-          <a
-            className={
-              isMenuOpen
-                ? "hidden  py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
-                : "py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
-            }
-            href="/signup"
-          >
-            Sign up
-          </a>
-          <div className="lg:hidden">
-            <button
-              className="text-2xl navbar-burger flex items-center text-[#ffffff] p-3"
-              onClick={toggleMenu}
+          <div className="grid grid-cols-3 lg:flex gap-4">
+            <a
+              className={
+                isMenuOpen
+                  ? "hidden"
+                  : "my-auto py-3 px-4 bg-white md:px-6 hover:bg-gray-600 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+              }
+              href="/login"
             >
-              {isMenuOpen ? (
-                <FaTimes />
-              ) : (
-                <svg
-                  className=" block h-4 w-4 fill-current"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>Mobile menu</title>
-                  <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-                </svg>
-              )}
-            </button>
+              Sign In
+            </a>
+            <a
+              className={
+                isMenuOpen
+                  ? "hidden"
+                  : "my-auto py-3 text-center md:px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+              }
+              href="/signup"
+            >
+              Sign up
+            </a>
+            <div className="lg:hidden">
+              <button
+                className="text-2xl navbar-burger flex items-center text-[#ffffff] p-3"
+                onClick={toggleMenu}
+              >
+                {isMenuOpen ? (
+                  <FaTimes />
+                ) : (
+                  <svg
+                    className=" block h-4 w-4 fill-current"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <title>Mobile menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
-          </div>
-          
         </nav>
       )}
     </div>

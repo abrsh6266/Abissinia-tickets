@@ -20,9 +20,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const timeout = setTimeout(() => {
-      // Simulate loading time (e.g., 2 seconds)
-      setLoading(false); // Update loading state when timeout expires
-    }, 4000); // Adjust timeout duration as needed
+      setLoading(false);
+    }, 4000);
 
     return () => clearTimeout(timeout); // Cleanup timeout on unmount
   }, []);
