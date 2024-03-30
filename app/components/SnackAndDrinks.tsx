@@ -4,11 +4,9 @@ import { SnackAndDrink } from "../data";
 
 const SnackAndDrinks = ({ snack }: { snack: SnackAndDrink }) => {
   return (
-    <section className="py-20 overflow-x-hidden" id="about">
+    <section className="sm:py-5 md:py-20 overflow-x-hidden" id="about">
       <div className="align-element grid grid-cols-2 items-center gap-16">
         <article>
-          <h1></h1>
-
           <div>
             <Image
               width={200}
