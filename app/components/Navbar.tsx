@@ -4,13 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import logo from "/public/images/logo.png";
 import Image from "next/image";
-import { links } from "./data";
+import { links } from "../data";
 import { FaTimes } from "react-icons/fa";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "../context";
 const Navbar = () => {
   const { loading } = useGlobalContext();
   const currentPath = usePathname();
-  console.log(currentPath);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
