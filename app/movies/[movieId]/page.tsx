@@ -1,5 +1,5 @@
 "use client";
-import MovieDetail from "@/app/components/MovieDetail";
+import MovieDetail from "@/app/components/movieDetailComponents/MovieDetail";
 import { movie as movies } from "../../data";
 import { useState } from "react";
 

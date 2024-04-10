@@ -2,7 +2,7 @@
 import { useState } from "react";
 import SectionTitle from "../components/SectionTitle";
 import { Movie, movie } from "../data";
-import MovieDetail from "../components/MovieDetail";
+import MovieDetail from "../components/movieDetailComponents/MovieDetail";
 
 const Page = () => {
   const [movies, setMovies] = useState(movie);

@@ -16,7 +16,7 @@ const Message = () => {
         </div>
       </div>
       <div className="chat-header">
-        Obi-Wan Kenobi
+        Helina Bikes
         <time className="text-xs opacity-50">12:45</time>
         <div className="dropdown ml-6">
           <div tabIndex={0} role="0">

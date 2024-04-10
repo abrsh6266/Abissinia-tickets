@@ -1,5 +1,5 @@
 import { BiStar } from "react-icons/bi";
-import { Movie } from "../data";
+import { Movie } from "../../data";
 
 const MovieInfoCard = ({
   title,

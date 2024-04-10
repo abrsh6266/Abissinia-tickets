@@ -3,14 +3,13 @@ import { RxArrowBottomRight } from "react-icons/rx";
 import Image from "next/image";
 import MovieInfoCard from "./MovieInfoCard";
 import MovieSchedule from "./MovieSchedule";
-import { Movie } from "../data";
+import { Movie } from "../../data";
 import Review from "./Review";
 
 const MovieDetail = ({ movie }: { movie: Movie }) => {
   return (
     <div className="align-element">
       <div className="m-auto md:grid lg:grid md:pl-4 md:grid-cols-5 lg:grid-cols-8 gap-4">
-        <div className="ml-2 col-span-full my-2"></div>
         <div className="relative tile row-start-2 row-end-5 col-span-1 md:col-span-2 lg:col-span-3 max-h-96 h-96 mt-8">
           <Image
             className="absolute top-0 left-0 w-full h-full object-cover"
