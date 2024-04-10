@@ -24,7 +24,7 @@ const Navbar = () => {
             {/* Title */}
             <Link
               href="/"
-              className="hidden btn bg-white hover:bg-gray-200 lg:flex  h-full rounded-full text-3xl items-center "
+              className="hidden btn mask mask-hexagon-2 bg-gray-200 hover:bg-gray-400  lg:flex  h-full rounded-full text-3xl items-center "
             >
               <Image
                 style={{

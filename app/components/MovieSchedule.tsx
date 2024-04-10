@@ -3,11 +3,11 @@ interface Props {
 }
 const MovieSchedule = ({ showTime }: Props) => {
   return (
-    <div className="mt-10 border-2 rounded p-2">
+    <div className="mt-10 border-2 rounded p-2 ">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium text-gray-200">Time</h3>
+        <h3 className="text-sm font-medium ">Time</h3>
         <p
-          className="text-sm font-medium text-gray-200"
+          className="text-sm font-medium"
         >
           3/28/2024
         </p>
