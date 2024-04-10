@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import TanstackProvider from "./components/providers/TanstackProvider";
 import Footer from "./components/Footer";
 import { AppProvider, useGlobalContext } from "./context";
+import Header from "./components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-black">
+    <html lang="en" data-theme="black">
         <AppProvider>
           <TanstackProvider>
             <body className={inter.className}>
+              <Header />
               <Navbar />
               <main>{children}</main>
               <Footer />

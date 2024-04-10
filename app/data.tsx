@@ -56,12 +56,12 @@ export const socials = [
 ];
 
 export const links = [
-  { label: "Home", href: "/" },
-  { label: "Coming soon", href: "/movies/1" },
-  { label: "Food and drinks", href: "/food-drink" },
-  { label: "Tickets", href: "/film-showtimes-tickets" },
-  { label: "Cinemas", href: "#" },
-  { label: "Schedule", href: "#" },
+  { id:1,label: "Home", href: "/" },
+  { id:2,label: "Coming soon", href: "/movies/1" },
+  { id:3,label: "Food and drinks", href: "/food-drink" },
+  { id:4,label: "Tickets", href: "/film-showtimes-tickets" },
+  { id:5,label: "Cinemas", href: "#" },
+  { id:6,label: "Schedule", href: "#" },
 ];
 
 export interface Movie {
