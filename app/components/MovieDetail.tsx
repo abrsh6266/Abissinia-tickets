@@ -1,5 +1,5 @@
 "use client";
-
+import { RxArrowBottomRight } from "react-icons/rx";
 import Image from "next/image";
 import MovieInfoCard from "./MovieInfoCard";
 import MovieSchedule from "./MovieSchedule";
@@ -23,11 +23,20 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
           <MovieInfoCard {...movie} />
         </div>
       </div>
-      <div className="ml-2 col-span-full my-2">
+      <a href="#schedule" className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded transition duration-300">Get Tickets <RxArrowBottomRight /></a>
+      <div>
+        <div className="ml-2 col-span-full my-2">
           <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold  text-xl ">
-            Schedules
+            Reviews
           </h1>
         </div>
+        <Review />
+      </div>
+      <div className="ml-2 col-span-full my-2">
+        <h1 id="schedule" className="uppercase tracking-wide no-underline hover:no-underline font-bold  text-xl ">
+          Schedules
+        </h1>
+      </div>
       <div className=" m-auto lg:flex sm: gap-4">
         {movie.showTime.map((time, index) => {
           const { day, times } = time;
@@ -38,14 +47,6 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
             </div>
           );
         })}
-      </div>
-      <div>
-        <div className="ml-2 col-span-full my-2">
-          <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold  text-xl ">
-            Reviews
-          </h1>
-        </div>
-        <Review />
       </div>
     </div>
   );
