@@ -22,7 +22,7 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
           <MovieInfoCard {...movie} />
         </div>
       </div>
-      <a href="#schedule" className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded transition duration-300">Get Tickets <RxArrowBottomRight /></a>
+      <a href="#schedule" className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300">Get Tickets <RxArrowBottomRight /></a>
       <div>
         <div className="ml-2 col-span-full my-2">
           <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold  text-xl ">
