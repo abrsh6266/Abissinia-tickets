@@ -24,7 +24,7 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
           <MovieInfoCard {...movie} />
         </div>
         <div className="ml-2 col-span-full my-2">
-          <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-200 text-xl ">
+          <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold  text-xl ">
             Schedules
           </h1>
         </div>
@@ -34,7 +34,7 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
           const { day, times } = time;
           return (
             <div key={day} className="lg:col-start-4 lg:col-span-2 my-4 mx-4">
-              <h1 className="text-center text-gray-200">{time.day}</h1>
+              <h1 className="text-center ">{time.day}</h1>
               <MovieSchedule showTime={times} />
             </div>
           );

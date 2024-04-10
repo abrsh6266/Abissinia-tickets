@@ -14,11 +14,11 @@ const MovieSchedule = ({ showTime }: Props) => {
       </div>
 
       <fieldset className="mt-4">
-        <legend className="text-gray-200">Choose the time</legend>
+        <legend >Choose the time</legend>
         <div className="flex gap-4 lg:grid-cols-4">
             {
                 showTime.map(time=>{
-                    return <button key={time} className="overflow-hidden p-2 h-auto bg-gray-700 text-white border-none rounded-md text-xl font-bold cursor-pointer relative z-10 group">
+                    return <button key={time} className="overflow-hidden p-2 h-auto bg-gray-700 border-none rounded-md text-xl font-bold cursor-pointer relative z-10 group">
                     {time}
                     <span className="absolute w-36 h-32 -top-8 -left-2 bg-white rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-left"></span>
                     <span className="absolute w-36 h-32 -top-8 -left-2 bg-purple-400 rotate-12 transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-left"></span>
