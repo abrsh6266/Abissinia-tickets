@@ -28,7 +28,7 @@ const Tickets = ({ params }: Props) => {
     router.back();
   };
   return (
-    <section className="grid place-items-center">
+    <section className="grid place-items-center overflow-x-hidden">
       <div className="relative w-full ml-4 mr-4 md:ml-10 md:mr-10 mx-1 rounded-lg shadow-lg">
         <div className="ml-2 col-span-full my-2 align-element">
           <h1
@@ -91,13 +91,12 @@ const Tickets = ({ params }: Props) => {
           </select>
         </div>
       </div>
-      <div className="overflow-x-auto">
+      <div className="ml-2 mr-2">
         <label htmlFor="#x" className="capitalize mb-2">
           Choose your tickets
         </label>
-        <table id="x" className="table table-zebra">
-          {/* head */}
-          <thead className="bg-blue-700  text-lg">
+        <table id="x" className="md:table">
+          <thead className="bg-blue-700  md:text-lg">
             <tr>
               <th>Ticket</th>
               <th>Price</th>
@@ -111,7 +110,7 @@ const Tickets = ({ params }: Props) => {
               <td>
                 <select
                   name="ticket"
-                  className="select select-info select-lg w-full max-w-xs"
+                  className="select select-info select-lg w-full max-w-xs mt-4 md:mt-0"
                 >
                   <option disabled selected>
                     none
@@ -128,7 +127,7 @@ const Tickets = ({ params }: Props) => {
               <td>
                 <select
                   name="ticket"
-                  className="select select-info select-lg w-full max-w-xs"
+                  className="select select-info select-lg w-full max-w-xs mt-4 md:mt-0"
                 >
                   <option disabled selected>
                     none
@@ -140,14 +139,14 @@ const Tickets = ({ params }: Props) => {
               </td>
             </tr>
           </tbody>
-          <div className="justify-end mt-5">
+          <div className="mt-5 flex">
             <button
               onClick={handleGoBack}
-              className="btn bg-transparent border-2 text-red-700 border-red-700 rounded-lg px-10 mr-10"
+              className="btn bg-transparent border-2 text-red-700 border-red-700 rounded-lg px-6 mr-8"
             >
               cancel
             </button>
-            <button className="btn border-2  bg-blue-700 rounded-lg px-10">
+            <button className="btn border-2  bg-blue-700 rounded-lg px-4">
               Continue
             </button>
           </div>
