@@ -17,14 +17,20 @@ interface AppContextType {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   selectedMovie: Props | null;
   setSelectedMovie: React.Dispatch<React.SetStateAction<Props | null>>;
+  showTimes: ShowTimes[] | null;
+  setShowTimes: React.Dispatch<React.SetStateAction<ShowTimes[] | null>>;
 }
 export interface Props {
-  times: string[];
-  poster: StaticImageData;
-  time: string;
-  day: string;
+  times?: string[] | undefined;
+  poster?: StaticImageData | undefined;
+  time?: string | undefined;
+  day?: string | undefined;
+  id?: number | null;
 }
-export type MovieScheduleProps = Omit<Props, "time">;
+export interface ShowTimes {
+  day: string;
+  times: string[];
+}
 
 const appContext = createContext<AppContextType | null>(null);
 
@@ -35,6 +41,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [searchMovies, setSearchMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedMovie, setSelectedMovie] = useState<Props | null>(null);
+  const [showTimes, setShowTimes] = useState<ShowTimes[] | null>(null);
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
@@ -53,6 +60,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         setLoading,
         selectedMovie,
         setSelectedMovie,
+        showTimes,
+        setShowTimes,
       }}
     >
       {children}

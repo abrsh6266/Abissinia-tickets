@@ -2,9 +2,9 @@
 import { RxArrowBottomRight } from "react-icons/rx";
 import Image from "next/image";
 import MovieInfoCard from "./MovieInfoCard";
-import MovieSchedule from "./MovieSchedule";
 import { Movie } from "../../data";
 import Review from "./Review";
+import Link from "next/link";
 
 const MovieDetail = ({ movie }: { movie: Movie }) => {
   return (
@@ -22,7 +22,12 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
           <MovieInfoCard {...movie} />
         </div>
       </div>
-      <a href="#schedule" className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300">Get Tickets <RxArrowBottomRight /></a>
+      <Link
+        href={`/ticket-purchase/${movie?.id}`}
+        className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
+      >
+        Get Tickets <RxArrowBottomRight />
+      </Link>
       <div>
         <div className="ml-2 col-span-full my-2">
           <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold  text-xl ">
@@ -31,8 +36,11 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
         </div>
         <Review />
       </div>
-      <div className="ml-2 col-span-full my-2">
-        <h1 id="schedule" className="uppercase tracking-wide no-underline hover:no-underline font-bold  text-xl ">
+      {/* <div className="ml-2 col-span-full my-2">
+        <h1
+          id="schedule"
+          className="uppercase tracking-wide no-underline hover:no-underline font-bold  text-xl "
+        >
           Schedules
         </h1>
       </div>
@@ -42,11 +50,11 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
           return (
             <div key={day} className="lg:col-start-4 lg:col-span-2 my-4 mx-4">
               <h1 className="text-center">{time.day}</h1>
-              <MovieSchedule times={times} poster={movie.poster} day={day} />
+              <MovieSchedule times={times} day={day} />
             </div>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 };

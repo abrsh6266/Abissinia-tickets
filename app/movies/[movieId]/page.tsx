@@ -3,7 +3,7 @@ import MovieDetail from "@/app/components/movieDetailComponents/MovieDetail";
 import { movie as movies } from "../../data";
 import { useState } from "react";
 
-interface Props {
+export interface Props {
   params: {
     movieId: string;
   };
