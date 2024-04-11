@@ -19,12 +19,12 @@ interface AppContextType {
   setSelectedMovie: React.Dispatch<React.SetStateAction<Props | null>>;
 }
 export interface Props {
-  showTime: string[];
+  times: string[];
   poster: StaticImageData;
-  time:string;
+  time: string;
   day: string;
 }
-export type MovieScheduleProps = Omit<Props, 'time'>;
+export type MovieScheduleProps = Omit<Props, "time">;
 
 const appContext = createContext<AppContextType | null>(null);
 
@@ -40,7 +40,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
       setLoading(false);
     }, 4000);
 
-    return () => clearTimeout(timeout); // Cleanup timeout on unmount
+    return () => clearTimeout(timeout);
   }, []);
   return (
     <appContext.Provider

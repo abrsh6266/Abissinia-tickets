@@ -42,7 +42,7 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
           return (
             <div key={day} className="lg:col-start-4 lg:col-span-2 my-4 mx-4">
               <h1 className="text-center">{time.day}</h1>
-              <MovieSchedule showTime={times} poster={movie.poster} day={day}/>
+              <MovieSchedule times={times} poster={movie.poster} day={day} />
             </div>
           );
         })}

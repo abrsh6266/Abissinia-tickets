@@ -4,7 +4,7 @@ import logo from "/public/images/logo.png";
 
 const login = () => {
   return (
-    <div className="py-26 bg-black text-gray-100">
+    <div className="py-26 bg-black text-black">
       <div className="container px-4 mx-auto ">
         <div className="md:max-w-lg max-w-screen-xl md:mx-auto sm:w-full bg-gradient-to-t from-black via-gray-500 to-black bg-opacity-40">
           <div className="text-center mb-8">

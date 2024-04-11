@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react";
 import Message from "./Message";
+import { nanoid } from "@reduxjs/toolkit";
 
 const Review = () => {
   const [showComment, setShowComment] = useState(false);
   const [visibleMessages, setVisibleMessages] = useState(1);
   const totalMessages = 10;
-  const messages = new Array(totalMessages).fill(<Message />);
+  const messages = new Array(totalMessages).fill(<Message key={nanoid()}/>);
 
   const handleSeeMore = () => {
     setVisibleMessages(Math.min(visibleMessages + 3, totalMessages));

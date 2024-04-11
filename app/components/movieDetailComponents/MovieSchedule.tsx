@@ -1,7 +1,7 @@
 import { MovieScheduleProps, useGlobalContext } from "@/app/context";
 import Link from "next/link";
 
-const MovieSchedule = ({ showTime, poster, day }: MovieScheduleProps) => {
+const MovieSchedule = ({ times, poster, day }: MovieScheduleProps) => {
   const { setSelectedMovie } = useGlobalContext();
   return (
     <div className="mt-10 border rounded p-2 ">
@@ -13,19 +13,18 @@ const MovieSchedule = ({ showTime, poster, day }: MovieScheduleProps) => {
       <fieldset className="mt-4">
         <legend>Choose the time</legend>
         <div className="flex gap-4 lg:grid-cols-4">
-          {showTime.map((time) => {
+          {times.map((time) => {
             return (
-              <Link href={`/ticket-purchase`}>
+              <Link key={time} href={`/ticket-purchase`}>
               <button
                 onClick={() =>
                   setSelectedMovie({
                     poster: poster,
                     day: day,
                     time:time,
-                    showTime: showTime,
+                    times: times,
                   })
                 }
-                key={time}
                 className="overflow-hidden p-2 h-auto bg-blue-700 hover:bg-blue-900 rounded-lg"
               >
                 {time}

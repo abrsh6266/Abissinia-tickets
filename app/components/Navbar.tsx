@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname,useRouter } from "next/navigation";
 import logo from "/public/images/logo.png";
 import Image from "next/image";
 import { FaBarsStaggered } from "react-icons/fa6";
