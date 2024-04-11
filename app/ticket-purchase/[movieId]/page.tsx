@@ -40,9 +40,8 @@ const Tickets = ({ params }: Props) => {
         <div className="carousel carousel-end rounded-box">
           {movie?.showTime?.map((show) => {
             return (
-              <div className="carousel-item">
+              <div key={nanoid()}  className="carousel-item">
                 <button
-                  key={nanoid()}
                   onClick={() => {
                     setSelectedMovie((prevSelectedMovie) => ({
                       ...prevSelectedMovie,
