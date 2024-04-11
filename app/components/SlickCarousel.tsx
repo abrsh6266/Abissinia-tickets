@@ -28,7 +28,7 @@ const SlickCarousel = () => {
             const { name, image, id, quote, title } = p;
             return (
               <article key={id}>
-                <div className="bg-black relative ml-4 mr-4 md:ml-10 border border-red-900 md:mr-10 h-96 mb-4 mx-1 rounded-lg shadow-lg">
+                <div className="relative ml-4 mr-4 md:ml-10 border border-red-900 md:mr-10 h-96 mb-4 mx-1 rounded-lg shadow-lg">
                   <Image
                     src={image}
                     alt={name}

@@ -2,7 +2,6 @@ import Link from "next/link";
 import { BiEdit, BiSolidShare } from "react-icons/bi";
 import { SlOptionsVertical } from "react-icons/sl";
 import { AiFillDelete, AiFillLike } from "react-icons/ai";
-import { FaDeleteLeft } from "react-icons/fa6";
 
 const Message = () => {
   return (
@@ -18,9 +17,9 @@ const Message = () => {
       <div className="chat-header">
         Helina Bikes
         <time className="text-xs opacity-50">12:45</time>
-        <div className="dropdown ml-6">
+        <div className="dropdown ml-6 mb-3">
           <div tabIndex={0} role="0">
-            <SlOptionsVertical className="inline" />
+            <SlOptionsVertical className="inline mb-1" />
           </div>
           <ul
             tabIndex={0}
