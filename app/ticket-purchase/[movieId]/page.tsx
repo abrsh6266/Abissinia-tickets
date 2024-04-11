@@ -14,7 +14,7 @@ const Tickets = ({ params }: Props) => {
   const [movie, setMovie] = useState(() => {
     return movies.find((m) => m.id.toString() === id);
   });
-  const { selectedMovie, showTimes, setSelectedMovie } = useGlobalContext();
+  const { selectedMovie, setSelectedMovie } = useGlobalContext();
   useEffect(() => {
     setSelectedMovie((prev) => ({
       ...prev,
@@ -85,9 +85,9 @@ const Tickets = ({ params }: Props) => {
             name="seat"
             className="select select-info select-lg w-full max-w-xs"
           >
-            <option selected>Standard</option>
-            <option>Sofa</option>
-            <option>Premier</option>
+            <option value={"standard"}>Standard</option>
+            <option value={"sofa"}>Sofa</option>
+            <option value={"premier"}>Premier</option>
           </select>
         </div>
       </div>
@@ -112,11 +112,11 @@ const Tickets = ({ params }: Props) => {
                   name="ticket"
                   className="select select-info select-lg w-full max-w-xs mt-4 md:mt-0"
                 >
-                  <option disabled selected>
+                  <option value={0}>
                     none
                   </option>
                   {[...Array(8)].map((_, index) => (
-                    <option key={index + 1}>{index + 1}</option>
+                    <option value={index+1} key={index + 1}>{index + 1}</option>
                   ))}
                 </select>
               </td>
@@ -129,11 +129,11 @@ const Tickets = ({ params }: Props) => {
                   name="ticket"
                   className="select select-info select-lg w-full max-w-xs mt-4 md:mt-0"
                 >
-                  <option disabled selected>
+                  <option value={0}>
                     none
                   </option>
                   {[...Array(8)].map((_, index) => (
-                    <option key={index + 1}>{index + 1}</option>
+                    <option value={index+1} key={index + 1}>{index + 1}</option>
                   ))}
                 </select>
               </td>
