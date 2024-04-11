@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../../context";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Image from "next/image";
@@ -15,6 +15,14 @@ const Tickets = ({ params }: Props) => {
     return movies.find((m) => m.id.toString() === id);
   });
   const { selectedMovie, showTimes, setSelectedMovie } = useGlobalContext();
+  useEffect(() => {
+    setSelectedMovie((prev) => ({
+      ...prev,
+      times: undefined,
+      time: undefined,
+      day: undefined,
+    }));
+  }, []);
   const router = useRouter();
   const handleGoBack = () => {
     router.back();
@@ -40,7 +48,7 @@ const Tickets = ({ params }: Props) => {
         <div className="carousel carousel-end rounded-box">
           {movie?.showTime?.map((show) => {
             return (
-              <div key={nanoid()}  className="carousel-item">
+              <div key={nanoid()} className="carousel-item">
                 <button
                   onClick={() => {
                     setSelectedMovie((prevSelectedMovie) => ({
@@ -77,12 +85,9 @@ const Tickets = ({ params }: Props) => {
             name="seat"
             className="select select-info select-lg w-full max-w-xs"
           >
-            <option disabled selected>
-              Standard
-            </option>
-            <option>English</option>
-            <option>Japanese</option>
-            <option>Italian</option>
+            <option selected>Standard</option>
+            <option>Sofa</option>
+            <option>Premier</option>
           </select>
         </div>
       </div>
@@ -135,6 +140,17 @@ const Tickets = ({ params }: Props) => {
               </td>
             </tr>
           </tbody>
+          <div className="justify-end mt-5">
+            <button
+              onClick={handleGoBack}
+              className="btn bg-transparent border-2 text-red-700 border-red-700 rounded-lg px-10 mr-10"
+            >
+              cancel
+            </button>
+            <button className="btn border-2  bg-blue-700 rounded-lg px-10">
+              Continue
+            </button>
+          </div>
         </table>
       </div>
     </section>

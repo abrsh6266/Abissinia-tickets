@@ -25,7 +25,7 @@ export interface Props {
   poster?: StaticImageData | undefined;
   time?: string | undefined;
   day?: string | undefined;
-  id?: number | null;
+  id?: number | undefined;
 }
 export interface ShowTimes {
   day: string;
