@@ -56,7 +56,6 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="navbar-end space-x-8">
-              <div className="hidden xl:flex items-center space-x-5 items-center">
                 <Link className="hover:text-gray-200" href="/bookmarks">
                   <BiHeart className="text-2xl"/>
                 </Link>
@@ -67,7 +66,6 @@ const Navbar = () => {
                     <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
                   </span>
                 </Link>
-              </div>
             <Link href="/profile">
               <div className="avatar">
                 <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
