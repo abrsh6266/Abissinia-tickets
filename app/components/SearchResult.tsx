@@ -11,18 +11,17 @@ const SearchResult = () => {
       <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
         <nav  className="w-full z-30 top-0 px-6 py-1">
           <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
-            <a
-              className="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-200 text-xl "
-              href="#"
+            <h1
+              className="uppercase md:tracking-wide font-bold text-gray-200 md:text-xl "
             >
               Your Search Result
-            </a>
+            </h1>
             <button
               onClick={() => {
                 setSearchMovies([]);
                 setSearchTerm("");
               }}
-              className="absolute right-0 mx-4 md:mx-40 border flex gap-2 rounded-lg  hover:bg-[#f55ae8] bg-transparent text-gray-100 p-2 transition-all duration-300 text-2xl"
+              className="btn bg-transparent  md:text-2xl border-2 border-gray-400 hover:bg-blue-700 rounded-lg px-6 mr-8"
             >
               back <FaArrowRight className="mt-1"/>
             </button>
