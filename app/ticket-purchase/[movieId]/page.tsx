@@ -110,7 +110,7 @@ const Tickets = ({ params }: Props) => {
               <td>
                 <select
                   name="ticket"
-                  className="select select-info select-lg w-full max-w-xs mt-4 md:mt-0"
+                  className="select select-info select-lg w-full max-w-xs mt-4 md:mt-0 mx-1 md:mx-0"
                 >
                   <option value={0}>
                     none
@@ -127,7 +127,7 @@ const Tickets = ({ params }: Props) => {
               <td>
                 <select
                   name="ticket"
-                  className="select select-info select-lg w-full max-w-xs mt-4 md:mt-0"
+                  className="select select-info select-lg w-full max-w-xs mt-4 mx-1 md:mx-0 md:mt-0"
                 >
                   <option value={0}>
                     none
