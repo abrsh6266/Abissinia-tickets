@@ -8,6 +8,7 @@ import { nanoid } from "@reduxjs/toolkit";
 import { movie as movies } from "../../data";
 import { Props } from "@/app/movies/[movieId]/page";
 import MovieSchedule from "@/app/components/movieDetailComponents/MovieSchedule";
+import Link from "next/link";
 
 const Tickets = ({ params }: Props) => {
   const [id, setId] = useState(params.movieId);
@@ -25,6 +26,16 @@ const Tickets = ({ params }: Props) => {
   }, []);
   const router = useRouter();
   const handleGoBack = () => {
+    setSelectedMovie((prev) => ({
+      ...prev,
+      times: undefined,
+      time: undefined,
+      day: undefined,
+      seats: Array.from({ length: 64 }, (_, index) => ({
+        id: index + 1,
+        selected: false,
+      })),
+    }));
     router.back();
   };
   return (
@@ -112,11 +123,11 @@ const Tickets = ({ params }: Props) => {
                   name="ticket"
                   className="select select-info select-lg w-full max-w-xs mt-4 md:mt-0 mx-1 md:mx-0"
                 >
-                  <option value={0}>
-                    none
-                  </option>
+                  <option value={0}>none</option>
                   {[...Array(8)].map((_, index) => (
-                    <option value={index+1} key={index + 1}>{index + 1}</option>
+                    <option value={index + 1} key={index + 1}>
+                      {index + 1}
+                    </option>
                   ))}
                 </select>
               </td>
@@ -129,11 +140,11 @@ const Tickets = ({ params }: Props) => {
                   name="ticket"
                   className="select select-info select-lg w-full max-w-xs mt-4 mx-1 md:mx-0 md:mt-0"
                 >
-                  <option value={0}>
-                    none
-                  </option>
+                  <option value={0}>none</option>
                   {[...Array(8)].map((_, index) => (
-                    <option value={index+1} key={index + 1}>{index + 1}</option>
+                    <option value={index + 1} key={index + 1}>
+                      {index + 1}
+                    </option>
                   ))}
                 </select>
               </td>
@@ -146,9 +157,11 @@ const Tickets = ({ params }: Props) => {
             >
               cancel
             </button>
-            <button className="btn border-2  bg-blue-700 rounded-lg px-4">
-              Continue
-            </button>
+            <Link href={`/seat-selection/${movie?.id}`}>
+              <button className="btn border-2  bg-blue-700 rounded-lg px-4">
+                Continue
+              </button>
+            </Link>
           </div>
         </table>
       </div>

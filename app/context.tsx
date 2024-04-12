@@ -20,10 +20,15 @@ interface AppContextType {
 }
 export interface Props {
   times?: string[] | undefined;
-  poster?: StaticImageData | undefined;
   time?: string | undefined;
   day?: string | undefined;
   id?: number | undefined;
+  seats?:
+    | {
+        id: number;
+        selected: boolean;
+      }[]
+    | undefined;
 }
 
 const appContext = createContext<AppContextType | null>(null);
