@@ -29,7 +29,7 @@ const Tickets = ({ params }: Props) => {
   };
   return (
     <section className="grid place-items-center overflow-x-hidden">
-      <div className="relative w-full ml-4 mr-4 md:ml-10 md:mr-10 mx-1 rounded-lg shadow-lg">
+      <div className="relative w-full px-2 md:px-10 lg:px-20 rounded-lg shadow-lg">
         <div className="ml-2 col-span-full my-2 align-element">
           <h1
             onClick={handleGoBack}
@@ -41,7 +41,7 @@ const Tickets = ({ params }: Props) => {
         <Image
           src={movie?.poster || "img"}
           alt={movie?.title || "poster"}
-          className="object-cover w-full h-[200px] md:h-[250px] lg:h-[350px] xl:h-[400px] rounded-lg"
+          className="object-cover w-full h-[200px] md:h-[250px] lg:h-[400px] xl:h-[500px] rounded-lg"
         />
       </div>
       <div>
