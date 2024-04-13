@@ -25,6 +25,9 @@ const Seats = ({ params }: Props) => {
     }));
   };
   useEffect(() => {
+    if (selectedMovie?.day === undefined && selectedMovie?.time === undefined) {
+      handleGoBack();
+    }
     setSelectedMovie((prev) => ({
       ...prev,
       seats: Array.from({ length: 64 }, (_, index) => ({

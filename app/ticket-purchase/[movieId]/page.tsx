@@ -31,10 +31,7 @@ const Tickets = ({ params }: Props) => {
       times: undefined,
       time: undefined,
       day: undefined,
-      seats: Array.from({ length: 64 }, (_, index) => ({
-        id: index + 1,
-        selected: false,
-      })),
+      seats: undefined,
     }));
     router.back();
   };
