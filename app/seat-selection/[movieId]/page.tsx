@@ -16,6 +16,14 @@ const Seats = ({ params }: Props) => {
   });
   const { selectedMovie, setSelectedMovie } = useGlobalContext();
   const router = useRouter();
+  const handleSelectSeat = (id: any) => {
+    setSelectedMovie((prev) => ({
+      ...prev,
+      seats: prev?.seats?.map((seat) =>
+        seat.id === id ? { ...seat, selected: !seat.selected } : seat
+      ),
+    }));
+  };
   useEffect(() => {
     setSelectedMovie((prev) => ({
       ...prev,
@@ -69,7 +77,7 @@ const Seats = ({ params }: Props) => {
       </div>
       <div className="min-h-[180px]">
         <button className="px-6">
-          <PiArmchairFill className="text-blue-700 text-6xl"/>
+          <PiArmchairFill className="text-blue-700 text-6xl" />
           <h1 className="text-sm ">Selected</h1>
         </button>
         <button className="text-4xl px-6">
@@ -77,18 +85,28 @@ const Seats = ({ params }: Props) => {
           <h1 className="text-sm">Booked</h1>
         </button>
         <button className="text-4xl px-6">
-          <PiArmchairFill className="text-6xl"/>
+          <PiArmchairFill className="text-6xl" />
           <h1 className="text-sm">Available</h1>
         </button>
       </div>
       <div className="max-w-[600px] mb-[20px]">
         <div>
-          <div className="grid grid-cols-8 gap-3 md:gap-8">
+          <div className="grid grid-cols-8">
             {selectedMovie?.seats?.map((seat) => {
               return (
-                <button className="text-4xl" key={seat.id}>
-                  <PiArmchairFill />
-                </button>
+                <div
+                  className="md:m-4 md:h-10 md:w-10 m-3 h-6 w-6"
+                  key={seat?.id}
+                >
+                  <button
+                    onClick={() => handleSelectSeat(seat.id)}
+                    className={`${
+                      seat.selected ? "text-blue-700" : ""
+                    } text-2xl md:text-5xl hover:text-blue-700 md:hover:text-6xl hover:text-4xl duration-300 `}
+                  >
+                    <PiArmchairFill />
+                  </button>
+                </div>
               );
             })}
           </div>
