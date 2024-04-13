@@ -27,6 +27,7 @@ export interface Props {
     | {
         id: number;
         selected: boolean;
+        booked:boolean;
       }[]
     | undefined;
 }

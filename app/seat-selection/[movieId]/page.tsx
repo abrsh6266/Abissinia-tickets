@@ -30,6 +30,7 @@ const Seats = ({ params }: Props) => {
       seats: Array.from({ length: 64 }, (_, index) => ({
         id: index + 1,
         selected: false,
+        booked: index % 3 === 0,
       })),
     }));
   }, []);
@@ -99,10 +100,17 @@ const Seats = ({ params }: Props) => {
                   key={seat?.id}
                 >
                   <button
-                    onClick={() => handleSelectSeat(seat.id)}
+                    onClick={() => {
+                      if (!seat.booked) handleSelectSeat(seat.id);
+                    }}
                     className={`${
                       seat.selected ? "text-blue-700" : ""
-                    } text-2xl md:text-5xl hover:text-blue-700 md:hover:text-6xl hover:text-4xl duration-300 `}
+                    } text-2xl md:text-5xl
+                    ${
+                      !seat.booked
+                        ? "hover:text-blue-700 md:hover:text-6xl hover:text-4xl"
+                        : "text-red-700"
+                    }  duration-300 `}
                   >
                     <PiArmchairFill />
                   </button>
