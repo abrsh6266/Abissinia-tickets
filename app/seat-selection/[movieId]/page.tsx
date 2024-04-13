@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { movie as movies } from "../../data";
 import { Props } from "@/app/movies/[movieId]/page";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 const Seats = ({ params }: Props) => {
   const [id, setId] = useState(params.movieId);
@@ -26,6 +27,9 @@ const Seats = ({ params }: Props) => {
   };
   useEffect(() => {
     if (selectedMovie?.day === undefined && selectedMovie?.time === undefined) {
+      toast.error("you have to select day and time !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
       handleGoBack();
     }
     setSelectedMovie((prev) => ({
