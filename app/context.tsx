@@ -7,7 +7,6 @@ import {
   useState,
 } from "react";
 import { Movie } from "./data";
-import { StaticImageData } from "next/image";
 interface AppContextType {
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
