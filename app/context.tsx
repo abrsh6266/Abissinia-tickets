@@ -17,6 +17,8 @@ interface AppContextType {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   selectedMovie: Props | null;
   setSelectedMovie: React.Dispatch<React.SetStateAction<Props | null>>;
+  showNotification: boolean;
+  setShowNotification: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export interface Props {
   times?: string[] | undefined;
@@ -27,7 +29,7 @@ export interface Props {
     | {
         id: number;
         selected: boolean;
-        booked:boolean;
+        booked: boolean;
       }[]
     | undefined;
 }
@@ -41,6 +43,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [searchMovies, setSearchMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedMovie, setSelectedMovie] = useState<Props | null>(null);
+  const [showNotification, setShowNotification] = useState(false);
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
@@ -59,6 +62,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         setLoading,
         selectedMovie,
         setSelectedMovie,
+        showNotification,
+        setShowNotification,
       }}
     >
       {children}

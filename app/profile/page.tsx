@@ -1,6 +1,6 @@
 import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import PublicProfile from "../components/profileComponents/PublicProfile.tsx/PublicProfile";
+import PublicProfile from "../components/profileComponents/PublicProfile";
 import Aside from "../components/profileComponents/Aside";
 
 const Profile = () => {
