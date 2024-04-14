@@ -1,6 +1,7 @@
 "use client";
 import { useGlobalContext } from "@/app/context";
 import { FaTimes } from "react-icons/fa";
+import MessageComponent from "./MessageComponent";
 
 const Notification = () => {
   const { setShowNotification, showNotification } = useGlobalContext();
@@ -19,22 +20,11 @@ const Notification = () => {
             className="cursor-pointer"
             onClick={() => setShowNotification(false)}
           >
-            <FaTimes className="text-black text-3xl"/>
+            <FaTimes className="text-black text-3xl" />
           </div>
         </div>
-        <div className="w-full p-3 mt-8 bg-gray-700 rounded flex items-center text-white">
-          <div className="w-8 h-8 border rounded-full bg-white border-blue-700 flex items-center justify-center">
-          </div>
-          <div className="pl-3">
-            <p className="text-sm leading-none">
-              <span className="font-semibold">Admin:</span>{" "}
-              <span className="">
-                You have purchased the ticket successfully
-              </span>
-            </p>
-            <p className="text-xs leading-3 pt-1 text-gray-300">2 hours ago</p>{" "}
-          </div>
-        </div>
+        <MessageComponent />
+        <MessageComponent />
       </div>
     </div>
   );

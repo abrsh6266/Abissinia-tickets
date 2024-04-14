@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 import { AppProvider, useGlobalContext } from "./context";
 import Header from "./components/Header";
 import { ToastContainer } from "react-toastify";
-import Notification from "./components/Notification";
+import Notification from "./components/notification/Notification";
 
 const inter = Inter({ subsets: ["latin"] });
 
