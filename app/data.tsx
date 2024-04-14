@@ -6,6 +6,31 @@ import {
   FaLinkedin,
   FaTwitter,
 } from "react-icons/fa";
+//genres
+export const genres = [
+  "Action",
+  "Adventure",
+  "Animation",
+  "Biography",
+  "Comedy",
+  "Crime",
+  "Documentary",
+  "Drama",
+  "Family",
+  "Fantasy",
+  "History",
+  "Horror",
+  "Music",
+  "Musical",
+  "Mystery",
+  "Romance",
+  "Sci-Fi",
+  "Sport",
+  "Thriller",
+  "War",
+  "Western",
+];
+
 
 // cinemas
 import cinema1 from "/public/cinema/cinema1.jpg";
