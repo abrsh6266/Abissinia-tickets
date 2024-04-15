@@ -32,7 +32,7 @@ const SlickCarousel = () => {
                     alt={name}
                     className="bg-black object-cover w-full h-full rounded-lg"
                   />
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white bg-black bg-opacity-50 rounded-lg">
+                  <div className="absolute left-2 top-20 lg:w-[400px] lg:left-[450px] xl:w-[600px]  text-center text-white bg-black bg-opacity-50 rounded-lg">
                     <p className="text-xl">{quote}</p>
                   </div>
                 </div>
