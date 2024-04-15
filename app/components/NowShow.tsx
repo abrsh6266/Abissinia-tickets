@@ -9,9 +9,9 @@ const NowShow = () => {
   const [movies, setMovies] = useState(movie);
   
   return (
-    <section className="bg-black">
+    <section >
       <Hero />
-      <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+      <div className="container mx-auto flex items-center gap-2 flex-wrap pt-4 pb-12">
         <nav id="store" className="w-full z-30 top-0 px-6 py-1">
           <SectionTitle text="now Showing"/>
         </nav>

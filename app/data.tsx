@@ -88,7 +88,7 @@ export const links = [
   { id:5,label: "Cinemas", href: "#" },
   { id:6,label: "Schedule", href: "#" },
 ];
-
+  
 export interface Movie {
   id: number;
   poster: StaticImageData;
