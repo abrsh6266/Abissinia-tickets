@@ -7,7 +7,7 @@ import { FaArrowRight, FaTimesCircle } from "react-icons/fa";
 const SearchResult = () => {
   const { searchMovies, setSearchMovies, setSearchTerm } = useGlobalContext();
   return (
-    <div className="w-full bg-black">
+    <div className="w-full overflow-hidden">
       <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
         <nav  className="w-full z-30 top-0 px-6 py-1">
           <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
