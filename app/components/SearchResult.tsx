@@ -23,7 +23,7 @@ const SearchResult = () => {
               }}
               className="btn bg-transparent  md:text-2xl border-2 border-gray-400 hover:bg-blue-700 rounded-lg px-6 mr-8"
             >
-              back <FaArrowRight className="mt-1"/>
+              back
             </button>
           </div>
         </nav>

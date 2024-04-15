@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { list } from "../data";
 import { useState } from "react";
 import Image from "next/image";
-import Search from "./Search";
 
 const SlickCarousel = () => {
   const [people, setPeople] = useState(list);
@@ -21,7 +20,6 @@ const SlickCarousel = () => {
   };
   return (
     <section className="overflow-hidden bg-black rounded-lg">
-      <Search />
       <div className="carousel-wrapper">
         <Slider {...settings}>
           {people.map((p) => {

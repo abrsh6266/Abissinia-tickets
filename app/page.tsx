@@ -8,6 +8,7 @@ import SearchResult from "./components/SearchResult";
 import Loading from "./components/Loading";
 import { usePathname } from "next/navigation";
 import { link } from "fs";
+import Search from "./components/Search";
 
 export default function Home() {
   const currentPath = usePathname();
@@ -33,6 +34,7 @@ export default function Home() {
         <Loading />
       ) : (
         <div>
+          <Search />
           {searchMovies.length > 0 ? <SearchResult /> : <SlickCarousel />}
           <NowShow />
         </div>
