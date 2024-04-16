@@ -23,16 +23,14 @@ const SnackAndDrinks = ({ snack }: { snack: SnackAndDrink }) => {
           <div className="mt-20 ml-2 relative h-10 min-w-[100px] max-w-[200px]">
             <select
               onChange={() => console.log("value")}
-              className="h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 empty:!bg-gray-900 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-              style={{ color: "#fff" }}
+              className="h-full w-full rounded-[7px]  disabled:border-0 select select-bordered"
             >
-              <option style={{ color: "#000" }} value={0}>
+              <option  value={0}>
                 0 - 0ETB
               </option>
               {Array.from({ length: 10 }, (_, index) => index + 1).map(
                 (number) => (
                   <option
-                    style={{ color: "#000" }}
                     key={number}
                     value={number * snack.price}
                   >
