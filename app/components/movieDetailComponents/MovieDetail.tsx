@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const MovieDetail = ({ movie }: { movie: Movie }) => {
   return (
-    <div className="align-element">
+    <div className="align-element shadow-gray-700 shadow-xl mb-6">
       <div className="m-auto md:grid lg:grid md:pl-4 md:grid-cols-5 lg:grid-cols-8 gap-4">
         <div className="relative tile row-start-2 row-end-5 col-span-1 md:col-span-2 lg:col-span-3 max-h-96 h-96 mt-8">
           <Image

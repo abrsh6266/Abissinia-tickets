@@ -62,7 +62,7 @@ const Page = () => {
           are subject to our Terms and Conditions.
         </p>
       </div>
-      <div className="border min-h-8 max-h-full m-4">
+      <div className="min-h-8 max-h-full m-4">
         {movies.map((m) => {
           return <MovieDetail key={m.id} movie={m} />;
         })}
