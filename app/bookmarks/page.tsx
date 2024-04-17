@@ -10,21 +10,16 @@ const page = () => {
         <div className="grid lg:grid-cols-3 gap-12 p-6">
           <Bookmark movie={movie[0]} />
           <div className="shadow-md p-6">
-            <h3 className="text-xl font-extrabold  border-b pb-4">
-              Order Summary
-            </h3>
+            <h3 className="text-xl font-extrabold  border-b pb-4">Summary</h3>
             <ul className=" divide-y mt-6">
               <li className="flex flex-wrap gap-4 text-md py-4">
-                Subtotal <span className="ml-auto font-bold">$55.5</span>
+                Subtotal <span className="ml-auto font-bold">220ETB</span>
               </li>
               <li className="flex flex-wrap gap-4 text-md py-4">
-                Shipping <span className="ml-auto font-bold">$4.00</span>
-              </li>
-              <li className="flex flex-wrap gap-4 text-md py-4">
-                Tax <span className="ml-auto font-bold">$4.00</span>
+                Tax <span className="ml-auto font-bold">30ETB</span>
               </li>
               <li className="flex flex-wrap gap-4 text-md py-4 font-bold">
-                Total <span className="ml-auto">$63.5</span>
+                Total <span className="ml-auto">250ETB</span>
               </li>
             </ul>
             <button
@@ -33,23 +28,6 @@ const page = () => {
             >
               Check out
             </button>
-
-            <div className="mt-10">
-              <h3 className="text-xl font-extrabold  mb-6">Apply promo code</h3>
-              <div className="flex border border-blue-600 overflow-hidden max-w-md rounded">
-                <input
-                  type="email"
-                  placeholder="Promo code"
-                  className="w-full outline-none  text-gray-600 text-md px-4 py-2.5"
-                />
-                <button
-                  type="button"
-                  className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 px-6 text-md text-white"
-                >
-                  Apply
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
