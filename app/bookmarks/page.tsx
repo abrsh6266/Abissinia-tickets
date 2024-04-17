@@ -8,7 +8,7 @@ const page = () => {
     <div className="align-element">
       <div className="font-[sans-serif]">
         <div className="grid lg:grid-cols-3 gap-12 p-6">
-          <Bookmark />
+          <Bookmark movie={movie[0]} />
           <div className="shadow-md p-6">
             <h3 className="text-xl font-extrabold  border-b pb-4">
               Order Summary
