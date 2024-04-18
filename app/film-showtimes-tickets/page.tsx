@@ -15,7 +15,7 @@ const Page = () => {
     } else setMovies(movie);
   };
   return (
-    <div>
+    <div className="align-element">
       <div className="sm:flex md:grid md:grid-cols-2">
         <SectionTitle text={"showTimes"} />
         <div className="md:m-auto ml-2 relative h-10 w-72 min-w-[200px]">
@@ -54,7 +54,7 @@ const Page = () => {
           </label>
         </div>
       </div>
-      <div className="md:text-2xl text-gray-200 sm:text-xl md:m-20 m-2 max-w-lg italic ">
+      <div className="md:text-2xl text-gray-200 sm:text-xl italic lg:mx-20">
         <p>
           Film schedule is updated and published on a weekly basis every Monday
           evening. You do not need to print the tickets - just present them to
