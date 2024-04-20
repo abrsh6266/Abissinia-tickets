@@ -9,6 +9,8 @@ import { AppProvider, useGlobalContext } from "./context";
 import Header from "./components/Header";
 import { ToastContainer } from "react-toastify";
 import Notification from "./components/notification/Notification";
+import { Suspense } from "react";
+import Load from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,7 +33,9 @@ export default function RootLayout({
             <Navbar />
             <Notification />
             <ToastContainer />
-            <main>{children}</main>
+            <Suspense fallback={<Load />}>
+              <main>{children}</main>
+            </Suspense>
             <Footer />
           </body>
         </TanstackProvider>

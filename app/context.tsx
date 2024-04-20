@@ -12,8 +12,6 @@ interface AppContextType {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   searchMovies: Movie[];
   setSearchMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   selectedMovie: Props | null;
   setSelectedMovie: React.Dispatch<React.SetStateAction<Props | null>>;
   showNotification: boolean;
@@ -40,16 +38,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchMovies, setSearchMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState(true);
   const [selectedMovie, setSelectedMovie] = useState<Props | null>(null);
   const [showNotification, setShowNotification] = useState(false);
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 4000);
-
-    return () => clearTimeout(timeout);
-  }, []);
   return (
     <appContext.Provider
       value={{
@@ -57,8 +47,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         setSearchTerm,
         searchMovies,
         setSearchMovies,
-        loading,
-        setLoading,
         selectedMovie,
         setSelectedMovie,
         showNotification,
