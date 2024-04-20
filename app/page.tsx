@@ -29,13 +29,9 @@ export default function Home() {
 
   return (
     <div>
-      (
-      <div>
-        <Search />
-        {searchMovies.length > 0 ? <SearchResult /> : <SlickCarousel />}
-        <NowShow />
-      </div>
-      )
+      <Search />
+      {searchMovies.length > 0 ? <SearchResult /> : <SlickCarousel />}
+      <NowShow />
     </div>
   );
 }
