@@ -35,8 +35,8 @@ export default function RootLayout({
             <ToastContainer />
             <Suspense fallback={<Load />}>
               <main>{children}</main>
+              <Footer />
             </Suspense>
-            <Footer />
           </body>
         </TanstackProvider>
       </AppProvider>
