@@ -12,8 +12,7 @@ import Search from "./components/Search";
 
 export default function Home() {
   const currentPath = usePathname();
-  const { searchTerm, searchMovies, setSearchMovies, loading } =
-    useGlobalContext();
+  const { searchTerm, searchMovies, setSearchMovies } = useGlobalContext();
   useEffect(() => {
     if (searchTerm != "") {
       setSearchMovies(() => {
@@ -30,15 +29,13 @@ export default function Home() {
 
   return (
     <div>
-      {loading && '/'===currentPath ? (
-        <Loading />
-      ) : (
-        <div>
-          <Search />
-          {searchMovies.length > 0 ? <SearchResult /> : <SlickCarousel />}
-          <NowShow />
-        </div>
-      )}
+      (
+      <div>
+        <Search />
+        {searchMovies.length > 0 ? <SearchResult /> : <SlickCarousel />}
+        <NowShow />
+      </div>
+      )
     </div>
   );
 }
