@@ -19,7 +19,7 @@ const ComingSoon = () => {
   };
   const [moviess, setMovies] = useState<Movie[]>(selectFiveMovies());
   return (
-    <div className=" w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row ">
+    <div className=" w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row overflow-hidden">
       <aside className="hidden py-4 md:w-1/3 lg:w-1/5 md:block">
         <Genre />
       </aside>

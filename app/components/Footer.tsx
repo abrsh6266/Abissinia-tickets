@@ -7,7 +7,6 @@ const Footer = () => {
   const currentPath = usePathname();
   return (
     <>
-      (
       <section className="bg-gradient-to-t from-gray-500 via-gray-700 to-black mt-20">
         <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
           <nav className="flex flex-wrap justify-center -mx-5 -my-2">
@@ -45,7 +44,6 @@ const Footer = () => {
           </p>
         </div>
       </section>
-      )
     </>
   );
 };
