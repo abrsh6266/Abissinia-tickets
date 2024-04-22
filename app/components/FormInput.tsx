@@ -9,7 +9,7 @@ const FormInput = ({
   name: string;
   type: string;
   defaultValue: any;
-  size: string;
+  size?: string|'';
 }) => {
   return (
     <div className="form-control">
