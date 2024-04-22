@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import logo from "/public/images/logo.png";
+import logo from "/public/images/logo2.png";
 import Image from "next/image";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { IoNotificationsSharp } from "react-icons/io5";
@@ -25,7 +25,7 @@ const Navbar = () => {
           {/* Title */}
           <Link
             href="/"
-            className="hidden btn mask mask-hexagon-2 bg-gray-200 hover:bg-gray-400  lg:flex  h-full rounded-full text-3xl items-center "
+            className="hidden btn mask mask-hexagon-2   lg:flex  h-full rounded-full text-3xl items-center "
           >
             <Image
               style={{
