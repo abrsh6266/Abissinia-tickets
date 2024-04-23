@@ -8,6 +8,7 @@ import { movie as movies, SnackAndDrink, snackAndDrinkData } from "../../data";
 import { Props } from "@/app/movies/[movieId]/page";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import Extra from "@/app/components/extrasComponents/Extra";
 
 const Extras = ({ params }: Props) => {
   const [snacks, setSnacks] = useState<SnackAndDrink[]>(snackAndDrinkData);
@@ -85,26 +86,10 @@ const Extras = ({ params }: Props) => {
           </button>
         </Link>
       </div>
-      <div className="max-w-[600px] mb-[20px] flex flex-wrap gap-4">
+      <div className="max-w-[1000px] mb-[20px] flex flex-wrap gap-2 xl:gap-6">
         {snacks.map((snack) => {
           return (
-            <div
-              key={snack.id}
-              className="card w-64 bg-base-200 shadow-lg shadow-gray-600 rounded-l-2xl rounded-b-2xl"
-            >
-              <figure>
-                <Image src={snack.image} alt="Shoes" />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">
-                  {snack.name}
-                </h2>
-                <div className="w-full flex justify-between text-xs px-2 mt-2">
-                  <span className="font-bold text-lg">{snack.price}ETB</span>
-                  <span className="font-bold text-dm">Max: </span>
-                </div>
-              </div>
-            </div>
+            <Extra key={snack.id} snack={snack} />
           );
         })}
       </div>
