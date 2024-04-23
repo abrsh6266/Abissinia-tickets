@@ -45,6 +45,10 @@ import pizza from "/public/snacks/pizza.jpg";
 import soda from "/public/snacks/soft-drinks.jpg";
 import water from "/public/snacks/bottled-water.jpg";
 import fries from "/public/snacks/fries.jpg";
+import kolo from "/public/snacks/kolo.png"
+import chips from "/public/snacks/chips.png"
+import popcorn2 from "/public/snacks/popcorn2.png"
+
 
 export const socials = [
   {
@@ -351,5 +355,26 @@ export const snackAndDrinkData: SnackAndDrink[] = [
     type: "Snack",
     price: 4,
     image: fries,
+  },
+  {
+    id: 7,
+    name: "kolo",
+    type: "Snack",
+    price: 50,
+    image: kolo,
+  },
+  {
+    id: 8,
+    name: "chips",
+    type: "Snack",
+    price: 70,
+    image: chips,
+  },
+  {
+    id: 9,
+    name: "popcorn2",
+    type: "Snack",
+    price: 100,
+    image: popcorn2,
   },
 ];

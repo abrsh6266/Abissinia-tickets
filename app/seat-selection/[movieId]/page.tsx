@@ -134,7 +134,7 @@ const Seats = ({ params }: Props) => {
         >
           cancel
         </button>
-        <Link href={`/seat-selection/${movie?.id}`}>
+        <Link href={`/extras-selection/${movie?.id}`}>
           <button className="btn border-2  bg-blue-700 rounded-lg px-4">
             Continue
           </button>
