@@ -14,7 +14,7 @@ const login = () => {
       >
         <Image
           style={{
-            maxWidth: "100%",
+            maxWidth: "100%  ",
             height: "auto",
           }}
           src={logo}
