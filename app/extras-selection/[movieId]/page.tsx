@@ -86,7 +86,7 @@ const Extras = ({ params }: Props) => {
           </button>
         </Link>
       </div>
-      <div className="max-w-[1000px] mb-[20px] flex flex-wrap gap-2 xl:gap-6">
+      <div className="xl:max-w-[1200px] mb-[20px] flex flex-wrap gap-2 xl:gap-6">
         {snacks.map((snack) => {
           return (
             <Extra key={snack.id} snack={snack} />

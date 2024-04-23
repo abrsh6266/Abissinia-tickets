@@ -4,7 +4,7 @@ import React from "react";
 
 const Extra = ({ snack }: { snack: SnackAndDrink }) => {
   return (
-    <div className="card md:w-64 sm:w-96 mb-5 bg-base-200 shadow-lg shadow-gray-600 rounded-l-2xl rounded-b-2xl mx-auto">
+    <div className="card w-80 mb-5 bg-base-200 shadow-lg shadow-gray-600 rounded-l-2xl rounded-b-2xl mx-auto">
       <figure>
         <Image
           className="object-cover w-full h-[240px]"
