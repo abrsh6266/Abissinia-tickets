@@ -16,6 +16,13 @@ interface AppContextType {
   setSelectedMovie: React.Dispatch<React.SetStateAction<Props | null>>;
   showNotification: boolean;
   setShowNotification: React.Dispatch<React.SetStateAction<boolean>>;
+
+  meta: Meta;
+  setMeta: React.Dispatch<React.SetStateAction<Meta>>;
+}
+interface Meta {
+  pageCount: number;
+  page: number;
 }
 export interface Props {
   times?: string[] | undefined;
@@ -40,6 +47,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [searchMovies, setSearchMovies] = useState<Movie[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<Props | null>(null);
   const [showNotification, setShowNotification] = useState(false);
+  const [meta, setMeta] = useState<Meta>({
+    page: 1,
+    pageCount: 10,
+  });
   return (
     <appContext.Provider
       value={{
@@ -51,6 +62,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         setSelectedMovie,
         showNotification,
         setShowNotification,
+        meta,
+        setMeta,
       }}
     >
       {children}
