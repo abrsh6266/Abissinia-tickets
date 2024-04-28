@@ -3,6 +3,7 @@ import { useState } from "react";
 import SectionTitle from "../components/SectionTitle";
 import { Movie, movie } from "../data";
 import MovieDetail from "../components/movieDetailComponents/MovieDetail";
+import PaginationContainer from "../components/PaginationContainer";
 
 const Page = () => {
   const [movies, setMovies] = useState(movie);
@@ -66,6 +67,9 @@ const Page = () => {
         {movies.map((m) => {
           return <MovieDetail key={m.id} movie={m} />;
         })}
+      </div>
+      <div className="align-element">
+        <PaginationContainer />
       </div>
     </div>
   );

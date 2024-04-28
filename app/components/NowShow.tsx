@@ -20,7 +20,9 @@ const NowShow = () => {
           return <MovieCard {...movie} key={movie.id} />;
         })}
       </div>
-      
+      <div className="align-element">
+        <PaginationContainer />
+      </div>
     </section>
   );
 };
