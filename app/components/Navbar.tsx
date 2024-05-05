@@ -7,19 +7,10 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { IoNotificationsSharp } from "react-icons/io5";
 import NavLinks from "./NavLinks";
 import { BiHeart } from "react-icons/bi";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { useDispatch } from "react-redux";
 import { setShowNotification } from "../features/user/userSlice";
 const Navbar = () => {
   const dispatch = useDispatch();
-  const showNotification = useSelector(
-    (state: RootState) => state.userState.showNotification
-  );
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   return (
     <nav>
       <div className="navbar align-element">
