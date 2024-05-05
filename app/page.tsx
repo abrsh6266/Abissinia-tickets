@@ -1,32 +1,32 @@
 "use client";
-import { useEffect, useState } from "react";
-import { movie, Movie } from "./data";
-import { useGlobalContext } from "./context";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setSearchMovies } from "./features/movie/movieSlice";
 import NowShow from "./components/NowShow";
 import SlickCarousel from "./components/SlickCarousel";
 import SearchResult from "./components/SearchResult";
-import Loading from "./components/Loading";
-import { usePathname } from "next/navigation";
-import { link } from "fs";
 import Search from "./components/Search";
-import { useSelector } from "react-redux";
 import { RootState } from "./store/store";
+import { movie, Movie } from "./data";
 
-export default function Home() {
-  const user = useSelector((state: RootState) => state.user);
-  const currentPath = usePathname();
-  const { searchTerm, searchMovies, setSearchMovies } = useGlobalContext();
+const Home = () => {
+  const searchTerm = useSelector(
+    (state: RootState) => state.movieState.searchTerm
+  );
+  const searchMovies = useSelector(
+    (state: RootState) => state.movieState.searchMovies
+  );
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    if (searchTerm != "") {
-      setSearchMovies(() => {
-        const searchTermLowerCase = searchTerm.toLowerCase();
-        const filteredMovies = movie.filter((m) =>
-          m.title.toLowerCase().includes(searchTermLowerCase)
-        );
-        return filteredMovies;
-      });
+    if (searchTerm !== "") {
+      const searchTermLowerCase = searchTerm.toLowerCase();
+      const filteredMovies = movie.filter((m: Movie) =>
+        m.title.toLowerCase().includes(searchTermLowerCase)
+      );
+      dispatch(setSearchMovies(filteredMovies));
     } else {
-      setSearchMovies([]);
+      dispatch(setSearchMovies([]));
     }
   }, [searchTerm]);
 
@@ -37,4 +37,6 @@ export default function Home() {
       <NowShow />
     </div>
   );
-}
+};
+
+export default Home;
