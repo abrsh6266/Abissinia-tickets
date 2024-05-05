@@ -10,6 +10,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { loginUser } from "../features/user/userSlice";
 import axios from "axios";
+import { customFetch } from "../utils";
 
 const login = () => {
   const dispatch = useDispatch();
@@ -25,12 +26,7 @@ const login = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      console.log(formData);
-      const response = await axios.post(
-        "https://strapi-store-server.onrender.com/api/auth/local",
-        formData
-      );
-
+      const response = await customFetch.post("/auth/local", formData);
       const data = response.data;
       dispatch(loginUser({ user: data.user, jwt: data.jwt }));
       router.push("/");
