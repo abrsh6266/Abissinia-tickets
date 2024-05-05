@@ -1,19 +1,21 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
 import logo from "/public/images/logo2.png";
 import Image from "next/image";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { IoNotificationsSharp } from "react-icons/io5";
-import { useGlobalContext } from "../context";
 import NavLinks from "./NavLinks";
 import { BiHeart } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { setShowNotification } from "../features/user/userSlice";
 const Navbar = () => {
-  const { setShowNotification } = useGlobalContext();
-  const currentPath = usePathname();
+  const dispatch = useDispatch();
+  const showNotification = useSelector(
+    (state: RootState) => state.userState.showNotification
+  );
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -59,7 +61,7 @@ const Navbar = () => {
             <BiHeart className="text-2xl" />
           </Link>
           <button
-            onClick={() => setShowNotification(true)}
+            onClick={() => dispatch(setShowNotification(true))}
             className="flex items-center hover:text-gray-200"
           >
             <IoNotificationsSharp className="text-2xl" />

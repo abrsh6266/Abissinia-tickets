@@ -1,10 +1,18 @@
-"use client";
-import { useGlobalContext } from "@/app/context";
+'use client'
+import { useSelector, useDispatch } from "react-redux";
+import { setShowNotification } from "../../features/user/userSlice";
 import { FaTimes } from "react-icons/fa";
 import MessageComponent from "./MessageComponent";
+import { RootState } from "@/app/store/store";
 
 const Notification = () => {
-  const { setShowNotification, showNotification } = useGlobalContext();
+  const showNotification = useSelector((state:RootState) => state.userState.showNotification);
+  const dispatch = useDispatch();
+
+  const handleCloseNotification = () => {
+    dispatch(setShowNotification(false));
+  };
+
   return (
     <div
       className={`fixed top-0 right-0 z-50 w-full h-full overflow-x-hidden transition-all ease-in-out duration-500 ${
@@ -16,10 +24,7 @@ const Notification = () => {
           <p className="text-2xl font-semibold leading-6 text-gray-800">
             Notifications
           </p>
-          <div
-            className="cursor-pointer"
-            onClick={() => setShowNotification(false)}
-          >
+          <div className="cursor-pointer" onClick={handleCloseNotification}>
             <FaTimes className="text-black text-3xl" />
           </div>
         </div>
