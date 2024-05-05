@@ -9,10 +9,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { loginUser } from "../features/user/userSlice";
-import axios from "axios";
 import { customFetch } from "../utils";
 
-const login = () => {
+const Login = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -85,4 +84,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
