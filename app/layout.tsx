@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import Notification from "./components/notification/Notification";
 import { Suspense } from "react";
 import Load from "./loading";
+import { StoreProvider } from "./store/StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,21 +26,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="black">
-      <AppProvider>
-        <TanstackProvider>
-          <body className={inter.className}>
-            <Header />
-            <Navbar />
-            <Notification />
-            <ToastContainer />
-            <Suspense fallback={<Load />}>
-              <main>{children}</main>
-              <Footer />
-            </Suspense>
-          </body>
-        </TanstackProvider>
-      </AppProvider>
-    </html>
+    <StoreProvider>
+      <html lang="en" data-theme="black">
+        <AppProvider>
+          <TanstackProvider>
+            <body className={inter.className}>
+              <Header />
+              <Navbar />
+              <Notification />
+              <ToastContainer />
+              <Suspense fallback={<Load />}>
+                <main>{children}</main>
+                <Footer />
+              </Suspense>
+            </body>
+          </TanstackProvider>
+        </AppProvider>
+      </html>
+    </StoreProvider>
   );
 }
