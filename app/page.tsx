@@ -9,8 +9,11 @@ import Loading from "./components/Loading";
 import { usePathname } from "next/navigation";
 import { link } from "fs";
 import Search from "./components/Search";
+import { useSelector } from "react-redux";
+import { RootState } from "./store/store";
 
 export default function Home() {
+  const user = useSelector((state: RootState) => state.user);
   const currentPath = usePathname();
   const { searchTerm, searchMovies, setSearchMovies } = useGlobalContext();
   useEffect(() => {

@@ -4,12 +4,14 @@ const FormInput = ({
   type,
   defaultValue,
   size,
+  handleChange
 }: {
   label: string;
   name: string;
   type: string;
-  defaultValue: any;
+  defaultValue?: any;
   size?: string|'';
+  handleChange?:any
 }) => {
   return (
     <div className="form-control">
@@ -17,6 +19,7 @@ const FormInput = ({
         <span className="label-text capitalize">{label}</span>
       </label>
       <input
+      onChange={handleChange}
         type={type}
         name={name}
         defaultValue={defaultValue}
