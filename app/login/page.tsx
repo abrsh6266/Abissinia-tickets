@@ -31,16 +31,17 @@ const login = () => {
         formData
       );
 
-      if (response.status === 200) {
-        const data = response.data;
-        dispatch(loginUser({ user: data.user, jwt: data.jwt }));
-        router.push("/");
-        toast.success("Login successful");
-      } else {
-        toast.error("Invalid identifier or password");
-      }
-    } catch (error) {
-      toast.error("An error occurred during login");
+      const data = response.data;
+      dispatch(loginUser({ user: data.user, jwt: data.jwt }));
+      router.push("/");
+      toast.success("Login successful");
+    } catch (error: any) {
+      const errorMessage =
+        error?.response?.data?.error?.message ||
+        "please double check your credentials";
+
+      toast.error(errorMessage);
+      return null;
     }
   };
   return (
