@@ -8,7 +8,7 @@ interface PaginationState {
 
 const initialState: PaginationState = {
   page: 1,
-  pageCount: 1,
+  pageCount: 2,
   // Initialize other properties here
 };
 

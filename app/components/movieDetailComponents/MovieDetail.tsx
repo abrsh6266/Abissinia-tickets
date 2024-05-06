@@ -5,8 +5,11 @@ import MovieInfoCard from "./MovieInfoCard";
 import { Movie } from "../../data";
 import Review from "./Review";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store/store";
 
 const MovieDetail = ({ movie }: { movie: Movie }) => {
+  const { user } = useSelector((state: RootState) => state.userState);
   return (
     <div className="align-element shadow-gray-700 shadow-xl mb-6">
       <div className="m-auto md:grid lg:grid md:pl-4 md:grid-cols-5 lg:grid-cols-8 gap-4">
@@ -22,12 +25,19 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
           <MovieInfoCard {...movie} />
         </div>
       </div>
-      <Link
+      {
+        user?<Link
         href={`/ticket-purchase/${movie?.id}`}
         className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
       >
         Get Tickets <RxArrowBottomRight />
+      </Link>:<Link
+        href={`/login`}
+        className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
+      >
+        please login <RxArrowBottomRight />
       </Link>
+      }
       <div>
         <div className="ml-2 col-span-full my-2">
           <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold  text-xl ">
