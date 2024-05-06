@@ -4,11 +4,11 @@ import { store } from "./app/store/store";
 
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
-  const state = store.getState();
-  const { user } = state.userState;
-  if (!user) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
+  // const state = store.getState();
+  // const { user } = state.userState;
+  // if (!user) {
+  //   return NextResponse.redirect(new URL("/login", request.url));
+  // }
   return response;
 }
 export const config = {

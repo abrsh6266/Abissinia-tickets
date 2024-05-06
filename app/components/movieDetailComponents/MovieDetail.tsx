@@ -25,19 +25,22 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
           <MovieInfoCard {...movie} />
         </div>
       </div>
-      {
-        user?<Link
-        href={`/ticket-purchase/${movie?.id}`}
-        className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
-      >
-        Get Tickets <RxArrowBottomRight />
-      </Link>:<Link
-        href={`/login`}
-        className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
-      >
-        please login <RxArrowBottomRight />
-      </Link>
-      }
+      {user?.id ? (
+        <Link
+          href={`/ticket-purchase/${movie?.id}`}
+          className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
+        >
+          Get Tickets <RxArrowBottomRight />
+        </Link>
+      ) : (
+        <Link
+          href={`/login`}
+          className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
+        >
+          please login to get tickets
+          <RxArrowBottomRight />
+        </Link>
+      )}
       <div>
         <div className="ml-2 col-span-full my-2">
           <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold  text-xl ">
