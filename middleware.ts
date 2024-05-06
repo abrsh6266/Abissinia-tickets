@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { store } from "./app/store/store";
+//import { store } from "./app/store/store";
 
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();

@@ -29,7 +29,7 @@ const Header = () => {
         ) : (
           <div className="flex gap-x-6 justify-center items-center">
             <Link href="/login" className="link link-hover text-xs sm:text-sm">
-              Sign in / Guest
+              Sign in
             </Link>
             <Link
               href="/signup"
