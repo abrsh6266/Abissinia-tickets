@@ -1,10 +1,11 @@
 // reducers.js
+import { Props } from "@/app/utils";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   searchTerm: "",
   searchMovies: [],
-  selectedMovie: null,
+  selectedMovie: null as Props | null,
   meta: {
     page: 1,
     pageCount: 10,
@@ -23,6 +24,7 @@ const appSlice = createSlice({
     },
     setSelectedMovie(state, action) {
       state.selectedMovie = action.payload;
+      console.log(state.selectedMovie)
     },
     setMeta(state, action) {
       state.meta = action.payload;

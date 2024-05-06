@@ -1,33 +1,38 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useGlobalContext } from "../../context";
-import { IoMdArrowRoundBack } from "react-icons/io";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { nanoid } from "@reduxjs/toolkit";
-import { movie as movies } from "../../data";
+import { useSelector, useDispatch } from "react-redux";
+import { setSelectedMovie } from "@/app/features/movie/movieSlice";
 import { Props } from "@/app/movies/[movieId]/page";
+import { movie as movies } from "@/app/data";
 import MovieSchedule from "@/app/components/movieDetailComponents/MovieSchedule";
 import Link from "next/link";
+import { RootState } from "@/app/store/store";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const Tickets = ({ params }: Props) => {
   const [id, setId] = useState(params.movieId);
   const [movie, setMovie] = useState(() => {
     return movies.find((m) => m.id.toString() === id);
   });
-  const { selectedMovie, setSelectedMovie } = useGlobalContext();
+  const selectedMovie = useSelector((state:RootState) => state.movieState.selectedMovie);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   useEffect(() => {
-    setSelectedMovie((prev) => ({
-      ...prev,
+    dispatch(setSelectedMovie({
+      ...selectedMovie,
       times: undefined,
       time: undefined,
       day: undefined,
     }));
   }, []);
-  const router = useRouter();
+
   const handleGoBack = () => {
-    setSelectedMovie((prev) => ({
-      ...prev,
+    dispatch(setSelectedMovie({
+      ...selectedMovie,
       times: undefined,
       time: undefined,
       day: undefined,
@@ -35,6 +40,7 @@ const Tickets = ({ params }: Props) => {
     }));
     router.back();
   };
+
   return (
     <section className="grid place-items-center overflow-x-hidden">
       <div className="relative w-full px-2 md:px-10 lg:px-20 rounded-lg shadow-lg">
@@ -59,12 +65,14 @@ const Tickets = ({ params }: Props) => {
               <div key={nanoid()} className="carousel-item">
                 <button
                   onClick={() => {
-                    setSelectedMovie((prevSelectedMovie) => ({
-                      ...prevSelectedMovie,
-                      day: show.day,
-                      times: show.times,
-                      time: undefined,
-                    }));
+                    dispatch(
+                      setSelectedMovie({
+                        ...selectedMovie,
+                        day: show.day,
+                        times: show.times,
+                        time: undefined,
+                      })
+                    );
                   }}
                   className={
                     show.day === selectedMovie?.day
@@ -167,3 +175,4 @@ const Tickets = ({ params }: Props) => {
 };
 
 export default Tickets;
+

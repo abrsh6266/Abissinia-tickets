@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import SectionTitle from "../components/SectionTitle";
-import { Movie, movie } from "../data";
+import { movie } from "../data";
 import MovieDetail from "../components/movieDetailComponents/MovieDetail";
 import PaginationContainer from "../components/PaginationContainer";
 
@@ -23,7 +23,7 @@ const Page = () => {
           <select
             onChange={handleFilter}
             className="h-full w-full rounded-[7px]  disabled:border-0 select select-bordered"
-            style={{ color: "#fff" }} // Set text color to white
+            style={{ color: "#fff" }}
           >
             <option value="">none</option>
             <option value="Monday">

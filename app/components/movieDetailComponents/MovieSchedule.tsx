@@ -1,8 +1,14 @@
-import { Props, useGlobalContext } from "@/app/context";
+import { setSelectedMovie } from "@/app/features/movie/movieSlice";
+import { RootState } from "@/app/store/store";
+import { Props } from "@/app/utils";
 import { nanoid } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
 
 const MovieSchedule = ({ times }: Props) => {
-  const { setSelectedMovie, selectedMovie } = useGlobalContext();
+  const selectedMovie = useSelector(
+    (state: RootState) => state.movieState.selectedMovie
+  );
+  const dispatch = useDispatch();
   return (
     <div className="mt-10">
       <div className="flex items-center justify-between">
@@ -16,10 +22,12 @@ const MovieSchedule = ({ times }: Props) => {
             return (
               <button
                 onClick={() => {
-                  setSelectedMovie((prevSelectedMovie) => ({
-                    ...prevSelectedMovie,
-                    time,
-                  }));
+                  dispatch(
+                    setSelectedMovie({
+                      ...selectedMovie,
+                      time: time,
+                    })
+                  );
                 }}
                 key={nanoid()}
                 className={

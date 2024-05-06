@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import TanstackProvider from "./components/providers/TanstackProvider";
 import Footer from "./components/Footer";
-import { AppProvider, useGlobalContext } from "./context";
 import Header from "./components/Header";
 import { ToastContainer } from "react-toastify";
 import Notification from "./components/notification/Notification";
@@ -28,7 +27,6 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="en" data-theme="black">
-        <AppProvider>
           <TanstackProvider>
             <body className={inter.className}>
               <Header />
@@ -41,7 +39,6 @@ export default function RootLayout({
               </Suspense>
             </body>
           </TanstackProvider>
-        </AppProvider>
       </html>
     </StoreProvider>
   );

@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "../features/user/userSlice";
 import movieReducer from "../features/movie/movieSlice";
+import paginationReducer from "../features/pagination/paginationSlice";
 // ...
 
 export const store = configureStore({
   reducer: {
     userState: userReducer,
     movieState: movieReducer,
+    paginationState: paginationReducer,
   },
 });
 

@@ -1,13 +1,19 @@
-import { useGlobalContext } from "../context";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { setPage } from "../features/pagination/paginationSlice";
 
 const PaginationContainer = () => {
-  const { meta } = useGlobalContext();
-  const { pageCount, page } = meta;
+  const { pageCount, page } = useSelector((state: RootState) => state.paginationState);
+  const dispatch = useDispatch();
+
   const pages = Array.from({ length: pageCount }, (_, index) => {
     return index + 1;
   });
 
-  const handlePageChange = (pageNumber: any) => {};
+  const handlePageChange = (pageNumber: number) => {
+    dispatch(setPage(pageNumber));
+  };
 
   if (pageCount < 2) return null;
 
@@ -51,4 +57,5 @@ const PaginationContainer = () => {
     </div>
   );
 };
+
 export default PaginationContainer;

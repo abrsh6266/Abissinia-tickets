@@ -1,30 +1,39 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useGlobalContext } from "../../context";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { PiArmchairFill } from "react-icons/pi";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { movie as movies } from "../../data";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedMovie } from "@/app/features/movie/movieSlice";
 import { Props } from "@/app/movies/[movieId]/page";
+import { movie as movies } from "@/app/data";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { PiArmchairFill } from "react-icons/pi";
+import { RootState } from "@/app/store/store";
 
 const Seats = ({ params }: Props) => {
   const [id, setId] = useState(params.movieId);
   const [movie, setMovie] = useState(() => {
     return movies.find((m) => m.id.toString() === id);
   });
-  const { selectedMovie, setSelectedMovie } = useGlobalContext();
+  const selectedMovie = useSelector(
+    (state: RootState) => state.movieState.selectedMovie
+  );
+  const dispatch = useDispatch();
   const router = useRouter();
+
   const handleSelectSeat = (id: any) => {
-    setSelectedMovie((prev) => ({
-      ...prev,
-      seats: prev?.seats?.map((seat) =>
-        seat.id === id ? { ...seat, selected: !seat.selected } : seat
-      ),
-    }));
+    dispatch(
+      setSelectedMovie({
+        ...selectedMovie,
+        seats: selectedMovie?.seats?.map((seat) =>
+          seat.id === id ? { ...seat, selected: !seat.selected } : seat
+        ),
+      })
+    );
   };
+
   useEffect(() => {
     if (selectedMovie?.day === undefined && selectedMovie?.time === undefined) {
       toast.error("you have to select day and time !", {
@@ -32,25 +41,31 @@ const Seats = ({ params }: Props) => {
       });
       handleGoBack();
     }
-    setSelectedMovie((prev) => ({
-      ...prev,
-      seats: Array.from({ length: 64 }, (_, index) => ({
-        id: index + 1,
-        selected: false,
-        booked: index % 3 === 0,
-      })),
-    }));
+    dispatch(
+      setSelectedMovie({
+        ...selectedMovie,
+        seats: Array.from({ length: 64 }, (_, index) => ({
+          id: index + 1,
+          selected: false,
+          booked: index % 3 === 0,
+        })),
+      })
+    );
   }, []);
+
   const handleGoBack = () => {
-    setSelectedMovie((prev) => ({
-      ...prev,
-      times: undefined,
-      time: undefined,
-      day: undefined,
-      seats: undefined,
-    }));
+    dispatch(
+      setSelectedMovie({
+        ...selectedMovie,
+        times: undefined,
+        time: undefined,
+        day: undefined,
+        seats: undefined,
+      })
+    );
     router.back();
   };
+
   return (
     <section className="grid place-items-center overflow-x-hidden">
       <div className="relative w-full px-2 md:px-10 lg:px-20 rounded-lg shadow-lg">
