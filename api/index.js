@@ -21,7 +21,7 @@ mongoose
   )
   .then((result) => {
     console.log("connected TO PORT ", process.env.PORT);
-    app.listen(3000);
+    app.listen(3001);
   })
   .catch((err) => {
     console.log(err);
