@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Image from "next/image";
@@ -10,8 +10,9 @@ import Link from "next/link";
 import { setSelectedMovie } from "@/app/features/movie/movieSlice";
 import { RootState } from "@/app/store/store";
 import { movie as movies } from "@/app/data";
+import { FaPaypal } from "react-icons/fa";
 
-const Extras = ({ params }: Props) => {
+const PaymentDetail = ({ params }: Props) => {
   const [snacks, setSnacks] = useState(snackAndDrinkData);
   const [id, setId] = useState(params.movieId);
   const [movie, setMovie] = useState(() => {
@@ -54,7 +55,15 @@ const Extras = ({ params }: Props) => {
     );
     router.back();
   };
+  //modal
 
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+
+  const openModal = () => {
+    if (dialogRef.current) {
+      dialogRef.current.showModal();
+    }
+  };
   return (
     <section className="grid place-items-center overflow-x-hidden">
       <div className="relative w-full px-2 md:px-10 lg:px-20 rounded-lg shadow-lg">
@@ -121,15 +130,53 @@ const Extras = ({ params }: Props) => {
           >
             cancel
           </button>
-          <Link href={`/extras-selection/${movie?.id}`}>
-            <button className="btn border-2  bg-blue-700 rounded-lg px-4">
-              proceed to Payment
-            </button>
-          </Link>
+          <button
+            className="btn border-2  bg-blue-700 rounded-lg px-4"
+            onClick={openModal}
+          >
+            proceed to Payment
+          </button>
+          <div>
+            <dialog className="modal bg-gray-700 " ref={dialogRef}>
+              <div className="modal-box max-w-80 rounded-2xl">
+                <form method="dialog" className="p-4 ">
+                  <div className="space-y-4">
+                    <label className="input input-bordered flex items-center gap-2">
+                      <input
+                        type="text"
+                        className="grow"
+                        placeholder="Username"
+                      />
+                    </label>
+                    <label className="input input-bordered flex items-center gap-2">
+                      <input
+                        type="tel"
+                        id="phone"
+                        className="grow"
+                        placeholder="Enter your phone number"
+                      />
+                    </label>
+                    <label className="block">Pay With</label>
+                    <div className="flex space-x-4">
+                      <FaPaypal size={24} />
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center mt-4">
+                    <button
+                      className="btn bg-transparent border-2 text-red-700 border-red-700 rounded-lg px-6 mr-8"
+                      onClick={() => dialogRef.current?.close()}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </dialog>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default Extras;
+export default PaymentDetail;
