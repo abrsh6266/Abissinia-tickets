@@ -1,0 +1,2 @@
+# Abyssinian-ticketing
+Abyssinian-ticketing, which is Ethiopian Cinema Ticketing System, is an upcoming online ticketing platform developed using Node.js, Express, and MongoDB. Designed to streamline the cinema ticket purchasing process, it offers a user-friendly interface for selecting movies, seats, and making secure payments, aiming to enhance the overall moviegoing experience across Ethiopia.
