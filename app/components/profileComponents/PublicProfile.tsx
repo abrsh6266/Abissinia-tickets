@@ -1,4 +1,69 @@
+import { storage } from "@/app/firebase/firebaseConfig";
+import { RootState } from "@/app/store/store";
+import { error } from "console";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+  UploadTaskSnapshot,
+} from "firebase/storage";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
 const PublicProfile = () => {
+  const [image, setImage] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [avatarURL, setAvatarURL] = useState<string | null>(null);
+  const user = useSelector((state: RootState) => state.userState.user);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+  const handleUpload = () => {
+    if (image && user) {
+      const fileName = `${user.id}.jpg`; // User's ID is appended to the file name
+      const storageRef = ref(storage, `images/${fileName}`);
+      const uploadTask = uploadBytesResumable(storageRef, image);
+      uploadTask.on(
+        "state_changed",
+        (snapshot: UploadTaskSnapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setLoading(true);
+        },
+        (error) => {
+          setLoading(false);
+          toast.error("Something went wrong, please try again");
+          console.error(error.message);
+        },
+        async () => {
+          setLoading(false);
+          toast.success("Successfully uploaded");
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          setAvatarURL(downloadURL); // Update the avatar URL
+        }
+      );
+    }
+  };
+  useEffect(() => {
+    const fetchAvatar = async () => {
+      if (user) {
+        const avatarRef = ref(storage, `images/${user.id}.jpg`); // Path to the user's avatar image
+        try {
+          const url = await getDownloadURL(avatarRef);
+          setAvatarURL(url);
+        } catch (error) {
+          console.error("Error fetching avatar:", error);
+          // Handle error (e.g., set a default avatar URL)
+        }
+      }
+    };
+
+    fetchAvatar();
+  }, [user]);
   return (
     <main className="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
       <div className="p-2 md:p-4">
@@ -9,16 +74,25 @@ const PublicProfile = () => {
             <div className="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
               <img
                 className="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
-                src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                src={avatarURL || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
                 alt="Bordered avatar"
               />
 
               <div className="flex flex-col space-y-5 sm:ml-8">
+                <input
+                  onChange={handleChange}
+                  type="file"
+                  className="file-input file-input-bordered file-input-primary w-full max-w-xs"
+                />
                 <button
+                  onClick={handleUpload}
                   type="button"
                   className="text-base font-medium  focus:outline-none btn focus:ring-4 rounded-lg border border-blue-700"
                 >
                   Change picture
+                  {loading && (
+                    <span className="loading loading-spinner loading-md"></span>
+                  )}
                 </button>
                 <button
                   type="button"

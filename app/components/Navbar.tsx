@@ -6,9 +6,31 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { IoNotificationsSharp } from "react-icons/io5";
 import NavLinks from "./NavLinks";
 import { BiHeart } from "react-icons/bi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setShowNotification } from "../features/user/userSlice";
+import { useEffect, useState } from "react";
+import { RootState } from "../store/store";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../firebase/firebaseConfig";
 const Navbar = () => {
+  const [avatarURL, setAvatarURL] = useState<string | null>(null);
+  const user = useSelector((state: RootState) => state.userState.user);
+  useEffect(() => {
+    const fetchAvatar = async () => {
+      if (user) {
+        const avatarRef = ref(storage, `images/${user.id}.jpg`); // Path to the user's avatar image
+        try {
+          const url = await getDownloadURL(avatarRef);
+          setAvatarURL(url);
+        } catch (error) {
+          console.error("Error fetching avatar:", error);
+          // Handle error (e.g., set a default avatar URL)
+        }
+      }
+    };
+
+    fetchAvatar();
+  }, [user]);
   const dispatch = useDispatch();
   return (
     <nav>
@@ -63,7 +85,7 @@ const Navbar = () => {
           <Link href="/profile">
             <div className="avatar">
               <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                <img src={avatarURL || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} />
               </div>
             </div>
           </Link>
