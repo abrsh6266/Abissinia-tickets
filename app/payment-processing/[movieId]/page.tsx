@@ -12,12 +12,14 @@ import { RootState } from "@/app/store/store";
 import { movie as movies } from "@/app/data";
 
 const Extras = ({ params }: Props) => {
+  const [snacks, setSnacks] = useState(snackAndDrinkData);
+  const [id, setId] = useState(params.movieId);
   const [movie, setMovie] = useState(() => {
     return movies.find((m) => m.id.toString() === id);
   });
-  const [snacks, setSnacks] = useState(snackAndDrinkData);
-  const [id, setId] = useState(params.movieId);
-  const selectedMovie = useSelector((state: RootState) => state.movieState.selectedMovie);
+  const selectedMovie = useSelector(
+    (state: RootState) => state.movieState.selectedMovie
+  );
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -80,7 +82,51 @@ const Extras = ({ params }: Props) => {
         </div>
       </div>
       <div className="min-h-[180px]">
-        
+        <div className="">
+          <div className="">
+            <p className="flex  text-lg border-b border-base-300 pb-2 mb-4">
+              <span className="mr-2">Movie Name :</span>
+              <span className="font-medium">{movie?.title}</span>
+            </p>
+            <p className="flex text-lg border-b border-base-300 pb-2 mb-4">
+              <span className="mr-2">Date : </span>
+              <span className="font-medium">Jan 20, 2024</span>
+            </p>
+            <p className="flex text-lg border-b border-base-300 pb-2 mb-4">
+              <span className="mr-2">Time : </span>
+              <span className="font-medium">10:00AM</span>
+            </p>
+            <p className="flex text-lg border-b border-base-300 pb-2 mb-4">
+              <span className="mr-2">Seat Area : </span>
+              <span className="font-medium">Standard</span>
+            </p>
+            <p className="flex text-lg border-b border-base-300 pb-2 mb-4">
+              <span className="mr-2">Seats : </span>
+              <span className="font-medium">AB, AC</span>
+            </p>
+
+            <p className="flex text-lg border-b border-base-300 pb-2 mb-4">
+              <span className="mr-2">Extras : </span>
+              <span className="font-medium">Yegebs kolo, Chips</span>
+            </p>
+
+            <p className="mt-4 flex justify-between text-lg font-bold  pb-2">
+              <span className="font-bold">Total Price</span>
+              <span className="font-bold">220ETB</span>
+            </p>
+          </div>
+          <button
+            onClick={handleGoBack}
+            className="btn bg-transparent border-2 text-red-700 border-red-700 rounded-lg px-6 mr-8"
+          >
+            cancel
+          </button>
+          <Link href={`/extras-selection/${movie?.id}`}>
+            <button className="btn border-2  bg-blue-700 rounded-lg px-4">
+              proceed to Payment
+            </button>
+          </Link>
+        </div>
       </div>
     </section>
   );
