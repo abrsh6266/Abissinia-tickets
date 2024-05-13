@@ -13,6 +13,7 @@ import { movie as movies } from "@/app/data";
 import { FaPaypal } from "react-icons/fa";
 
 const PaymentDetail = ({ params }: Props) => {
+  
   const [snacks, setSnacks] = useState(snackAndDrinkData);
   const [id, setId] = useState(params.movieId);
   const [movie, setMovie] = useState(() => {
