@@ -6,14 +6,13 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { snackAndDrinkData } from "../../data";
 import { Props } from "@/app/movies/[movieId]/page";
-import Link from "next/link";
 import { setSelectedMovie } from "@/app/features/movie/movieSlice";
 import { RootState } from "@/app/store/store";
 import { movie as movies } from "@/app/data";
 import { FaPaypal } from "react-icons/fa";
 
 const PaymentDetail = ({ params }: Props) => {
-  
+
   const [snacks, setSnacks] = useState(snackAndDrinkData);
   const [id, setId] = useState(params.movieId);
   const [movie, setMovie] = useState(() => {
