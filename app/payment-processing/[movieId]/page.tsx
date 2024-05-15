@@ -29,6 +29,7 @@ const PaymentDetail = ({ params }: Props) => {
       //   toast.error("you have to select day, time and seats !", {
       //     position: toast.POSITION.TOP_RIGHT,
       //   });
+      //
       //   handleGoBack();
     }
     dispatch(
