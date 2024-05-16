@@ -9,7 +9,11 @@ import { Props } from "@/app/movies/[movieId]/page";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import Extra from "@/app/components/extrasComponents/Extra";
-import { setSelectedMovie } from "@/app/features/movie/movieSlice";
+import {
+  ExtraItem,
+  setExtras,
+  setSelectedMovie,
+} from "@/app/features/movie/movieSlice";
 import { RootState } from "@/app/store/store";
 
 const Extras = ({ params }: Props) => {
@@ -18,16 +22,25 @@ const Extras = ({ params }: Props) => {
   const [movie, setMovie] = useState(() => {
     return movies.find((m) => m.id.toString() === id);
   });
-  const selectedMovie = useSelector((state: RootState) => state.movieState.selectedMovie);
+
+  const handleSelectExtras = (selectedExtras: ExtraItem) => {
+    dispatch(setExtras({ selectedExtras }));
+  };
+
+  const selectedMovie = useSelector(
+    (state: RootState) => state.movieState.selectedMovie
+  );
   const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
-    if (selectedMovie?.day === undefined && selectedMovie?.time === undefined) {
-      //   toast.error("you have to select day, time and seats !", {
-      //     position: toast.POSITION.TOP_RIGHT,
-      //   });
-      //   handleGoBack();
+    if (
+      selectedMovie?.seats?.find((seat) => seat.selected === true) === undefined
+    ) {
+      toast.error("you have to select day, time and seats !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      handleGoBack();
     }
     dispatch(
       setSelectedMovie({
@@ -45,9 +58,6 @@ const Extras = ({ params }: Props) => {
     dispatch(
       setSelectedMovie({
         ...selectedMovie,
-        times: undefined,
-        time: undefined,
-        day: undefined,
         seats: undefined,
       })
     );
@@ -99,11 +109,14 @@ const Extras = ({ params }: Props) => {
       <div className="xl:max-w-[1200px] mb-[20px] flex flex-wrap gap-2 xl:gap-6">
         {snacks.map((snack) => {
           return (
-            <Extra key={snack.id} snack={snack} />
+            <Extra
+              key={snack.id}
+              snack={snack}
+              handleSelectExtras={handleSelectExtras}
+            />
           );
         })}
       </div>
-      <div className="mt-5 flex"></div>
     </section>
   );
 };

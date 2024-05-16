@@ -35,7 +35,7 @@ const Seats = ({ params }: Props) => {
   };
 
   useEffect(() => {
-    if (selectedMovie?.day === undefined && selectedMovie?.time === undefined) {
+    if (selectedMovie?.time === undefined) {
       toast.error("you have to select day and time !", {
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -60,6 +60,7 @@ const Seats = ({ params }: Props) => {
         times: undefined,
         time: undefined,
         day: undefined,
+        movie: undefined,
         seats: undefined,
       })
     );

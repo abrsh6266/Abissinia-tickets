@@ -20,7 +20,7 @@ const Chappa: React.FC<ChappaProps> = ({
         name="public_key"
         value={process.env.NEXT_PUBLIC_CHAPA_PUBLIC_KEY}
       />
-      <input type="hidden" name="tx_ref" value="negade-tx-12345678sss9" />
+      <input type="hidden" name="tx_ref" value={`${firstName}-${lastName}-tx-122212 `} />
       <input type="hidden" name="amount" value="100" />
       <input type="hidden" name="currency" value="ETB" />
       <input type="hidden" name="email" value={email} />

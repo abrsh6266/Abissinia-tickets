@@ -9,7 +9,7 @@ const Aside = () => {
       >
         Pubic Profile
       </a>
-      <a
+      <a 
         href="#"
         className="flex items-center px-3 py-2.5 font-semibold  hover hover:border hover:rounded-full"
       >

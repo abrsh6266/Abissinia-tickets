@@ -1,7 +1,11 @@
 // reducers.js
+import { SnackAndDrink } from "@/app/data";
 import { Props } from "@/app/utils";
-import { createSlice } from "@reduxjs/toolkit";
-
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+export interface ExtraItem {
+  snackAndDrink: SnackAndDrink | undefined;
+  amount: number;
+}
 const initialState = {
   searchTerm: "",
   searchMovies: [],
@@ -24,7 +28,26 @@ const appSlice = createSlice({
     },
     setSelectedMovie(state, action) {
       state.selectedMovie = action.payload;
-      console.log(state.selectedMovie)
+      console.log(state.selectedMovie);
+    },
+    setExtras(state, action) {
+      const newExtra = action.payload.selectedExtras;
+    
+      if (state.selectedMovie) {
+        if (state.selectedMovie.extras) {
+          const existingExtraIndex = state.selectedMovie.extras.findIndex(
+            (extra) => extra.snackAndDrink?.id === newExtra.snackAndDrink.id
+          );
+    
+          if (existingExtraIndex !== -1) {
+            state.selectedMovie.extras.splice(existingExtraIndex, 1, newExtra);
+          } else {
+            state.selectedMovie.extras.push(newExtra);
+          }
+        } else {
+          state.selectedMovie.extras = [newExtra];
+        }
+      }
     },
     setMeta(state, action) {
       state.meta = action.payload;
@@ -37,5 +60,6 @@ export const {
   setSearchMovies,
   setSelectedMovie,
   setMeta,
+  setExtras,
 } = appSlice.actions;
 export default appSlice.reducer;

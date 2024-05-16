@@ -17,27 +17,36 @@ const Tickets = ({ params }: Props) => {
   const [movie, setMovie] = useState(() => {
     return movies.find((m) => m.id.toString() === id);
   });
-  const selectedMovie = useSelector((state:RootState) => state.movieState.selectedMovie);
+  const { selectedMovie } = useSelector(
+    (state: RootState) => state.movieState
+  );
   const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
-    dispatch(setSelectedMovie({
-      ...selectedMovie,
-      times: undefined,
-      time: undefined,
-      day: undefined,
-    }));
+    dispatch(
+      setSelectedMovie({
+        ...selectedMovie,
+        times: undefined,
+        time: undefined,
+        day: undefined,
+        movie: undefined,
+        extras: undefined
+      })
+    );
   }, []);
 
   const handleGoBack = () => {
-    dispatch(setSelectedMovie({
-      ...selectedMovie,
-      times: undefined,
-      time: undefined,
-      day: undefined,
-      seats: undefined,
-    }));
+    dispatch(
+      setSelectedMovie({
+        ...selectedMovie,
+        times: undefined,
+        time: undefined,
+        day: undefined,
+        seats: undefined,
+        movie: undefined,
+      })
+    );
     router.back();
   };
 
@@ -69,6 +78,7 @@ const Tickets = ({ params }: Props) => {
                       setSelectedMovie({
                         ...selectedMovie,
                         day: show.day,
+                        movie: movie,
                         times: show.times,
                         time: undefined,
                       })
@@ -175,4 +185,3 @@ const Tickets = ({ params }: Props) => {
 };
 
 export default Tickets;
-
