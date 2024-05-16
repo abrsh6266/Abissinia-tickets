@@ -9,10 +9,10 @@ import { Props } from "@/app/movies/[movieId]/page";
 import { setSelectedMovie } from "@/app/features/movie/movieSlice";
 import { RootState } from "@/app/store/store";
 import { movie as movies } from "@/app/data";
-import { FaPaypal } from "react-icons/fa";
+import SelectionDetails from "@/app/components/SelectionDetails";
+import PaymentProcess from "@/app/components/PaymentProcess";
 
 const PaymentDetail = ({ params }: Props) => {
-
   const [snacks, setSnacks] = useState(snackAndDrinkData);
   const [id, setId] = useState(params.movieId);
   const [movie, setMovie] = useState(() => {
@@ -29,7 +29,6 @@ const PaymentDetail = ({ params }: Props) => {
       //   toast.error("you have to select day, time and seats !", {
       //     position: toast.POSITION.TOP_RIGHT,
       //   });
-      //
       //   handleGoBack();
     }
     dispatch(
@@ -93,38 +92,7 @@ const PaymentDetail = ({ params }: Props) => {
       </div>
       <div className="min-h-[180px]">
         <div className="">
-          <div className="">
-            <p className="flex  text-lg border-b border-base-300 pb-2 mb-4">
-              <span className="mr-2">Movie Name :</span>
-              <span className="font-medium">{movie?.title}</span>
-            </p>
-            <p className="flex text-lg border-b border-base-300 pb-2 mb-4">
-              <span className="mr-2">Date : </span>
-              <span className="font-medium">Jan 20, 2024</span>
-            </p>
-            <p className="flex text-lg border-b border-base-300 pb-2 mb-4">
-              <span className="mr-2">Time : </span>
-              <span className="font-medium">10:00AM</span>
-            </p>
-            <p className="flex text-lg border-b border-base-300 pb-2 mb-4">
-              <span className="mr-2">Seat Area : </span>
-              <span className="font-medium">Standard</span>
-            </p>
-            <p className="flex text-lg border-b border-base-300 pb-2 mb-4">
-              <span className="mr-2">Seats : </span>
-              <span className="font-medium">AB, AC</span>
-            </p>
-
-            <p className="flex text-lg border-b border-base-300 pb-2 mb-4">
-              <span className="mr-2">Extras : </span>
-              <span className="font-medium">Yegebs kolo, Chips</span>
-            </p>
-
-            <p className="mt-4 flex justify-between text-lg font-bold  pb-2">
-              <span className="font-bold">Total Price</span>
-              <span className="font-bold">220ETB</span>
-            </p>
-          </div>
+          <SelectionDetails movie={movie} />
           <button
             onClick={handleGoBack}
             className="btn bg-transparent border-2 text-red-700 border-red-700 rounded-lg px-6 mr-8"
@@ -140,37 +108,7 @@ const PaymentDetail = ({ params }: Props) => {
           <div>
             <dialog className="modal bg-gray-700 " ref={dialogRef}>
               <div className="modal-box max-w-80 rounded-2xl">
-                <form method="dialog" className="p-4 ">
-                  <div className="space-y-4">
-                    <label className="input input-bordered flex items-center gap-2">
-                      <input
-                        type="text"
-                        className="grow"
-                        placeholder="Username"
-                      />
-                    </label>
-                    <label className="input input-bordered flex items-center gap-2">
-                      <input
-                        type="tel"
-                        id="phone"
-                        className="grow"
-                        placeholder="Enter your phone number"
-                      />
-                    </label>
-                    <label className="block">Pay With</label>
-                    <div className="flex space-x-4">
-                      <FaPaypal size={24} />
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center mt-4">
-                    <button
-                      className="btn bg-transparent border-2 text-red-700 border-red-700 rounded-lg px-6 mr-8"
-                      onClick={() => dialogRef.current?.close()}
-                    >
-                      Close
-                    </button>
-                  </div>
-                </form>
+                <PaymentProcess />
               </div>
             </dialog>
           </div>
