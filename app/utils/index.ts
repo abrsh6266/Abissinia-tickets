@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Movie, SnackAndDrink } from "../data";
+import { ExtraItem, Ticket } from "../features/movie/movieSlice";
 
 const productionUrl = "https://strapi-store-server.onrender.com/api";
 
@@ -19,7 +20,8 @@ export interface Props {
         booked: boolean;
       }[]
     | undefined;
-  extras?:
-    | { snackAndDrink: SnackAndDrink | undefined; amount: number }[]
-    | undefined;
+  extras?: ExtraItem[] | undefined;
+  tickets?: Ticket[] | undefined;
+  seatType?: string | undefined;
+  totalSeat?: number | undefined;
 }

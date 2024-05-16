@@ -35,8 +35,8 @@ const Seats = ({ params }: Props) => {
   };
 
   useEffect(() => {
-    if (selectedMovie?.time === undefined) {
-      toast.error("you have to select day and time !", {
+    if (!selectedMovie?.time || selectedMovie?.totalSeat === 0) {
+      toast.error("you have to select ticket type day and time !", {
         position: toast.POSITION.TOP_RIGHT,
       });
       handleGoBack();
@@ -62,6 +62,7 @@ const Seats = ({ params }: Props) => {
         day: undefined,
         movie: undefined,
         seats: undefined,
+        tickets: undefined,
       })
     );
     router.back();

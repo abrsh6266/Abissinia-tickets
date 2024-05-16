@@ -6,6 +6,10 @@ export interface ExtraItem {
   snackAndDrink: SnackAndDrink | undefined;
   amount: number;
 }
+export interface Ticket {
+  ticketType: string | undefined;
+  amount: number;
+}
 const initialState = {
   searchTerm: "",
   searchMovies: [],
@@ -32,13 +36,13 @@ const appSlice = createSlice({
     },
     setExtras(state, action) {
       const newExtra = action.payload.selectedExtras;
-    
+
       if (state.selectedMovie) {
         if (state.selectedMovie.extras) {
           const existingExtraIndex = state.selectedMovie.extras.findIndex(
             (extra) => extra.snackAndDrink?.id === newExtra.snackAndDrink.id
           );
-    
+
           if (existingExtraIndex !== -1) {
             state.selectedMovie.extras.splice(existingExtraIndex, 1, newExtra);
           } else {
@@ -46,6 +50,41 @@ const appSlice = createSlice({
           }
         } else {
           state.selectedMovie.extras = [newExtra];
+        }
+      }
+    },
+    setTickets(state, action) {
+      const newTicket = action.payload;
+
+      if (state.selectedMovie) {
+        if (state.selectedMovie.tickets) {
+          const existingTicketIndex = state.selectedMovie.tickets.findIndex(
+            (ticket) => ticket.ticketType === newTicket.ticketType
+          );
+
+          if (
+            existingTicketIndex !== -1 &&
+            state.selectedMovie.totalSeat !== undefined
+          ) {
+            state.selectedMovie.totalSeat +=
+              Number.parseInt(newTicket.amount) -
+              state.selectedMovie.tickets[existingTicketIndex].amount;
+            state.selectedMovie.tickets.splice(
+              existingTicketIndex,
+              1,
+              newTicket
+            );
+          } else {
+            state.selectedMovie.tickets.push(newTicket);
+            if (state.selectedMovie.totalSeat !== undefined) {
+              state.selectedMovie.totalSeat += Number.parseInt(
+                newTicket.amount
+              );
+            }
+          }
+        } else {
+          state.selectedMovie.tickets = [newTicket];
+          state.selectedMovie.totalSeat = Number.parseInt(newTicket.amount);
         }
       }
     },
@@ -61,5 +100,6 @@ export const {
   setSelectedMovie,
   setMeta,
   setExtras,
+  setTickets,
 } = appSlice.actions;
 export default appSlice.reducer;

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { nanoid } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedMovie } from "@/app/features/movie/movieSlice";
+import { setSelectedMovie, setTickets } from "@/app/features/movie/movieSlice";
 import { Props } from "@/app/movies/[movieId]/page";
 import { movie as movies } from "@/app/data";
 import MovieSchedule from "@/app/components/movieDetailComponents/MovieSchedule";
@@ -17,9 +17,7 @@ const Tickets = ({ params }: Props) => {
   const [movie, setMovie] = useState(() => {
     return movies.find((m) => m.id.toString() === id);
   });
-  const { selectedMovie } = useSelector(
-    (state: RootState) => state.movieState
-  );
+  const { selectedMovie } = useSelector((state: RootState) => state.movieState);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -31,7 +29,7 @@ const Tickets = ({ params }: Props) => {
         time: undefined,
         day: undefined,
         movie: undefined,
-        extras: undefined
+        extras: undefined,
       })
     );
   }, []);
@@ -45,6 +43,7 @@ const Tickets = ({ params }: Props) => {
         day: undefined,
         seats: undefined,
         movie: undefined,
+        tickets: undefined,
       })
     );
     router.back();
@@ -78,6 +77,9 @@ const Tickets = ({ params }: Props) => {
                       setSelectedMovie({
                         ...selectedMovie,
                         day: show.day,
+                        tickets: [],
+                        seatType: "standard",
+                        totalSeat: 0,
                         movie: movie,
                         times: show.times,
                         time: undefined,
@@ -108,6 +110,14 @@ const Tickets = ({ params }: Props) => {
             Choose seat area{" "}
           </label>
           <select
+            onClick={(e) => {
+              dispatch(
+                setSelectedMovie({
+                  ...selectedMovie,
+                  seatType: e.currentTarget.value,
+                })
+              );
+            }}
             name="seat"
             className="select select-info select-lg w-full max-w-xs"
           >
@@ -135,6 +145,14 @@ const Tickets = ({ params }: Props) => {
               <td>100ETB</td>
               <td>
                 <select
+                  onClick={(e) => {
+                    dispatch(
+                      setTickets({
+                        ticketType: "adult 2D",
+                        amount: e.currentTarget.value,
+                      })
+                    );
+                  }}
                   name="ticket"
                   className="select select-info select-lg w-full max-w-xs mt-4 md:mt-0 mx-1 md:mx-0"
                 >
@@ -152,6 +170,14 @@ const Tickets = ({ params }: Props) => {
               <td>120ETB</td>
               <td>
                 <select
+                  onClick={(e) => {
+                    dispatch(
+                      setTickets({
+                        ticketType: "senior 2D",
+                        amount: e.currentTarget.value,
+                      })
+                    );
+                  }}
                   name="ticket"
                   className="select select-info select-lg w-full max-w-xs mt-4 mx-1 md:mx-0 md:mt-0"
                 >

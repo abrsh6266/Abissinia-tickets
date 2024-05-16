@@ -37,21 +37,11 @@ const Extras = ({ params }: Props) => {
     if (
       selectedMovie?.seats?.find((seat) => seat.selected === true) === undefined
     ) {
-      toast.error("you have to select day, time and seats !", {
+      toast.error("you have to select seats !", {
         position: toast.POSITION.TOP_RIGHT,
       });
       handleGoBack();
     }
-    dispatch(
-      setSelectedMovie({
-        ...selectedMovie,
-        seats: Array.from({ length: 64 }, (_, index) => ({
-          id: index + 1,
-          selected: false,
-          booked: index % 3 === 0,
-        })),
-      })
-    );
   }, []);
 
   const handleGoBack = () => {
@@ -100,7 +90,7 @@ const Extras = ({ params }: Props) => {
         >
           cancel
         </button>
-        <Link href={`/extras-selection/${movie?.id}`}>
+        <Link href={`/payment-processing/${movie?.id}`}>
           <button className="btn border-2  bg-blue-700 rounded-lg px-4">
             Continue
           </button>
