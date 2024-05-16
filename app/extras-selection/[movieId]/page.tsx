@@ -34,9 +34,7 @@ const Extras = ({ params }: Props) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (
-      selectedMovie?.seats?.find((seat) => seat.selected === true) === undefined
-    ) {
+    if (!selectedMovie?.seats?.length) {
       toast.error("you have to select seats !", {
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -48,7 +46,13 @@ const Extras = ({ params }: Props) => {
     dispatch(
       setSelectedMovie({
         ...selectedMovie,
+        times: undefined,
+        time: undefined,
+        day: undefined,
+        movie: undefined,
         seats: undefined,
+        tickets: undefined,
+        totalSeat: undefined,
       })
     );
     router.back();

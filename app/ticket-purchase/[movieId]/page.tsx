@@ -41,9 +41,10 @@ const Tickets = ({ params }: Props) => {
         times: undefined,
         time: undefined,
         day: undefined,
-        seats: undefined,
         movie: undefined,
+        seats: undefined,
         tickets: undefined,
+        totalSeat: undefined,
       })
     );
     router.back();
@@ -83,6 +84,7 @@ const Tickets = ({ params }: Props) => {
                         movie: movie,
                         times: show.times,
                         time: undefined,
+                        seats: [],
                       })
                     );
                   }}
@@ -148,7 +150,7 @@ const Tickets = ({ params }: Props) => {
                   onClick={(e) => {
                     dispatch(
                       setTickets({
-                        ticketType: "adult 2D",
+                        ticketType: "adult",
                         amount: e.currentTarget.value,
                       })
                     );
@@ -173,7 +175,7 @@ const Tickets = ({ params }: Props) => {
                   onClick={(e) => {
                     dispatch(
                       setTickets({
-                        ticketType: "senior 2D",
+                        ticketType: "child",
                         amount: e.currentTarget.value,
                       })
                     );

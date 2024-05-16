@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedMovie } from "@/app/features/movie/movieSlice";
 import { Props } from "@/app/movies/[movieId]/page";
-import { movie as movies } from "@/app/data";
+import { dummySeats, movie as movies } from "@/app/data";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -20,16 +20,20 @@ const Seats = ({ params }: Props) => {
   const selectedMovie = useSelector(
     (state: RootState) => state.movieState.selectedMovie
   );
+  const [seats, setSeats] = useState(dummySeats);
   const dispatch = useDispatch();
   const router = useRouter();
 
   const handleSelectSeat = (id: any) => {
+    setSeats((prevSeats) =>
+      prevSeats.map((seat) =>
+        seat.id === id ? { ...seat, selected: !seat.selected } : seat
+      )
+    );
     dispatch(
       setSelectedMovie({
         ...selectedMovie,
-        seats: selectedMovie?.seats?.map((seat) =>
-          seat.id === id ? { ...seat, selected: !seat.selected } : seat
-        ),
+        seats: selectedMovie?.seats?.push(id),
       })
     );
   };
@@ -44,11 +48,7 @@ const Seats = ({ params }: Props) => {
     dispatch(
       setSelectedMovie({
         ...selectedMovie,
-        seats: Array.from({ length: 64 }, (_, index) => ({
-          id: index + 1,
-          selected: false,
-          booked: index % 3 === 0,
-        })),
+        seats: [],
       })
     );
   }, []);
@@ -63,6 +63,7 @@ const Seats = ({ params }: Props) => {
         movie: undefined,
         seats: undefined,
         tickets: undefined,
+        totalSeat: undefined,
       })
     );
     router.back();
@@ -114,10 +115,15 @@ const Seats = ({ params }: Props) => {
           <h1 className="text-sm">Available</h1>
         </button>
       </div>
+      <div>
+        <h1 className="text-md">
+          Only {selectedMovie?.seatType} seats will be Selected
+        </h1>
+      </div>
       <div className="max-w-[600px] mb-[20px]">
         <div>
           <div className="grid grid-cols-8">
-            {selectedMovie?.seats?.map((seat) => {
+            {seats.map((seat) => {
               return (
                 <div
                   className="md:m-4 md:h-10 md:w-10 m-3 h-6 w-6"
@@ -127,15 +133,23 @@ const Seats = ({ params }: Props) => {
                     onClick={() => {
                       if (!seat.booked) handleSelectSeat(seat.id);
                     }}
-                    className={`${
+                    className={`indicator ${
                       seat.selected ? "text-blue-700" : ""
                     } text-2xl md:text-5xl
                     ${
-                      !seat.booked
+                      !(
+                        seat.booked ||
+                        !(seat.seatType === selectedMovie?.seatType)
+                      )
                         ? "hover:text-blue-700 md:hover:text-6xl hover:text-4xl"
+                        : !(seat.seatType === selectedMovie?.seatType)
+                        ? "text-gray-700"
                         : "text-red-700"
                     }  duration-300 `}
                   >
+                    <span className="indicator-item badge badge-secondary bg-transparent  border-0">
+                      {seat.id}
+                    </span>
                     <PiArmchairFill />
                   </button>
                 </div>

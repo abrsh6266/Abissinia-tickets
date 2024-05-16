@@ -47,7 +47,13 @@ const PaymentDetail = ({ params }: Props) => {
     dispatch(
       setSelectedMovie({
         ...selectedMovie,
-        seats: undefined, 
+        times: undefined,
+        time: undefined,
+        day: undefined,
+        movie: undefined,
+        seats: undefined,
+        tickets: undefined,
+        totalSeat: undefined,
       })
     );
     router.back();

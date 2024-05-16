@@ -13,13 +13,7 @@ export interface Props {
   time?: string | undefined;
   day?: string | undefined;
   movie?: Movie | undefined;
-  seats?:
-    | {
-        id: number;
-        selected: boolean;
-        booked: boolean;
-      }[]
-    | undefined;
+  seats?: number[] | undefined;
   extras?: ExtraItem[] | undefined;
   tickets?: Ticket[] | undefined;
   seatType?: string | undefined;

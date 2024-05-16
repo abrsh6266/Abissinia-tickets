@@ -31,7 +31,6 @@ export const genres = [
   "Western",
 ];
 
-
 // cinemas
 import cinema1 from "/public/cinema/cinema1.jpg";
 import cinema2 from "/public/cinema/cinema2.jpg";
@@ -45,54 +44,53 @@ import pizza from "/public/snacks/pizza.jpg";
 import soda from "/public/snacks/soft-drinks.jpg";
 import water from "/public/snacks/bottled-water.jpg";
 import fries from "/public/snacks/fries.jpg";
-import kolo from "/public/snacks/kolo.png"
-import chips from "/public/snacks/chips.png"
-import popcorn2 from "/public/snacks/popcorn2.png"
-
+import kolo from "/public/snacks/kolo.png";
+import chips from "/public/snacks/chips.png";
+import popcorn2 from "/public/snacks/popcorn2.png";
 
 export const socials = [
   {
     id: 10,
-    name:"Linkdin",
+    name: "Linkdin",
     url: "https://www.linkedin.com/in/abrham-belayineh-190658258/",
     icon: <FaLinkedin />,
   },
   {
     id: 3,
-    name:"Github",
+    name: "Github",
     url: "https://www.github.com/abrsh6266",
     icon: <FaGithub />,
   },
 
   {
     id: 33,
-    name:"Instagram",
+    name: "Instagram",
     url: "https://www.instagram.com/umabrshxovll/",
     icon: <FaInstagram />,
   },
   {
     id: 1,
-    name:"Facebook",
+    name: "Facebook",
     url: "https://www.facebook.com/profile.php?id=100034253550916",
     icon: <FaFacebook />,
   },
   {
     id: 2,
-    name:"Twitter",
+    name: "Twitter",
     url: "https://www.twitter.com",
     icon: <FaTwitter />,
   },
 ];
 
 export const links = [
-  { id:1,label: "Home", href: "/" },
-  { id:2,label: "Coming soon", href: "/coming-soon" },
-  { id:3,label: "Food and drinks", href: "/food-drink" },
-  { id:4,label: "Tickets", href: "/film-showtimes-tickets" },
-  { id:5,label: "Cinemas", href: "#" },
-  { id:6,label: "Schedule", href: "#" },
+  { id: 1, label: "Home", href: "/" },
+  { id: 2, label: "Coming soon", href: "/coming-soon" },
+  { id: 3, label: "Food and drinks", href: "/food-drink" },
+  { id: 4, label: "Tickets", href: "/film-showtimes-tickets" },
+  { id: 5, label: "Cinemas", href: "#" },
+  { id: 6, label: "Schedule", href: "#" },
 ];
-  
+
 export interface Movie {
   id: number;
   poster: StaticImageData;
@@ -378,3 +376,37 @@ export const snackAndDrinkData: SnackAndDrink[] = [
     image: popcorn2,
   },
 ];
+
+const seatTypes = ['sofa', 'standard', 'premier'];
+
+const generateSeats = (): {
+  id: number;
+  selected: boolean;
+  booked: boolean;
+  seatType: string;
+}[] => {
+  const seats: {
+    id: number;
+    selected: boolean;
+    booked: boolean;
+    seatType: string;
+  }[] = [];
+
+  for (let i = 1; i <= 64; i++) {
+    const seatTypeIndex = Math.floor((i - 1) / 8) % 3;
+    const seatType = seatTypes[seatTypeIndex];
+    const seat = {
+      id: i,
+      selected: false,
+      booked: false,
+      seatType: seatType,
+    };
+
+    seats.push(seat);
+  }
+
+  return seats;
+};
+
+export const dummySeats = generateSeats();
+console.log(dummySeats);
