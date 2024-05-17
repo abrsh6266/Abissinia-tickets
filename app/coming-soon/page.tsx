@@ -4,7 +4,7 @@ import { Movie, movie as movies } from "../data";
 import ComingMovieCard from "../components/comingComponents/ComingMovieCard";
 import Genre from "../components/comingComponents/Genre";
 import NewMovies from "../components/comingComponents/NewMovies";
-import PaginationContainer from "../components/PaginationContainer";
+import PaginationContainer from "../components/common/PaginationContainer";
 
 const ComingSoon = () => {
   const shuffleArray = (array: any) => {

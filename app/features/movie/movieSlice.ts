@@ -1,5 +1,5 @@
 // reducers.js
-import { SnackAndDrink } from "@/app/data";
+import { dummySeats, SnackAndDrink } from "@/app/data";
 import { Props } from "@/app/utils";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface ExtraItem {
@@ -18,6 +18,7 @@ const initialState = {
     page: 1,
     pageCount: 10,
   },
+  seats: dummySeats,
 };
 
 const appSlice = createSlice({
@@ -35,25 +36,30 @@ const appSlice = createSlice({
       console.log(state.selectedMovie);
     },
     setSeat(state, action) {
-      const seat = action.payload.id;
+      const seatId = action.payload.id;
       if (!state.selectedMovie) {
         return;
       }
-      if (state.selectedMovie?.seats) {
+
+      // Update the selectedMovie seats array
+      if (state.selectedMovie.seats) {
         const existingSeatIndex = state.selectedMovie.seats.findIndex(
-          (s) => s === seat
+          (s) => s === seatId
         );
 
         if (existingSeatIndex !== -1) {
           state.selectedMovie.seats.splice(existingSeatIndex, 1);
         } else {
-          state.selectedMovie.seats.push(seat);
+          state.selectedMovie.seats.push(seatId);
         }
       } else {
-        state.selectedMovie.seats = [seat];
+        state.selectedMovie.seats = [seatId];
       }
-    },
 
+      state.seats = state.seats.map((seat) =>
+        seat.id === seatId ? { ...seat, selected: !seat.selected } : seat
+      );
+    },
     setExtras(state, action) {
       const newExtra = action.payload.selectedExtras;
 

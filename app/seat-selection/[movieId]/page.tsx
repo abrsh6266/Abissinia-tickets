@@ -20,7 +20,7 @@ const Seats = ({ params }: Props) => {
   const selectedMovie = useSelector(
     (state: RootState) => state.movieState.selectedMovie
   );
-  const [seats, setSeats] = useState(dummySeats);
+  const seats = useSelector((store:RootState)=>store.movieState.seats)
   const dispatch = useDispatch();
   const router = useRouter();
   const [validChoose, setValidChoose] = useState(selectedMovie?.totalSeat || 0);
@@ -29,11 +29,6 @@ const Seats = ({ params }: Props) => {
       ? selectedMovie?.seats.findIndex((s) => s === id)
       : -1;
     if (validChoose >= 1 || existingSeatIndex !== -1) {
-      setSeats((prevSeats) =>
-        prevSeats.map((seat) =>
-          seat.id === id ? { ...seat, selected: !seat.selected } : seat
-        )
-      );
       dispatch(
         setSeat({
           id,

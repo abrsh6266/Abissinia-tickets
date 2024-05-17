@@ -409,4 +409,3 @@ const generateSeats = (): {
 };
 
 export const dummySeats = generateSeats();
-console.log(dummySeats);
