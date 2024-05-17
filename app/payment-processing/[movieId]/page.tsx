@@ -9,7 +9,7 @@ import { Props } from "@/app/movies/[movieId]/page";
 import { setSelectedMovie } from "@/app/features/movie/movieSlice";
 import { RootState } from "@/app/store/store";
 import { movie as movies } from "@/app/data";
-import SelectionDetails from "@/app/components/SelectionDetails";
+import SelectionDetails from "@/app/components/movieDetailComponents/SelectionDetails";
 import PaymentProcess from "@/app/components/paymentComponent/PaymentProcess";
 
 const PaymentDetail = ({ params }: Props) => {

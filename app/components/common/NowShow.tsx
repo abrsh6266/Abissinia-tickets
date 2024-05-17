@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { movie } from "../../data";
-import MovieCard from "../MovieCard";
+import MovieCard from "../movieDetailComponents/MovieCard";
 import Hero from "./Hero";
 import SectionTitle from "./SectionTitle";
 import PaginationContainer from "./PaginationContainer";

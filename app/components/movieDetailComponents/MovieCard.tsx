@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Movie } from "../data";
+import { Movie } from "../../data";
 import { BiStar } from "react-icons/bi";
 import Link from "next/link";
 
