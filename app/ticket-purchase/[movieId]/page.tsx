@@ -20,9 +20,28 @@ const Tickets = ({ params }: Props) => {
   const { selectedMovie } = useSelector((state: RootState) => state.movieState);
   const dispatch = useDispatch();
   const router = useRouter();
-
-
-
+  const [childAmount, setChildAmount] = useState(
+    selectedMovie?.tickets?.find((ticket) => ticket.ticketType === "child")
+      ?.amount || 0
+  );
+  const [adultAmount, setAdultAmount] = useState(
+    selectedMovie?.tickets?.find((ticket) => ticket.ticketType === "adult")
+      ?.amount || 0
+  );
+  useEffect(() => {
+    dispatch(
+      setTickets({
+        ticketType: "child",
+        amount: childAmount,
+      })
+    );
+    dispatch(
+      setTickets({
+        ticketType: "adult",
+        amount: adultAmount,
+      })
+    );
+  }, [childAmount, adultAmount]);
   const handleGoBack = () => {
     dispatch(
       setSelectedMovie({
@@ -136,16 +155,12 @@ const Tickets = ({ params }: Props) => {
               <td>120ETB</td>
               <td>
                 <select
-                  onClick={(e) => {
-                    dispatch(
-                      setTickets({
-                        ticketType: "adult",
-                        amount: e.currentTarget.value,
-                      })
-                    );
+                  onChange={(e) => {
+                    setAdultAmount(Number.parseInt(e.currentTarget.value));
                   }}
                   name="ticket"
                   className="select select-info select-lg w-full max-w-xs mt-4 md:mt-0 mx-1 md:mx-0"
+                  value={adultAmount}
                 >
                   <option value={0}>none</option>
                   {[...Array(8)].map((_, index) => (
@@ -161,16 +176,12 @@ const Tickets = ({ params }: Props) => {
               <td>100ETB</td>
               <td>
                 <select
-                  onClick={(e) => {
-                    dispatch(
-                      setTickets({
-                        ticketType: "child",
-                        amount: e.currentTarget.value,
-                      })
-                    );
+                  onChange={(e) => {
+                    setChildAmount(Number.parseInt(e.currentTarget.value));
                   }}
                   name="ticket"
-                  className="select select-info select-lg w-full max-w-xs mt-4 mx-1 md:mx-0 md:mt-0"
+                  className="select select-info select-lg w-full max-w-xs mt-4 md:mt-0 mx-1 md:mx-0"
+                  value={childAmount}
                 >
                   <option value={0}>none</option>
                   {[...Array(8)].map((_, index) => (

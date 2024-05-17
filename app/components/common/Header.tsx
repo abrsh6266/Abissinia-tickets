@@ -1,7 +1,7 @@
 'use client'
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../features/user/userSlice";
-import { RootState } from "../store/store";
+import { logoutUser } from "../../features/user/userSlice";
+import { RootState } from "../../store/store";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 const Header = () => {

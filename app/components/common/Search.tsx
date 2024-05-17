@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { setSearchTerm } from "../features/movie/movieSlice";
+import { setSearchTerm } from "../../features/movie/movieSlice";
 const Search = () => {
   const dispatch = useDispatch();
 

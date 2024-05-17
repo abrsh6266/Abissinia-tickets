@@ -7,11 +7,11 @@ import { IoNotificationsSharp } from "react-icons/io5";
 import NavLinks from "./NavLinks";
 import { BiHeart } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowNotification } from "../features/user/userSlice";
+import { setShowNotification } from "../../features/user/userSlice";
 import { useEffect, useState } from "react";
-import { RootState } from "../store/store";
+import { RootState } from "../../store/store";
 import { getDownloadURL, ref } from "firebase/storage";
-import { storage } from "../firebase/firebaseConfig";
+import { storage } from "../../firebase/firebaseConfig";
 const Navbar = () => {
   const [avatarURL, setAvatarURL] = useState<string | null>(null);
   const user = useSelector((state: RootState) => state.userState.user);

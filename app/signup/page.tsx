@@ -3,7 +3,7 @@ import Image from "next/image";
 import logo from "/public/images/logo.png";
 import Link from "next/link";
 import SubmitBtn from "../components/SubmitBtn";
-import FormInput from "../components/FormInput";
+import FormInput from "../components/common/FormInput";
 import { customFetch } from "../utils";
 import { useState } from "react";
 import { useRouter } from "next/navigation";

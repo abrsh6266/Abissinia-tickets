@@ -2,10 +2,10 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSearchMovies } from "./features/movie/movieSlice";
-import NowShow from "./components/NowShow";
+import NowShow from "./components/common/NowShow";
 import SlickCarousel from "./components/SlickCarousel";
-import SearchResult from "./components/SearchResult";
-import Search from "./components/Search";
+import SearchResult from "./components/common/SearchResult";
+import Search from "./components/common/Search";
 import { RootState } from "./store/store";
 import { movie, Movie } from "./data";
 

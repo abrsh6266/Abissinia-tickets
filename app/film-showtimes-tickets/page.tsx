@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import SectionTitle from "../components/SectionTitle";
+import SectionTitle from "../components/common/SectionTitle";
 import { movie } from "../data";
 import MovieDetail from "../components/movieDetailComponents/MovieDetail";
-import PaginationContainer from "../components/PaginationContainer";
+import PaginationContainer from "../components/common/PaginationContainer";
 
 const Page = () => {
   const [movies, setMovies] = useState(movie);

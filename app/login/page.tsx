@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import logo from "/public/images/logo.png";
-import FormInput from "../components/FormInput";
+import FormInput from "../components/common/FormInput";
 import SubmitBtn from "../components/SubmitBtn";
 import Link from "next/link";
 import { useDispatch } from "react-redux";

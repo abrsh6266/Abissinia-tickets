@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { links, socials } from "../data";
+import { links, socials } from "../../data";
 import { usePathname } from "next/navigation";
 
 const Footer = () => {

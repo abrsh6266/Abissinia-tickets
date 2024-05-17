@@ -10,7 +10,7 @@ import { setSelectedMovie } from "@/app/features/movie/movieSlice";
 import { RootState } from "@/app/store/store";
 import { movie as movies } from "@/app/data";
 import SelectionDetails from "@/app/components/SelectionDetails";
-import PaymentProcess from "@/app/components/PaymentProcess";
+import PaymentProcess from "@/app/components/paymentComponent/PaymentProcess";
 
 const PaymentDetail = ({ params }: Props) => {
   const [snacks, setSnacks] = useState(snackAndDrinkData);

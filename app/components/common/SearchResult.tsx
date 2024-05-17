@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
-import { setSearchMovies, setSearchTerm } from "../features/movie/movieSlice";
-import { RootState } from "../store/store";
-import { Movie } from "../data";
+import { setSearchMovies, setSearchTerm } from "../../features/movie/movieSlice";
+import { RootState } from "../../store/store";
+import { Movie } from "../../data";
 
 const SearchResult = () => {
   const searchMovies = useSelector((state:RootState) => state.movieState.searchMovies);
