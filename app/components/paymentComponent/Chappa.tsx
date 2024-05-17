@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface ChappaProps {
   firstName: string;
@@ -13,6 +13,11 @@ const Chappa: React.FC<ChappaProps> = ({
   email,
   selectedPaymentMethod,
 }) => {
+  const [currentTimeInSeconds, setCurrentTimeInSeconds] = useState(0);
+
+  useEffect(() => {
+    setCurrentTimeInSeconds(Math.floor(Date.now() / 1000));
+  }, []);
   return (
     <form method="POST" action="https://api.chapa.co/v1/hosted/pay">
       <input
@@ -20,7 +25,7 @@ const Chappa: React.FC<ChappaProps> = ({
         name="public_key"
         value={process.env.NEXT_PUBLIC_CHAPA_PUBLIC_KEY}
       />
-      <input type="hidden" name="tx_ref" value={`${firstName}-${lastName}-tx-122212 `} />
+      <input type="hidden" name="tx_ref" value={`${firstName}-${lastName}-${currentTimeInSeconds} `} />
       <input type="hidden" name="amount" value="100" />
       <input type="hidden" name="currency" value="ETB" />
       <input type="hidden" name="email" value={email} />

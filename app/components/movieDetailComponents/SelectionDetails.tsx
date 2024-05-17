@@ -1,4 +1,9 @@
+import { RootState } from "@/app/store/store";
+import { useSelector } from "react-redux";
+
 const SelectionDetails = ({ movie }: { movie: any }) => {
+  
+  const selectedMovie = useSelector((store:RootState)=>store.movieState.selectedMovie)
   return (
     <div className="">
       <p className="flex  text-lg border-b border-base-300 pb-2 mb-4">
