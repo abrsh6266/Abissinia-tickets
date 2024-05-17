@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedMovie } from "@/app/features/movie/movieSlice";
+import { setSeat, setSelectedMovie } from "@/app/features/movie/movieSlice";
 import { Props } from "@/app/movies/[movieId]/page";
 import { dummySeats, movie as movies } from "@/app/data";
 import Link from "next/link";
@@ -23,19 +23,23 @@ const Seats = ({ params }: Props) => {
   const [seats, setSeats] = useState(dummySeats);
   const dispatch = useDispatch();
   const router = useRouter();
-
-  const handleSelectSeat = (id: any) => {
-    setSeats((prevSeats) =>
-      prevSeats.map((seat) =>
-        seat.id === id ? { ...seat, selected: !seat.selected } : seat
-      )
-    );
-    dispatch(
-      setSelectedMovie({
-        ...selectedMovie,
-        seats: selectedMovie?.seats?.push(id),
-      })
-    );
+  const [validChoose, setValidChoose] = useState(selectedMovie?.totalSeat || 0);
+  const handleSelectSeat = (id: number) => {
+    if (validChoose >= 1) {
+      setSeats((prevSeats) =>
+        prevSeats.map((seat) =>
+          seat.id === id ? { ...seat, selected: !seat.selected } : seat
+        )
+      );
+      dispatch(
+        setSeat({
+          id,
+        })
+      );
+      setValidChoose(validChoose - 1);
+    } else {
+      toast.error("you have no left seats to choose");
+    }
   };
 
   useEffect(() => {

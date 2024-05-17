@@ -34,6 +34,26 @@ const appSlice = createSlice({
       state.selectedMovie = action.payload;
       console.log(state.selectedMovie);
     },
+    setSeat(state, action) {
+      const seat = action.payload.id;
+      if (!state.selectedMovie) {
+        return;
+      }
+      if (state.selectedMovie?.seats) {
+        const existingSeatIndex = state.selectedMovie.seats.findIndex(
+          (s) => s === seat
+        );
+
+        if (existingSeatIndex !== -1) {
+          state.selectedMovie.seats.splice(existingSeatIndex, 1);
+        } else {
+          state.selectedMovie.seats.push(seat);
+        }
+      } else {
+        state.selectedMovie.seats = [seat];
+      }
+    },
+
     setExtras(state, action) {
       const newExtra = action.payload.selectedExtras;
 
@@ -101,5 +121,6 @@ export const {
   setMeta,
   setExtras,
   setTickets,
+  setSeat,
 } = appSlice.actions;
 export default appSlice.reducer;
