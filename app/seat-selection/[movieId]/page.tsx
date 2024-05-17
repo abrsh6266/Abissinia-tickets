@@ -25,7 +25,7 @@ const Seats = ({ params }: Props) => {
   const router = useRouter();
   const [validChoose, setValidChoose] = useState(selectedMovie?.totalSeat || 0);
   const handleSelectSeat = (id: number) => {
-    if (validChoose >= 1) {
+    if (validChoose >= 1 || selectedMovie?.seats?.find((idd) => idd === id)) {
       setSeats((prevSeats) =>
         prevSeats.map((seat) =>
           seat.id === id ? { ...seat, selected: !seat.selected } : seat
@@ -36,7 +36,12 @@ const Seats = ({ params }: Props) => {
           id,
         })
       );
-      setValidChoose(validChoose - 1);
+
+      setValidChoose(
+        selectedMovie?.seats?.find((idd) => idd === id)
+          ? validChoose - 1
+          : validChoose + 1
+      );
     } else {
       toast.error("you have no left seats to choose");
     }
