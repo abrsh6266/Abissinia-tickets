@@ -8,7 +8,6 @@ const Cinema = () => {
       <SectionTitle text="Cinema Services" />
       <div className="mt-8 grid gap-8  lg:grid-cols-12">
         <div className="lg:col-span-8 p-2">
-        &apos
           <div>
             <div className="md:text-xl text-gray-200 sm:text-lg italic lg:mx-20 pt-8">
               <p>
@@ -45,9 +44,9 @@ const Cinema = () => {
               <p>
                 Enjoy our selection of seating options tailored to enhance your
                 comfort. Choose from standard, premier, and sofa seats, all
-                designed to provide maximum comfort. Whether you&aposre looking for
+                designed to provide maximum comfort. Whether you are looking for
                 a cozy seat for an intimate date night or a spacious seat to
-                stretch out and relax, we&aposve got you covered.
+                stretch out and relax, we have got you covered.
               </p>
             </div>
           </div>
@@ -57,9 +56,9 @@ const Cinema = () => {
               <p>
                 Enjoy our selection of seating options tailored to enhance your
                 comfort. Choose from standard, premier, and sofa seats, all
-                designed to provide maximum comfort. Whether you&aposre looking for
+                designed to provide maximum comfort. Whether you are looking for
                 a cozy seat for an intimate date night or a spacious seat to
-                stretch out and relax, we&aposve got you covered.
+                stretch out and relax, we have got you covered.
               </p>
             </div>
           </div>
