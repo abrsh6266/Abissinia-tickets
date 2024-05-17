@@ -43,18 +43,6 @@ const Extras = ({ params }: Props) => {
   }, []);
 
   const handleGoBack = () => {
-    dispatch(
-      setSelectedMovie({
-        ...selectedMovie,
-        times: undefined,
-        time: undefined,
-        day: undefined,
-        movie: undefined,
-        seats: undefined,
-        tickets: undefined,
-        totalSeat: undefined,
-      })
-    );
     router.back();
   };
 

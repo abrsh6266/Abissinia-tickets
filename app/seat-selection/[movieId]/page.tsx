@@ -67,13 +67,7 @@ const Seats = ({ params }: Props) => {
     dispatch(
       setSelectedMovie({
         ...selectedMovie,
-        times: undefined,
-        time: undefined,
-        day: undefined,
-        movie: undefined,
         seats: undefined,
-        tickets: undefined,
-        totalSeat: undefined,
       })
     );
     router.back();

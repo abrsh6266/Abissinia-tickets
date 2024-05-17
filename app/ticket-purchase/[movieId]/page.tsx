@@ -21,18 +21,7 @@ const Tickets = ({ params }: Props) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  useEffect(() => {
-    dispatch(
-      setSelectedMovie({
-        ...selectedMovie,
-        times: undefined,
-        time: undefined,
-        day: undefined,
-        movie: undefined,
-        extras: undefined,
-      })
-    );
-  }, []);
+
 
   const handleGoBack = () => {
     dispatch(
