@@ -33,7 +33,9 @@ const appSlice = createSlice({
     },
     setSelectedMovie(state, action) {
       state.selectedMovie = action.payload;
-      console.log(state.selectedMovie);
+    },
+    setGlobalSeats(state) {
+      state.seats = dummySeats;
     },
     setSeat(state, action) {
       const seatId = action.payload.id;
@@ -128,5 +130,6 @@ export const {
   setExtras,
   setTickets,
   setSeat,
+  setGlobalSeats,
 } = appSlice.actions;
 export default appSlice.reducer;

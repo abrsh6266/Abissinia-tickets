@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { setSeat, setSelectedMovie } from "@/app/features/movie/movieSlice";
+import {
+  setGlobalSeats,
+  setSeat,
+  setSelectedMovie,
+} from "@/app/features/movie/movieSlice";
 import { Props } from "@/app/movies/[movieId]/page";
 import { dummySeats, movie as movies } from "@/app/data";
 import Link from "next/link";
@@ -20,7 +24,7 @@ const Seats = ({ params }: Props) => {
   const selectedMovie = useSelector(
     (state: RootState) => state.movieState.selectedMovie
   );
-  const seats = useSelector((store:RootState)=>store.movieState.seats)
+  const seats = useSelector((store: RootState) => store.movieState.seats);
   const dispatch = useDispatch();
   const router = useRouter();
   const [validChoose, setValidChoose] = useState(selectedMovie?.totalSeat || 0);
@@ -50,21 +54,16 @@ const Seats = ({ params }: Props) => {
       });
       handleGoBack();
     }
-    dispatch(
-      setSelectedMovie({
-        ...selectedMovie,
-        seats: [],
-      })
-    );
   }, []);
 
   const handleGoBack = () => {
     dispatch(
       setSelectedMovie({
         ...selectedMovie,
-        seats: undefined,
+        seats: [],
       })
     );
+    dispatch(setGlobalSeats());
     router.back();
   };
 

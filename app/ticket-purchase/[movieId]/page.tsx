@@ -28,7 +28,16 @@ const Tickets = ({ params }: Props) => {
     selectedMovie?.tickets?.find((ticket) => ticket.ticketType === "adult")
       ?.amount || 0
   );
+  const [seatType, setSeatType] = useState(
+    selectedMovie?.seatType || "standard"
+  );
   useEffect(() => {
+    dispatch(
+      setSelectedMovie({
+        ...selectedMovie,
+        seatType: seatType,
+      })
+    );
     dispatch(
       setTickets({
         ticketType: "child",
@@ -41,7 +50,7 @@ const Tickets = ({ params }: Props) => {
         amount: adultAmount,
       })
     );
-  }, [childAmount, adultAmount]);
+  }, [childAmount, adultAmount,seatType]);
   const handleGoBack = () => {
     dispatch(
       setSelectedMovie({
@@ -76,6 +85,9 @@ const Tickets = ({ params }: Props) => {
         />
       </div>
       <div>
+        <label htmlFor="seat" className="capitalize mb-2 block mt-4 ml-2">
+          Choose The day
+        </label>
         <div className="carousel carousel-end rounded-box">
           {movie?.showTime?.map((show) => {
             return (
@@ -87,7 +99,6 @@ const Tickets = ({ params }: Props) => {
                         ...selectedMovie,
                         day: show.day,
                         tickets: [],
-                        seatType: "standard",
                         totalSeat: 0,
                         movie: movie,
                         times: show.times,
@@ -95,6 +106,7 @@ const Tickets = ({ params }: Props) => {
                         seats: [],
                       })
                     );
+                    setSeatType("standard");
                   }}
                   className={
                     show.day === selectedMovie?.day
@@ -120,13 +132,9 @@ const Tickets = ({ params }: Props) => {
             Choose seat area{" "}
           </label>
           <select
-            onClick={(e) => {
-              dispatch(
-                setSelectedMovie({
-                  ...selectedMovie,
-                  seatType: e.currentTarget.value,
-                })
-              );
+            value={seatType}
+            onChange={(e) => {
+              setSeatType(e.currentTarget.value);
             }}
             name="seat"
             className="select select-info select-lg w-full max-w-xs"
