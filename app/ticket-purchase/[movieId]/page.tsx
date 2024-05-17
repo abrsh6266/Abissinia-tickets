@@ -143,8 +143,8 @@ const Tickets = ({ params }: Props) => {
           </thead>
           <tbody>
             <tr>
-              <td>Adult 2D</td>
-              <td>100ETB</td>
+              <td>Adult</td>
+              <td>120ETB</td>
               <td>
                 <select
                   onClick={(e) => {
@@ -168,8 +168,8 @@ const Tickets = ({ params }: Props) => {
               </td>
             </tr>
             <tr>
-              <td>Senior 2D</td>
-              <td>120ETB</td>
+              <td>Child</td>
+              <td>100ETB</td>
               <td>
                 <select
                   onClick={(e) => {
