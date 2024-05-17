@@ -41,35 +41,37 @@ const Review = () => {
   return (
     <div className=" overflow-x-hidden">
       <div className="p-2 max-w-[900px]">
-        <div className="w-full">
-          <form className="w-full">
-            <div className="w-full px-3 mb-2 space-x-2 inline-flex">
-              <div className="chat-image avatar">
-                <div className="w-12 rounded-full">
-                  <img
-                    src={
-                      avatarURL ||
-                      "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                    }
-                  />
+        {user && (
+          <div className="w-full">
+            <form className="w-full">
+              <div className="w-full px-3 mb-2 space-x-2 inline-flex">
+                <div className="chat-image avatar">
+                  <div className="w-12 rounded-full">
+                    <img
+                      src={
+                        avatarURL ||
+                        "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                      }
+                    />
+                  </div>
                 </div>
-              </div>
-              <input
-                type="text"
-                placeholder="comment here"
-                className="input border-hidden input-accent w-full max-w-xs"
-              />
-              <div className="flex justify-end px-4">
                 <input
-                  type="submit"
-                  className="btn px-2.5 py-1.5 rounded-md bg-indigo-700 inline"
-                  value="Comment"
+                  type="text"
+                  placeholder="comment here"
+                  className="input border-hidden input-accent w-full max-w-xs"
                 />
+                <div className="flex justify-end px-4">
+                  <input
+                    type="submit"
+                    className="btn px-2.5 py-1.5 rounded-md bg-indigo-700 inline"
+                    value="Comment"
+                  />
+                </div>  
               </div>
-            </div>
-          </form>
-        </div>
-        <hr />
+            </form>
+            <hr />
+          </div>
+        )}
         {messages.slice(0, visibleMessages)}
         {visibleMessages < totalMessages ? (
           <button className="btn rounded-lg hover" onClick={handleSeeMore}>

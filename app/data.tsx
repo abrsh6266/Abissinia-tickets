@@ -87,7 +87,7 @@ export const links = [
   { id: 2, label: "Coming soon", href: "/coming-soon" },
   { id: 3, label: "Food and drinks", href: "/food-drink" },
   { id: 4, label: "Tickets", href: "/film-showtimes-tickets" },
-  { id: 5, label: "Cinemas", href: "#" },
+  { id: 5, label: "Abissinia Cinema", href: "/cinema" },
   { id: 6, label: "Schedule", href: "#" },
 ];
 
