@@ -175,11 +175,12 @@ const Seats = ({ params }: Props) => {
         >
           cancel
         </button>
-        <Link href={`/extras-selection/${movie?.id}`}>
-          <button className="btn border-2  bg-blue-700 rounded-lg px-4">
-            Continue
-          </button>
-        </Link>
+        <button
+          className="btn border-2  bg-blue-700 rounded-lg px-4"
+          disabled={validChoose !== 0}
+        >
+          <Link href={`/extras-selection/${movie?.id}`}>Continue</Link>
+        </button>
       </div>
     </section>
   );
