@@ -1,7 +1,9 @@
+"use client";
 import Image from "next/image";
 import SectionTitle2 from "../components/common/SectionTitle2";
 import cinema6 from "/public/cinema/cinema6.jpg";
 import SectionTitle from "../components/common/SectionTitle";
+import AbissiniaMovies from "../components/common/AbissiniaMovies";
 
 const Cinema = () => {
   return (
@@ -116,6 +118,10 @@ const Cinema = () => {
         </div>
         <div className="lg:col-span-4 lg:pl-4 px-4">
           <div>
+            <SectionTitle2 text="Abissinia Movies" />
+            <AbissiniaMovies />
+          </div>
+          <div>
             <SectionTitle2 text="Abissinia Cinema" />
             <div style={{ width: "100%", height: "400px" }}>
               <iframe
@@ -128,7 +134,6 @@ const Cinema = () => {
               ></iframe>
             </div>
           </div>
-          
         </div>
       </div>
     </>

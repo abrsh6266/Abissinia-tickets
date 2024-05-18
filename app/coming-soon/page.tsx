@@ -5,15 +5,15 @@ import ComingMovieCard from "../components/comingComponents/ComingMovieCard";
 import Genre from "../components/comingComponents/Genre";
 import NewMovies from "../components/comingComponents/NewMovies";
 import PaginationContainer from "../components/common/PaginationContainer";
-
+export const shuffleArray = (array: any) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
 const ComingSoon = () => {
-  const shuffleArray = (array: any) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  };
+  
   const selectFiveMovies = () => {
     const shuffledMovies = shuffleArray(movies);
     return shuffledMovies.slice(0, 3);
