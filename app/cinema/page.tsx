@@ -2,6 +2,7 @@ import Image from "next/image";
 import SectionTitle2 from "../components/common/SectionTitle2";
 import cinema6 from "/public/cinema/cinema6.jpg";
 import SectionTitle from "../components/common/SectionTitle";
+
 const Cinema = () => {
   return (
     <>
@@ -11,10 +12,9 @@ const Cinema = () => {
           <div>
             <div className="md:text-xl text-gray-200 sm:text-lg italic lg:mx-20 pt-8">
               <p>
-                Welcome to our cinema, where we provide an exceptional
-                movie-going experience designed to cater to all your
-                entertainment needs. Below is a comprehensive overview of the
-                services and amenities we offer:
+                Come and enjoy the best movie experience at our cinema. We offer
+                a wide range of services to ensure your visit is enjoyable and
+                memorable.
               </p>
               <Image src={cinema6} alt="cinema image" />
             </div>
@@ -114,7 +114,22 @@ const Cinema = () => {
             </div>
           </div>
         </div>
-        <div className="lg:col-span-4 lg:pl-4">hello world</div>
+        <div className="lg:col-span-4 lg:pl-4 px-4">
+          <div>
+            <SectionTitle2 text="Abissinia Cinema" />
+            <div style={{ width: "100%", height: "400px" }}>
+              <iframe
+                title="Cinema Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.3542106530117!2d38.738164773673205!3d9.03141658895392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b853e15e83f87%3A0x3e4c1ea5319d99a1!2zQ2luZW1hIFJhcyB8IE1lcmthdG98IOGIsuGKkuGImyDhiKvhiLUgfCDhiJjhiK3hiqvhibY!5e0!3m2!1sen!2set!4v1716022815747!5m2!1sen!2set"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+          
+        </div>
       </div>
     </>
   );
