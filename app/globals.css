@@ -221,3 +221,13 @@
       @apply mx-auto max-w-7xl px-6;
   }
 }
+.inner{
+  .slide{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #f42582;
+    width: 100vw;
+    height: 100vw;
+  }
+}

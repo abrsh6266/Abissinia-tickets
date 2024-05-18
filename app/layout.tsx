@@ -11,6 +11,7 @@ import Notification from "./components/notification/Notification";
 import { Suspense } from "react";
 import Load from "./loading";
 import { StoreProvider } from "./store/StoreProvider";
+import Inner from "./components/Inner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,18 +28,18 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="en" data-theme="black">
-          <TanstackProvider>
-            <body className={inter.className}>
-              <Header />
-              <Navbar />
-              <Notification />
-              <ToastContainer />
-              <Suspense fallback={<Load />}>
-                <main>{children}</main>
-                <Footer />
-              </Suspense>
-            </body>
-          </TanstackProvider>
+        <TanstackProvider>
+          <body className={inter.className}>
+            <Header />
+            <Navbar />
+            <Notification />
+            <ToastContainer />
+            <Suspense fallback={<Load />}>
+              <Inner>{children}</Inner>
+              <Footer />
+            </Suspense>
+          </body>
+        </TanstackProvider>
       </html>
     </StoreProvider>
   );
