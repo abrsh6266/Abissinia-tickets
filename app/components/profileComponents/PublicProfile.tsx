@@ -1,6 +1,5 @@
 import { storage } from "@/app/firebase/firebaseConfig";
 import { RootState } from "@/app/store/store";
-import { error } from "console";
 import {
   getDownloadURL,
   ref,
@@ -10,6 +9,7 @@ import {
 import { ChangeEvent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 const PublicProfile = () => {
   const [image, setImage] = useState<File | null>(null);
@@ -74,7 +74,10 @@ const PublicProfile = () => {
             <div className="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
               <img
                 className="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
-                src={avatarURL || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
+                src={
+                  avatarURL ||
+                  "https://firebasestorage.googleapis.com/v0/b/abissinia-tickets.appspot.com/o/images%2Favatar2.png?alt=media&token=e591a9bd-aeb6-4cbc-ba31-2c286f6f6f1c"
+                }
                 alt="Bordered avatar"
               />
 

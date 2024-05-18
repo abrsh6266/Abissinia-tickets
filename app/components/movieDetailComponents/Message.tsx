@@ -10,7 +10,7 @@ const Message = () => {
         <div className="w-10 rounded-full">
           <img
             alt="Tailwind CSS chat bubble component"
-            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+            src="https://firebasestorage.googleapis.com/v0/b/abissinia-tickets.appspot.com/o/images%2Favatar2.png?alt=media&token=e591a9bd-aeb6-4cbc-ba31-2c286f6f6f1c"
           />
         </div>
       </div>

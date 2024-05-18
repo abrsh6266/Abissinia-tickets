@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import logo from "/public/images/logo2.png";
+import avatar from "/public/profile/avatar.svg";
 import Image from "next/image";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { IoNotificationsSharp } from "react-icons/io5";
@@ -85,7 +86,12 @@ const Navbar = () => {
           <Link href="/profile">
             <div className="avatar">
               <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img src={avatarURL || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"} />
+                <img
+                  src={
+                    avatarURL ||
+                    "https://firebasestorage.googleapis.com/v0/b/abissinia-tickets.appspot.com/o/images%2Favatar2.png?alt=media&token=e591a9bd-aeb6-4cbc-ba31-2c286f6f6f1c"
+                  }
+                />
               </div>
             </div>
           </Link>

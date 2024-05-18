@@ -50,7 +50,7 @@ const Review = () => {
                     <img
                       src={
                         avatarURL ||
-                        "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                        "https://firebasestorage.googleapis.com/v0/b/abissinia-tickets.appspot.com/o/images%2Favatar2.png?alt=media&token=e591a9bd-aeb6-4cbc-ba31-2c286f6f6f1c"
                       }
                     />
                   </div>
@@ -66,7 +66,7 @@ const Review = () => {
                     className="btn px-2.5 py-1.5 rounded-md bg-indigo-700 inline"
                     value="Comment"
                   />
-                </div>  
+                </div>
               </div>
             </form>
             <hr />
