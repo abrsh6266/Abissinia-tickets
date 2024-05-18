@@ -1,17 +1,12 @@
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
-import {
-  setSearchMovies,
-  setSearchTerm,
-} from "../../features/movie/movieSlice";
+import { setSearchMovies, setSearchTerm } from "../../features/movie/movieSlice";
 import { RootState } from "../../store/store";
 import { gridSquareVariant, Movie, squareVariant } from "../../data";
-import { motion } from "framer-motion";
+import {motion} from "framer-motion"
 const SearchResult = () => {
-  const searchMovies = useSelector(
-    (state: RootState) => state.movieState.searchMovies
-  );
+  const searchMovies = useSelector((state:RootState) => state.movieState.searchMovies);
   const dispatch = useDispatch();
 
   const handleBack = () => {
@@ -38,15 +33,10 @@ const SearchResult = () => {
         <motion.section
           variants={gridSquareVariant}
           initial="hidden"
-          animate="show"
-          className="my-5 mx-auto grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 md:gap-4 "
-        >
-          {searchMovies.map((movie: Movie) => (
-            <motion.div
-              variants={squareVariant}
-              key={movie.id}
-              className="border-2 border-white rounded-lg"
-            >
+          animate="show" 
+         className="my-5 mx-auto grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 md:gap-4 ">
+          {searchMovies.map((movie:Movie) => (
+            <motion.div variants={squareVariant} key={movie.id} className="border-2 border-white rounded-lg">
               <Link href={`/movies/${movie.id}`} className="hover:opacity-75 ">
                 <Image
                   className="w-full h-64 object-cover"
