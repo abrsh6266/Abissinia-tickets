@@ -82,6 +82,26 @@ export const socials = [
   },
 ];
 
+export const gridSquareVariant = {
+  hidden: {
+    opacity: 0,
+  },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.25,
+    },
+  },
+};
+export const squareVariant = {
+  hidden: {
+    opacity: 0,
+  },
+  show: {
+    opacity: 1,
+  },
+};
+
 export const shuffleArray = (array: any) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -385,7 +405,7 @@ export const snackAndDrinkData: SnackAndDrink[] = [
   },
 ];
 
-const seatTypes = ['sofa', 'standard', 'premier'];
+const seatTypes = ["sofa", "standard", "premier"];
 
 const generateSeats = (): {
   id: number;

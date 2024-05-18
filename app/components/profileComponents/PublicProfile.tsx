@@ -9,7 +9,6 @@ import {
 import { ChangeEvent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import Image from "next/image";
 
 const PublicProfile = () => {
   const [image, setImage] = useState<File | null>(null);

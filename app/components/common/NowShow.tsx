@@ -5,7 +5,6 @@ import MovieCard from "../movieDetailComponents/MovieCard";
 import Hero from "./Hero";
 import SectionTitle from "./SectionTitle";
 import PaginationContainer from "./PaginationContainer";
-
 const NowShow = () => {
   const [movies, setMovies] = useState(movie);
 

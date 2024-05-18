@@ -1,7 +1,9 @@
-import { Movie, movie as movies, shuffleArray } from "@/app/data";
+import { gridSquareVariant, Movie, movie as movies, shuffleArray, squareVariant } from "@/app/data";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
+
 
 const AbissiniaMovies = () => {
   const selectFiveMovies = () => {
@@ -13,9 +15,14 @@ const AbissiniaMovies = () => {
   return (
     <div className="w-full overflow-hidden">
       <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
-        <section className="flex flex-wrap lg:grid lg:grid-cols-3">
+        <motion.section
+          variants={gridSquareVariant}
+          initial="hidden"
+          animate="show"
+          className="flex flex-wrap lg:grid lg:grid-cols-3"
+        >
           {moviess.map((movie: Movie) => (
-            <div key={movie.id}>
+            <motion.section variants={squareVariant} key={movie.id}>
               <Link href={`/movies/${movie.id}`} className="hover:opacity-75">
                 <Image
                   className="w-40 h-48 object-cover"
@@ -23,9 +30,9 @@ const AbissiniaMovies = () => {
                   alt={movie.title}
                 />
               </Link>
-            </div>
+            </motion.section>
           ))}
-        </section>
+        </motion.section>
       </div>
     </div>
   );
