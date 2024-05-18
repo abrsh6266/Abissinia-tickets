@@ -12,7 +12,7 @@ import { Suspense } from "react";
 import Load from "./loading";
 import { StoreProvider } from "./store/StoreProvider";
 import Inner from "./components/Inner";
-
+import NextTopLoader from "nextjs-toploader";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -30,6 +30,17 @@ export default function RootLayout({
       <html lang="en" data-theme="black">
         <TanstackProvider>
           <body className={inter.className}>
+            <NextTopLoader
+              color="#2299DD"
+              initialPosition={0.08}
+              crawlSpeed={200}
+              height={3}
+              crawl={true}
+              showSpinner={true}
+              easing="ease"
+              speed={200}
+              shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+            />
             <Header />
             <Navbar />
             <Notification />
