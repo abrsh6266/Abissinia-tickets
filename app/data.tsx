@@ -116,7 +116,7 @@ export const links = [
   { id: 3, label: "Food and drinks", href: "/food-drink" },
   { id: 4, label: "Tickets", href: "/film-showtimes-tickets" },
   { id: 5, label: "Abissinia Cinema", href: "/cinema" },
-  { id: 6, label: "Schedule", href: "#" },
+  { id: 6, label: "Schedule", href: "schedule" },
 ];
 
 export interface Movie {
