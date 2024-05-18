@@ -167,7 +167,7 @@ const Seats = ({ params }: Props) => {
           className="btn border-2  bg-blue-700 rounded-lg px-4"
           disabled={validChoose !== 0}
         >
-          <Link href={`/extras-selection/${movie?.id}`}>Continue</Link>
+          <Link className="btn bg-transparent border-hidden" href={`/extras-selection/${movie?.id}`}>Continue</Link>
         </button>
       </div>
     </section>

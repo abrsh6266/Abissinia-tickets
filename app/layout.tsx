@@ -31,7 +31,7 @@ export default function RootLayout({
         <TanstackProvider>
           <body className={inter.className}>
             <NextTopLoader
-              color="#2299DD"
+              color="#0325e9"
               initialPosition={0.08}
               crawlSpeed={200}
               height={3}
@@ -39,7 +39,7 @@ export default function RootLayout({
               showSpinner={true}
               easing="ease"
               speed={200}
-              shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+              shadow="0 0 10px #0325e9,0 0 5px #0325e9"
             />
             <Header />
             <Navbar />
