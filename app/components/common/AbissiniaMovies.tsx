@@ -1,5 +1,4 @@
-import { shuffleArray } from "@/app/coming-soon/page";
-import { Movie, movie as movies } from "@/app/data";
+import { Movie, movie as movies, shuffleArray } from "@/app/data";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
