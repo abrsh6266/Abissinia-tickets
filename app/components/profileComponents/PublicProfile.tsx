@@ -1,5 +1,9 @@
+import { loginUser, setUser } from "@/app/features/user/userSlice";
 import { storage } from "@/app/firebase/firebaseConfig";
 import { RootState } from "@/app/store/store";
+import { customFetch } from "@/app/utils";
+import Cookies from "js-cookie";
+
 import {
   getDownloadURL,
   ref,
@@ -7,18 +11,53 @@ import {
   UploadTaskSnapshot,
 } from "firebase/storage";
 import { ChangeEvent, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const PublicProfile = () => {
   const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
-  const [avatarURL, setAvatarURL] = useState<string | null>(null);
+  const [loading2, setLoading2] = useState(false);
+
   const user = useSelector((state: RootState) => state.userState.user);
 
+  const dispatch = useDispatch();
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setImage(e.target.files[0]);
+    }
+  };
+  const deletePicture = async () => {
+    try {
+      setLoading2(true);
+      const response = await customFetch.put(
+        `/user/${user.id}`,
+        {
+          avatar:
+            "https://firebasestorage.googleapis.com/v0/b/abissinia-tickets.appspot.com/o/images%2Favatar2.png?alt=media&token=e591a9bd-aeb6-4cbc-ba31-2c286f6f6f1c",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        }
+      );
+      const data = response.data.data;
+      if (data.id) {
+        dispatch(setUser({ user: data }));
+        toast.success("Successfully deleted");
+      } else {
+        toast.error("Please try again");
+      }
+      setLoading2(false);
+    } catch (error: any) {
+      setLoading2(false);
+      const errorMessage =
+        error?.response?.data?.error?.message || "Please try again";
+
+      toast.error(errorMessage);
+      console.error(error?.response);
+      return null;
     }
   };
   const handleUpload = () => {
@@ -39,30 +78,39 @@ const PublicProfile = () => {
           console.error(error.message);
         },
         async () => {
-          setLoading(false);
-          toast.success("Successfully uploaded");
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          setAvatarURL(downloadURL); // Update the avatar URL
+          try {
+            const response = await customFetch.put(
+              `/user/${user.id}`,
+              {
+                avatar: downloadURL,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${Cookies.get("token")}`,
+                },
+              }
+            );
+            const data = response.data.data;
+            if (data.id) {
+              dispatch(setUser({ user: data }));
+              toast.success("Successfully uploaded");
+            } else {
+              toast.error("Please try again");
+            }
+            setLoading(false);
+          } catch (error: any) {
+            setLoading(false);
+            const errorMessage =
+              error?.response?.data?.error?.message || "Please try again";
+            toast.error(errorMessage);
+            console.error(error?.response);
+            return null;
+          }
         }
       );
     }
   };
-  useEffect(() => {
-    const fetchAvatar = async () => {
-      if (user) {
-        const avatarRef = ref(storage, `images/${user.id}.jpg`); // Path to the user's avatar image
-        try {
-          const url = await getDownloadURL(avatarRef);
-          setAvatarURL(url);
-        } catch (error) {
-          console.error("Error fetching avatar:", error);
-          // Handle error (e.g., set a default avatar URL)
-        }
-      }
-    };
-
-    fetchAvatar();
-  }, [user]);
   return (
     <main className="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
       <div className="p-2 md:p-4">
@@ -74,7 +122,7 @@ const PublicProfile = () => {
               <img
                 className="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
                 src={
-                  avatarURL ||
+                  user?.avatar ||
                   "https://firebasestorage.googleapis.com/v0/b/abissinia-tickets.appspot.com/o/images%2Favatar2.png?alt=media&token=e591a9bd-aeb6-4cbc-ba31-2c286f6f6f1c"
                 }
                 alt="Bordered avatar"
@@ -97,10 +145,14 @@ const PublicProfile = () => {
                   )}
                 </button>
                 <button
+                  onClick={deletePicture}
                   type="button"
                   className="btn text-base font-medium focus:outline-none  rounded-lg border border-red-700"
                 >
                   Delete picture
+                  {loading2 && (
+                    <span className="loading loading-spinner loading-md"></span>
+                  )}
                 </button>
               </div>
             </div>

@@ -29,7 +29,7 @@ const Login = () => {
       const response = await customFetch.post("/login", formData);
       const data = response.data;
       Cookies.set("token", data.jwt);
-      dispatch(loginUser({ user: data.user, jwt: data.jwt }));
+      dispatch(loginUser({ user: data.user }));
       router.push("/");
       toast.success("Login successful");
     } catch (error: any) {

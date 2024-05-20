@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 const getUserFromLocalStorage = () => {
   if (typeof window !== "undefined") {
@@ -20,8 +20,13 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     loginUser: (state, action) => {
-      const user = { ...action.payload.user, token: action.payload.jwt };
+      const user = { ...action.payload.user };
       state.user = user;
+      localStorage.setItem("user", JSON.stringify(user));
+    },
+    setUser: (state, action) => {
+      const user = { ...action.payload.user };
+      state.user.avatar = user.avatar;
       localStorage.setItem("user", JSON.stringify(user));
     },
     setShowNotification(state, action) {
@@ -29,13 +34,14 @@ const userSlice = createSlice({
     },
     logoutUser: (state) => {
       state.user = null;
-      Cookies.remove('token');
+      Cookies.remove("token");
       localStorage.removeItem("user");
       toast.success("user logout successfully");
     },
   },
 });
 
-export const { loginUser, logoutUser,setShowNotification } = userSlice.actions;
+export const { loginUser, logoutUser, setShowNotification, setUser } =
+  userSlice.actions;
 
 export default userSlice.reducer;

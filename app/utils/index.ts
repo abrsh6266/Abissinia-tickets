@@ -2,7 +2,7 @@ import axios from "axios";
 import { Movie, SnackAndDrink } from "../data";
 import { ExtraItem, Ticket } from "../features/movie/movieSlice";
 
-const productionUrl = "https://abissinia-backend.vercel.app";
+const productionUrl = "https://abissinia-backend.vercel.app/api/auth";
 
 export const customFetch = axios.create({
   baseURL: productionUrl,

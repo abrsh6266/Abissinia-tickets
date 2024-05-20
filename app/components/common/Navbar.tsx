@@ -14,24 +14,7 @@ import { RootState } from "../../store/store";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../../firebase/firebaseConfig";
 const Navbar = () => {
-  const [avatarURL, setAvatarURL] = useState<string | null>(null);
   const user = useSelector((state: RootState) => state.userState.user);
-  useEffect(() => {
-    const fetchAvatar = async () => {
-      if (user) {
-        const avatarRef = ref(storage, `images/${user.id}.jpg`); // Path to the user's avatar image
-        try {
-          const url = await getDownloadURL(avatarRef);
-          setAvatarURL(url);
-        } catch (error) {
-          console.error("Error fetching avatar:", error);
-          // Handle error (e.g., set a default avatar URL)
-        }
-      }
-    };
-
-    fetchAvatar();
-  }, [user]);
   const dispatch = useDispatch();
   return (
     <nav>
@@ -88,7 +71,7 @@ const Navbar = () => {
               <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                 <img
                   src={
-                    avatarURL ||
+                    user?.avatar ||
                     "https://firebasestorage.googleapis.com/v0/b/abissinia-tickets.appspot.com/o/images%2Favatar2.png?alt=media&token=e591a9bd-aeb6-4cbc-ba31-2c286f6f6f1c"
                   }
                 />
