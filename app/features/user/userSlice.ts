@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import Cookies from 'js-cookie';
 
 const getUserFromLocalStorage = () => {
   if (typeof window !== "undefined") {
@@ -28,6 +29,7 @@ const userSlice = createSlice({
     },
     logoutUser: (state) => {
       state.user = null;
+      Cookies.remove('token');
       localStorage.removeItem("user");
       toast.success("user logout successfully");
     },

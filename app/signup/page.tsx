@@ -25,7 +25,7 @@ const SignUp = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await customFetch.post("/auth/local/register", formData);
+      const response = await customFetch.post("/register", formData);
       const data = response.data;
       toast.success("account created successfully");
       return router.push("/login");

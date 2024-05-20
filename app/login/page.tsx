@@ -10,13 +10,14 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { loginUser } from "../features/user/userSlice";
 import { customFetch } from "../utils";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    identifier: "",
+    email: "",
     password: "",
   });
   const handleChange = (e: any) => {
@@ -25,8 +26,9 @@ const Login = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await customFetch.post("/auth/local", formData);
+      const response = await customFetch.post("/login", formData);
       const data = response.data;
+      Cookies.set("token", data.jwt);
       dispatch(loginUser({ user: data.user, jwt: data.jwt }));
       router.push("/");
       toast.success("Login successful");
@@ -58,7 +60,7 @@ const Login = () => {
         <FormInput
           type={"email"}
           label={"email"}
-          name={"identifier"}
+          name={"email"}
           handleChange={handleChange}
         />
         <FormInput

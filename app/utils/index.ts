@@ -2,7 +2,7 @@ import axios from "axios";
 import { Movie, SnackAndDrink } from "../data";
 import { ExtraItem, Ticket } from "../features/movie/movieSlice";
 
-const productionUrl = "https://strapi-store-server.onrender.com/api";
+const productionUrl = "https://abissinia-backend.vercel.app";
 
 export const customFetch = axios.create({
   baseURL: productionUrl,
