@@ -3,7 +3,7 @@ import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import PublicProfile from "../components/profileComponents/PublicProfile";
 import Aside from "../components/profileComponents/Aside";
-import Auth from "../components/common/Auth";
+import withAuth from "../components/common/Auth";
 
 const Profile = () => {
   return (
@@ -28,4 +28,4 @@ const Profile = () => {
   );
 };
 
-export default Auth(Profile);
+export default withAuth(Profile);

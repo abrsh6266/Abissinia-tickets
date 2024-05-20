@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
-const Auth = (WrappedComponent: React.ComponentType) => {
-  return (props: any) => {
+const withAuth = (WrappedComponent: React.ComponentType) => {
+  const Auth = (props: any) => {
     const router = useRouter();
 
     useEffect(() => {
@@ -12,10 +12,16 @@ const Auth = (WrappedComponent: React.ComponentType) => {
       if (!token) {
         router.replace("/login");
       }
-    }, []);
+    }, [router]);
 
     return <WrappedComponent {...props} />;
   };
+
+  if (process.env.NODE_ENV !== "production") {
+    Auth.displayName = `withAuth(${WrappedComponent.displayName || WrappedComponent.name || "Component"})`;
+  }
+
+  return Auth;
 };
 
-export default Auth;
+export default withAuth;
