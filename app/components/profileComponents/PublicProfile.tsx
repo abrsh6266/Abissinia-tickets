@@ -157,7 +157,8 @@ const PublicProfile = () => {
               </div>
             </div>
 
-            <div className="items-center mt-8 sm:mt-14 ">
+            <div className="items-center mt-8 sm:mt-14 "> 
+            
               <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
                 <div className="w-full">
                   <label
