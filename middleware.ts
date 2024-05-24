@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import axios from "axios";
-import { toast } from "react-toastify";
 
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token");
@@ -16,7 +15,6 @@ export async function middleware(request: NextRequest) {
     );
 
     if (response.status !== 200) {
-      toast.error("Please login again your session is expired");
       return NextResponse.redirect(new URL("/login", request.url));
     }
   } catch (error) {

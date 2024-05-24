@@ -18,10 +18,51 @@ const PublicProfile = () => {
   const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
-
   const user = useSelector((state: RootState) => state.userState.user);
-
   const dispatch = useDispatch();
+  
+  const [formData, setFormData] = useState({
+    email: user?.email || "",
+    username: user?.username || "",
+    oldPassword: "",
+    newPassword: "",
+  });
+  const handleChange2 = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await customFetch.put(
+        `/user/${user.id}`,
+        {
+          email: formData.email,
+          username: formData.username,
+          oldPassword: formData.oldPassword,
+          newPassword: formData.newPassword,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+          },
+        }
+      );
+      const data = response.data.data;
+      if (data.id) {
+        dispatch(setUser({ user: data }));
+        toast.success("Profile updated successfully");
+      } else {
+        toast.error("Please try again");
+      }
+    } catch (error: any) {
+      const errorMessage =
+        error?.response?.data?.error?.message || "Please try again";
+      toast.error(errorMessage);
+      console.error(error?.response);
+    }
+  };
+  
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setImage(e.target.files[0]);
@@ -157,116 +198,74 @@ const PublicProfile = () => {
               </div>
             </div>
 
-            <div className="items-center mt-8 sm:mt-14 "> 
-            
-              <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
-                <div className="w-full">
-                  <label
-                    htmlFor="first_name"
-                    className="block mb-2 text-sm font-medium"
-                  >
-                    Your first name
-                  </label>
-                  <input
-                    type="text"
-                    id="first_name"
-                    className="input input-bordered w-full max-w-xs border"
-                    placeholder="Your first name"
-                    value="Helina"
-                    required
-                  />
-                </div>
-
-                <div className="w-full">
-                  <label
-                    htmlFor="last_name"
-                    className="block mb-2 text-sm font-medium"
-                  >
-                    Your last name
-                  </label>
-                  <input
-                    type="text"
-                    id="last_name"
-                    className="input input-bordered w-full max-w-xs border"
-                    placeholder="Your last name"
-                    value="Bikes"
-                    required
-                  />
-                </div>
-              </div>
-
+            <form onSubmit={handleSubmit} className="grid max-w-2xl mx-auto mt-8">
               <div className="mb-2 sm:mb-6">
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium"
-                >
+                <label htmlFor="email" className="block mb-2 text-sm font-medium">
                   Your email
                 </label>
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   className="input input-bordered w-full border"
-                  placeholder="Helina@gmail.com"
-                  value={"Helina@gmail.com"}
+                  value={formData.email}
+                  onChange={handleChange2}
                   required
                 />
               </div>
-
               <div className="mb-2 sm:mb-6">
-                <label
-                  htmlFor="username"
-                  className="block mb-2 text-sm font-medium"
-                >
+                <label htmlFor="username" className="block mb-2 text-sm font-medium">
                   Username
                 </label>
                 <input
                   type="text"
                   id="username"
+                  name="username"
                   className="input input-bordered w-full border"
-                  value={"hilu2121"}
-                  placeholder="your username"
+                  value={formData.username}
+                  onChange={handleChange2}
                   required
                 />
               </div>
               <div className="mb-2 sm:mb-6">
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium"
-                >
-                  old password
+                <label htmlFor="oldPassword" className="block mb-2 text-sm font-medium">
+                  Old password
                 </label>
                 <input
                   type="password"
-                  id="password"
+                  id="oldPassword"
+                  name="oldPassword"
                   className="input input-bordered w-full border"
                   placeholder="******"
+                  value={formData.oldPassword}
+                  onChange={handleChange2}
                   required
                 />
               </div>
               <div className="mb-2 sm:mb-6">
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium"
-                >
-                  new password
+                <label htmlFor="newPassword" className="block mb-2 text-sm font-medium">
+                  New password
                 </label>
                 <input
                   type="password"
-                  id="password"
+                  id="newPassword"
+                  name="newPassword"
                   className="input input-bordered w-full border"
                   placeholder="******"
+                  value={formData.newPassword}
+                  onChange={handleChange2}
                   required
                 />
               </div>
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  className="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+                  className="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
                 >
                   Save
                 </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
