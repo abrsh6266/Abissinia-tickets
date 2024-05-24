@@ -1,18 +1,34 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-//import { store } from "./app/store/store";
+import axios from "axios";
+import { toast } from "react-toastify";
 
-export function middleware(request: NextRequest) {
-  const response = NextResponse.next();
-  // const state = store.getState();
-  // const { user } = state.userState;
-  // if (!user) {
-  //   return NextResponse.redirect(new URL("/login", request.url));
-  // }
-  return response;
+export async function middleware(request: NextRequest) {
+  const token = request.cookies.get("token");
+  if (!token) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  try {
+    const response = await axios.post(
+      "https://abissinia-backend.vercel.app/api/auth/verify-token",
+      { token: token?.value }
+    );
+
+    if (response.status !== 200) {
+      toast.error("Please login again your session is expired");
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  } catch (error) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  return NextResponse.next();
 }
+
 export const config = {
   matcher: [
+    "/profile",
     "/ticket-purchase/:path*",
     "/seat-selection/:path*",
     "/payment-processing/:path*",
