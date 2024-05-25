@@ -62,6 +62,7 @@ const Tickets = ({ params }: Props) => {
         seats: undefined,
         tickets: undefined,
         totalSeat: undefined,
+        totalPrice: undefined,
       })
     );
     router.back();
@@ -100,6 +101,7 @@ const Tickets = ({ params }: Props) => {
                         day: show.day,
                         tickets: [],
                         totalSeat: 0,
+                        totalPrice: 0,
                         movie: movie,
                         times: show.times,
                         time: undefined,

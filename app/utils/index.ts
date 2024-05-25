@@ -18,4 +18,5 @@ export interface Props {
   tickets?: Ticket[] | undefined;
   seatType?: string | undefined;
   totalSeat?: number | undefined;
+  totalPrice?: number | undefined;
 }

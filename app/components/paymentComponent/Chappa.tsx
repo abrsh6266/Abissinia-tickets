@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-
+import { RootState } from "@/app/store/store";
+import { useSelector } from "react-redux";
 interface ChappaProps {
   firstName: string;
   lastName: string;
@@ -14,7 +15,9 @@ const Chappa: React.FC<ChappaProps> = ({
   selectedPaymentMethod,
 }) => {
   const [currentTimeInSeconds, setCurrentTimeInSeconds] = useState(0);
-
+  const selectedMovie = useSelector(
+    (store: RootState) => store.movieState.selectedMovie
+  );
   useEffect(() => {
     setCurrentTimeInSeconds(Math.floor(Date.now() / 1000));
   }, []);
@@ -25,8 +28,12 @@ const Chappa: React.FC<ChappaProps> = ({
         name="public_key"
         value={process.env.NEXT_PUBLIC_CHAPA_PUBLIC_KEY}
       />
-      <input type="hidden" name="tx_ref" value={`${firstName}-${lastName}-${currentTimeInSeconds} `} />
-      <input type="hidden" name="amount" value="100" />
+      <input
+        type="hidden"
+        name="tx_ref"
+        value={`${firstName}-${lastName}-${currentTimeInSeconds} `}
+      />
+      <input type="hidden" name="amount" value={selectedMovie?.totalPrice} />
       <input type="hidden" name="currency" value="ETB" />
       <input type="hidden" name="email" value={email} />
       <input type="hidden" name="first_name" value={firstName} />

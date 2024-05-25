@@ -74,7 +74,7 @@ const Extras = ({ params }: Props) => {
       </div>
       <div className="min-h-[180px]">
         <button className="px-6">
-          <span className="font-bold text-dm">Total Price: 200ETB</span>
+          <span className="font-bold text-dm">Total Price: {selectedMovie?.totalPrice}.0ETB</span>
         </button>
         <button
           onClick={handleGoBack}

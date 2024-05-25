@@ -5,6 +5,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface ExtraItem {
   snackAndDrink: SnackAndDrink | undefined;
   amount: number;
+  price: number;
 }
 export interface Ticket {
   ticketType: string | undefined;
@@ -71,12 +72,27 @@ const appSlice = createSlice({
             (extra) => extra.snackAndDrink?.id === newExtra.snackAndDrink.id
           );
 
-          if (existingExtraIndex !== -1) {
+          if (
+            existingExtraIndex !== -1 &&
+            state.selectedMovie.totalPrice !== undefined
+          ) {
+            state.selectedMovie.totalPrice +=
+              (Number.parseInt(newExtra.amount) -
+                state.selectedMovie.extras[existingExtraIndex].amount) *
+              Number.parseInt(newExtra.price);
             state.selectedMovie.extras.splice(existingExtraIndex, 1, newExtra);
           } else {
             state.selectedMovie.extras.push(newExtra);
+            if (state.selectedMovie.totalPrice !== undefined)
+              state.selectedMovie.totalPrice +=
+                Number.parseInt(newExtra.amount) *
+                Number.parseInt(newExtra.price);
           }
         } else {
+          if (state.selectedMovie.totalPrice !== undefined)
+            state.selectedMovie.totalPrice +=
+              Number.parseInt(newExtra.amount) *
+              Number.parseInt(newExtra.price);
           state.selectedMovie.extras = [newExtra];
         }
       }
@@ -92,11 +108,26 @@ const appSlice = createSlice({
 
           if (
             existingTicketIndex !== -1 &&
-            state.selectedMovie.totalSeat !== undefined
+            state.selectedMovie.totalSeat !== undefined &&
+            state.selectedMovie.totalPrice !== undefined
           ) {
             state.selectedMovie.totalSeat +=
               Number.parseInt(newTicket.amount) -
               state.selectedMovie.tickets[existingTicketIndex].amount;
+            if (
+              state.selectedMovie.tickets[existingTicketIndex]?.ticketType ===
+              "child"
+            ) {
+              state.selectedMovie.totalPrice +=
+                (Number.parseInt(newTicket.amount) -
+                  state.selectedMovie.tickets[existingTicketIndex].amount) *
+                100;
+            } else {
+              state.selectedMovie.totalPrice +=
+                (Number.parseInt(newTicket.amount) -
+                  state.selectedMovie.tickets[existingTicketIndex].amount) *
+                120;
+            }
             state.selectedMovie.tickets.splice(
               existingTicketIndex,
               1,
@@ -104,15 +135,35 @@ const appSlice = createSlice({
             );
           } else {
             state.selectedMovie.tickets.push(newTicket);
-            if (state.selectedMovie.totalSeat !== undefined) {
+            if (
+              state.selectedMovie.totalSeat !== undefined &&
+              state.selectedMovie.totalPrice !== undefined
+            ) {
               state.selectedMovie.totalSeat += Number.parseInt(
                 newTicket.amount
               );
+              if (
+                state.selectedMovie.tickets[existingTicketIndex]?.ticketType ===
+                "child"
+              ) {
+                state.selectedMovie.totalPrice +=
+                  Number.parseInt(newTicket.amount) * 100;
+              } else {
+                state.selectedMovie.totalPrice +=
+                  Number.parseInt(newTicket.amount) * 120;
+              }
             }
           }
         } else {
           state.selectedMovie.tickets = [newTicket];
           state.selectedMovie.totalSeat = Number.parseInt(newTicket.amount);
+          if (newTicket.ticketType === "child") {
+            state.selectedMovie.totalPrice =
+              Number.parseInt(newTicket.amount) * 100;
+          } else {
+            state.selectedMovie.totalPrice =
+              Number.parseInt(newTicket.amount) * 120;
+          }
         }
       }
     },

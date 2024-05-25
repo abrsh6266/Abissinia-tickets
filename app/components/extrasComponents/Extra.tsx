@@ -14,7 +14,7 @@ const Extra = ({
   const handleChangeAmount = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedAmount = parseInt(e.target.value);
     setAmount(selectedAmount);
-    handleSelectExtras({ snackAndDrink: snack, amount: selectedAmount });
+    handleSelectExtras({ snackAndDrink: snack, amount: selectedAmount,price:snack.price });
   };
   return (
     <div className="card w-80 mb-5 bg-base-200 shadow-lg shadow-gray-600 rounded-l-2xl rounded-b-2xl mx-auto">

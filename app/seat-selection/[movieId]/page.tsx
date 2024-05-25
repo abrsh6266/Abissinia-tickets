@@ -68,7 +68,7 @@ const Seats = ({ params }: Props) => {
   };
 
   return (
-    <section className="grid place-items-center overflow-x-hidden">
+    <section className="grid place-items-center overflow-hidden">
       <div className="relative w-full px-2 md:px-10 lg:px-20 rounded-lg shadow-lg">
         <div className="ml-2 col-span-full my-2 align-element">
           <h1

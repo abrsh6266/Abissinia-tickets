@@ -11,6 +11,7 @@ import { RootState } from "@/app/store/store";
 import { movie as movies } from "@/app/data";
 import SelectionDetails from "@/app/components/movieDetailComponents/SelectionDetails";
 import PaymentProcess from "@/app/components/paymentComponent/PaymentProcess";
+import { toast } from "react-toastify";
 
 const PaymentDetail = ({ params }: Props) => {
   const [snacks, setSnacks] = useState(snackAndDrinkData);
@@ -23,24 +24,13 @@ const PaymentDetail = ({ params }: Props) => {
   );
   const dispatch = useDispatch();
   const router = useRouter();
-
   useEffect(() => {
-    if (selectedMovie?.day === undefined && selectedMovie?.time === undefined) {
-      //   toast.error("you have to select day, time and seats !", {
-      //     position: toast.POSITION.TOP_RIGHT,
-      //   });
-      //   handleGoBack();
+    if (!selectedMovie?.seats?.length) {
+      toast.error("you have to select can not proceed to payment!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      handleGoBack();
     }
-    dispatch(
-      setSelectedMovie({
-        ...selectedMovie,
-        seats: Array.from({ length: 64 }, (_, index) => ({
-          id: index + 1,
-          selected: false,
-          booked: index % 3 === 0,
-        })),
-      })
-    );
   }, []);
 
   const handleGoBack = () => {
