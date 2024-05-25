@@ -4,6 +4,7 @@ import axios from "axios";
 
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token");
+  console.log("token ",token);
   if (!token) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
