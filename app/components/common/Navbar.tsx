@@ -52,33 +52,35 @@ const Navbar = () => {
             <NavLinks />
           </ul>
         </div>
-        <div className="navbar-end space-x-8">
-          <Link className="hover:text-gray-200" href="/bookmarks">
-            <BiHeart className="text-2xl" />
-          </Link>
-          <button
-            onClick={() => dispatch(setShowNotification(true))}
-            className="flex items-center hover:text-gray-200"
-          >
-            <IoNotificationsSharp className="text-2xl" />
-            <span className="flex absolute -mt-5 ml-5">
-              <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
-            </span>
-          </button>
-          <Link href="/profile">
-            <div className="avatar">
-              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img
-                  src={
-                    user?.avatar ||
-                    "https://firebasestorage.googleapis.com/v0/b/abissinia-tickets.appspot.com/o/images%2Favatar2.png?alt=media&token=e591a9bd-aeb6-4cbc-ba31-2c286f6f6f1c"
-                  }
-                />
+        {user && (
+          <div className="navbar-end space-x-8">
+            <Link className="hover:text-gray-200" href="/bookmarks">
+              <BiHeart className="text-2xl" />
+            </Link>
+            <button
+              onClick={() => dispatch(setShowNotification(true))}
+              className="flex items-center hover:text-gray-200"
+            >
+              <IoNotificationsSharp className="text-2xl" />
+              <span className="flex absolute -mt-5 ml-5">
+                <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
+              </span>
+            </button>
+            <Link href="/profile">
+              <div className="avatar">
+                <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                  <img
+                    src={
+                      user?.avatar ||
+                      "https://firebasestorage.googleapis.com/v0/b/abissinia-tickets.appspot.com/o/images%2Favatar2.png?alt=media&token=e591a9bd-aeb6-4cbc-ba31-2c286f6f6f1c"
+                    }
+                  />
+                </div>
               </div>
-            </div>
-          </Link>
-        </div>
+            </Link>
+          </div>
+        )}
       </div>
     </nav>
   );
