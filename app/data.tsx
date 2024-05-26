@@ -119,6 +119,10 @@ export const links = [
   { id: 6, label: "Schedule", href: "schedule" },
 ];
 
+export interface ShowTime {
+  day: string;
+  time: string[];
+}
 export interface Movie {
   id: number;
   poster: StaticImageData;
@@ -129,10 +133,25 @@ export interface Movie {
   description: string;
   releasedYear: number;
   rating: number;
-  showTime: {
-    day: string;
-    times: string[];
-  }[];
+  showTime: ShowTime[];
+}
+[];
+export interface Star {
+  _id: string;
+  name: string;
+  profilePhoto: string;
+}
+export interface Movie2 {
+  _id: string;
+  duration: string;
+  poster: string;
+  title: string;
+  genre: string[];
+  starsId: Star[];
+  country: string;
+  description: string;
+  releaseDate: string;
+  reviewId: string[];
 }
 
 export interface SnackAndDrink {
@@ -187,155 +206,6 @@ import movie7 from "/public/movies/movie7.jpg";
 import movie8 from "/public/movies/movie8.jpg";
 import movie10 from "/public/movies/movie10.jpg";
 import { StaticImageData } from "next/image";
-export const movie: Movie[] = [
-  {
-    id: 1,
-    poster: movie1,
-    title: "Spider-Man: Into the Spider-Verse",
-    genre: ["Animation", "Action", "Adventure"],
-    cast: ["Shameik Moore", "Jake Johnson", "Hailee Steinfeld"],
-    director: ["Bob Persichetti", "Peter Ramsey", "Rodney Rothman"],
-    description:
-      "Teen Miles Morales becomes the Spider-Man of his universe, and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.",
-    releasedYear: 2018,
-    rating: 8.4,
-    showTime: [
-      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
-      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
-    ],
-  },
-  {
-    id: 2,
-    poster: movie2,
-    title: "Inception",
-    genre: ["Action", "Adventure", "Sci-Fi"],
-    cast: ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page"],
-    director: ["Christopher Nolan"],
-    description:
-      "A thief who enters the dreams of others to steal secrets from their subconscious.",
-    releasedYear: 2010,
-    rating: 8.8,
-    showTime: [
-      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
-      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
-    ],
-  },
-  {
-    id: 3,
-    poster: movie3,
-    title: "The Dark Knight",
-    genre: ["Action", "Crime", "Drama"],
-    cast: ["Christian Bale", "Heath Ledger", "Aaron Eckhart"],
-    director: ["Christopher Nolan"],
-    description:
-      "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
-    releasedYear: 2008,
-    rating: 9.0,
-    showTime: [
-      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
-      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
-    ],
-  },
-  {
-    id: 4,
-    poster: movie4,
-    title: "Interstellar",
-    genre: ["Adventure", "Drama", "Sci-Fi"],
-    cast: ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain"],
-    director: ["Christopher Nolan"],
-    description:
-      "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
-    releasedYear: 2014,
-    rating: 8.6,
-    showTime: [
-      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
-      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
-    ],
-  },
-  {
-    id: 5,
-    poster: movie5,
-    title: "The Shawshank Redemption",
-    genre: ["Drama"],
-    cast: ["Tim Robbins", "Morgan Freeman", "Bob Gunton"],
-    director: ["Frank Darabont"],
-    description:
-      "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
-    releasedYear: 1994,
-    rating: 9.3,
-    showTime: [
-      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
-      { day: "Friday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
-      { day: "Tuesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
-    ],
-  },
-  {
-    id: 6,
-    poster: movie6,
-    title: "The Godfather",
-    genre: ["Crime", "Drama"],
-    cast: ["Marlon Brando", "Al Pacino", "James Caan"],
-    director: ["Francis Ford Coppola"],
-    description:
-      "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
-    releasedYear: 1972,
-    rating: 9.2,
-    showTime: [
-      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
-      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
-    ],
-  },
-  {
-    id: 7,
-    poster: movie7,
-    title: "Pulp Fiction",
-    genre: ["Crime", "Drama"],
-    cast: ["John Travolta", "Uma Thurman", "Samuel L. Jackson"],
-    director: ["Quentin Tarantino"],
-    description:
-      "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
-    releasedYear: 1994,
-    rating: 8.9,
-    showTime: [
-      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
-      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
-    ],
-  },
-  {
-    id: 8,
-    poster: movie8,
-    title: "The Matrix",
-    genre: ["Action", "Sci-Fi"],
-    cast: ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
-    director: ["Lana Wachowski", "Lilly Wachowski"],
-    description:
-      "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
-    releasedYear: 1999,
-    rating: 8.7,
-    showTime: [
-      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
-      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
-      { day: "Sunday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
-    ],
-  },
-  {
-    id: 10,
-    poster: movie10,
-    title: "The Lord of the Rings: The Return of the King",
-    genre: ["Action", "Adventure", "Drama"],
-    cast: ["Elijah Wood", "Viggo Mortensen", "Ian McKellen"],
-    director: ["Peter Jackson"],
-    description:
-      "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
-    releasedYear: 2003,
-    rating: 8.9,
-    showTime: [
-      { day: "Monday", times: ["2:00 PM", "5:00 PM", "8:00 PM"] },
-      { day: "Wednesday", times: ["3:00 PM", "6:00 PM", "9:00 PM"] },
-      { day: "Sunday", times: ["2:30 PM", "5:30 PM", "8:30 PM"] },
-    ],
-  },
-];
 
 //food and drink data
 

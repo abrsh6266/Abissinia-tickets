@@ -1,7 +1,7 @@
 "use client";
+import useFetchData from "@/api/getData";
 import MovieDetail from "@/app/components/movieDetailComponents/MovieDetail";
-import { movie as movies } from "../../data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface Props {
   params: {
@@ -10,13 +10,16 @@ export interface Props {
 }
 const Details = ({ params }: Props) => {
   const [id, setId] = useState(params.movieId);
-  const [movie, setMovie] = useState(() => {
-    return movies.find((m) => m.id.toString() === id);
-  });
+  const { data, isLoading, isError } = useFetchData(`movies/${id}`);
+  const [movie, setMovie] = useState(data);
+  useEffect(() => {
+    if (data) {
+      setMovie(data);
+    }
+  }, [data]);
   if (movie) {
     return <MovieDetail movie={movie} />;
   }
-  return <h1>page not found</h1>;
 };
 
 export default Details;

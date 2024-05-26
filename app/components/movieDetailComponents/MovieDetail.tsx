@@ -1,20 +1,19 @@
 "use client";
 import { RxArrowBottomRight } from "react-icons/rx";
-import Image from "next/image";
 import MovieInfoCard from "./MovieInfoCard";
-import { Movie } from "../../data";
+import { Movie2 } from "../../data";
 import Review from "./Review";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store";
 
-const MovieDetail = ({ movie }: { movie: Movie }) => {
+const MovieDetail = ({ movie }: { movie: Movie2 }) => {
   const { user } = useSelector((state: RootState) => state.userState);
   return (
     <div className="align-element shadow-gray-700 shadow-xl mb-6">
       <div className="m-auto md:grid lg:grid md:pl-4 md:grid-cols-5 lg:grid-cols-8 gap-4">
         <div className="relative tile row-start-2 row-end-5 col-span-1 md:col-span-2 lg:col-span-3 max-h-96 h-96 mt-8">
-          <Image
+          <img
             className="absolute top-0 left-0 w-full h-full object-cover"
             src={movie.poster}
             alt={movie.title}
@@ -27,7 +26,7 @@ const MovieDetail = ({ movie }: { movie: Movie }) => {
       </div>
       {user?.id ? (
         <Link
-          href={`/ticket-purchase/${movie?.id}`}
+          href={`/ticket-purchase/${movie?._id}`}
           className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
         >
           Get Tickets <RxArrowBottomRight />

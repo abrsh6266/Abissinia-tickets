@@ -1,18 +1,17 @@
 import { BiStar } from "react-icons/bi";
-import { Movie } from "../../data";
+import { Movie, Movie2 } from "../../data";
 
 const MovieInfoCard = ({
+  _id,
   title,
-  description,
-  id,
+  duration,
   genre,
-  poster,
-  releasedYear,
-  rating,
-  cast,
-  director,
-  showTime,
-}: Movie) => {
+  country,
+  starsId,
+  releaseDate,
+  description,
+  reviewId,
+}: Movie2) => {
   return (
     <div className="max-w-2xl shadow overflow-hidden sm:rounded-lg">
       <div className="px-4 py-5 sm:px-6">
@@ -27,33 +26,37 @@ const MovieInfoCard = ({
       <div className="border-t">
         <dl>
           <div className=" px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-md font-medium ">Country</dt>
+            <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2">{country}</dd>
+          </div>
+          <div className=" px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-md font-medium ">Released Year</dt>
             <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2">
-              {releasedYear}
+              {releaseDate}
             </dd>
           </div>
           <div className=" px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-md font-medium">Cast</dt>
             <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2">
-              {cast.map((c) => {
-                return <span key={c}>{c}, </span>;
+              {starsId.map((c) => {
+                return <span key={c._id}>{c.name}, </span>;
               })}
             </dd>
           </div>
-          <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          {/* <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-md font-medium">Director</dt>
             <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2">
               {director.map((d) => {
                 return <span key={d}>{d}, </span>;
               })}
             </dd>
-          </div>
-          <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          </div> */}
+          {/* <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-md font-medium">Rating</dt>
             <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2">
               <BiStar className="inline mb-2 text-xl" /> {rating}
             </dd>
-          </div>
+          </div> */}
           <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-md font-medium">Description</dt>
             <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2">
