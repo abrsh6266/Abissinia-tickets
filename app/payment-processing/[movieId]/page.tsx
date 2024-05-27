@@ -9,26 +9,20 @@ import SelectionDetails from "@/app/components/movieDetailComponents/SelectionDe
 import PaymentProcess from "@/app/components/paymentComponent/PaymentProcess";
 import { toast } from "react-toastify";
 import useFetchData from "@/api/getData";
-import { Movie2, SnackAndDrink } from "@/app/data";
+import { Movie2 } from "@/app/data";
 
 const PaymentDetail = ({ params }: Props) => {
   const [id, setId] = useState(params.movieId);
-  const { data: snacks1 } = useFetchData("snacks");
   const { data: movie1 } = useFetchData(`movies/${id}`);
   const [movie, setMovie] = useState<Movie2>(movie1);
-  const [snacks, setSnacks] = useState<SnackAndDrink[]>([]);
   useEffect(() => {
-    if (snacks1) {
-      setSnacks(snacks1);
-    }
     if (movie1) {
       setMovie(movie1);
     }
-  }, [snacks1, movie1]);
+  }, [movie1]);
   const selectedMovie = useSelector(
     (state: RootState) => state.movieState.selectedMovie
   );
-  const dispatch = useDispatch();
   const router = useRouter();
   useEffect(() => {
     if (!selectedMovie?.seats?.length) {

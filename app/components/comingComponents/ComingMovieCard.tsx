@@ -1,25 +1,25 @@
-import { Movie } from "@/app/data";
+import { Movie2 } from "@/app/data";
 import Image from "next/image";
 import Link from "next/link";
 
 const ComingMovieCard = ({
+  _id,
   title,
-  description,
-  id,
+  duration,
   genre,
+  country,
+  starsId,
+  releaseDate,
+  description,
   poster,
-  releasedYear,
-  rating,
-  cast,
-  director,
-  showTime,
-}: Movie) => {
+  reviewId,
+}: Movie2) => {
   return (
     <div className="relative px-2 md:px-10 lg:px-20 md:w-[650px] lg:w-[460px]  xl:w-[650px] 2xl:w-[800px] my-10">
       <div className="relative w-full">
         <div className="z-10 rounded-2xl absolute top-10 right-2 px-4 py-2 text-2xl ">
-          <Link href={`/movies/${id}`} className="hover:opacity-75 ">
-            <Image
+          <Link href={`/movies/${_id}`} className="hover:opacity-75 ">
+            <img
               className="w-full h-48 object-cover rounded-lg hidden md:block lg:hidden xl:block"
               src={poster}
               alt={title}
@@ -28,7 +28,7 @@ const ComingMovieCard = ({
           </Link>
         </div>
         <div className="border rounded-t-2xl relative">
-          <Image
+          <img
             src={poster}
             alt={title}
             className="object-cover rounded-t-2xl w-full h-20 blur-sm saturate-150"
@@ -43,36 +43,25 @@ const ComingMovieCard = ({
               Main Cast
             </p>
             <div className="grid grid-row">
-              {cast.map((actor, index) => (
+              {starsId.map((actor, index) => (
                 <span
                   key={index}
                   className="bg-gray-200 text-gray-900 rounded-full px-3 py-1 m-1"
                 >
                   <span className="w-6 h-6 px-2 py-1 rounded-full bg-blue-700  text-white">
-                    {actor[0]}
+                    {actor.name[0]}
                   </span>{" "}
-                  {actor}
+                  {actor.name}
                 </span>
               ))}
             </div>
           </div>
           <div className="px-4 w-[300px]">
-            <p className="text-center  text-lg font-semibold mb-2 text-black">
-              Director
-            </p>
             <div className="grid grid-row">
-              {director.map((d, index) => (
-                <span
-                  key={index}
-                  className="bg-gray-200 text-gray-900 rounded-full  py-1 m-1 my-1"
-                >
-                  <span className="w-6 h-6 px-2 py-1 rounded-full bg-blue-700  text-white">
-                    {d[0]}
-                  </span>{" "}
-                  {d}
-                </span>
-              ))}
-              <Link href={`/movies/${id}`} className="m-4 sm:block md:hidden lg:block xl:hidden ">
+              <Link
+                href={`/movies/${_id}`}
+                className="m-4 sm:block md:hidden lg:block xl:hidden "
+              >
                 <button className="text-xlc btn bg-blue-700 hover:bg-black hover:border-2 hover:border-blue-700 rounded-lg">
                   See Details
                 </button>
