@@ -102,13 +102,17 @@ export const squareVariant = {
   },
 };
 
-export const shuffleArray = (array: any) => {
+export const shuffleArray = <T,>(array: T[]): T[] => {
+  if (!Array.isArray(array)) {
+    throw new Error("Expected an array to shuffle");
+  }
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
 };
+
 
 export const links = [
   { id: 1, label: "Home", href: "/" },
