@@ -155,11 +155,11 @@ export interface Movie2 {
 }
 
 export interface SnackAndDrink {
-  id: number;
+  _id: number;
   name: string;
   type: string;
   price: number;
-  image: StaticImageData;
+  image: string;
 }
 
 export const list = [
@@ -206,74 +206,6 @@ import movie7 from "/public/movies/movie7.jpg";
 import movie8 from "/public/movies/movie8.jpg";
 import movie10 from "/public/movies/movie10.jpg";
 import { StaticImageData } from "next/image";
-
-//food and drink data
-
-export const snackAndDrinkData: SnackAndDrink[] = [
-  {
-    id: 1,
-    name: "Popcorn",
-    type: "Snack",
-    price: 5,
-    image: popcorn,
-  },
-  {
-    id: 2,
-    name: "Burger",
-    type: "Snack",
-    price: 8,
-    image: burger,
-  },
-  {
-    id: 3,
-    name: "Pizza",
-    type: "Snack",
-    price: 10,
-    image: pizza,
-  },
-  {
-    id: 4,
-    name: "Soda",
-    type: "Drink",
-    price: 3,
-    image: soda,
-  },
-  {
-    id: 5,
-    name: "Water",
-    type: "Drink",
-    price: 2,
-    image: water,
-  },
-  {
-    id: 6,
-    name: "Fries",
-    type: "Snack",
-    price: 4,
-    image: fries,
-  },
-  {
-    id: 7,
-    name: "kolo",
-    type: "Snack",
-    price: 50,
-    image: kolo,
-  },
-  {
-    id: 8,
-    name: "chips",
-    type: "Snack",
-    price: 70,
-    image: chips,
-  },
-  {
-    id: 9,
-    name: "popcorn2",
-    type: "Snack",
-    price: 100,
-    image: popcorn2,
-  },
-];
 
 const seatTypes = ["sofa", "standard", "premier"];
 

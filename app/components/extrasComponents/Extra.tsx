@@ -19,7 +19,7 @@ const Extra = ({
   return (
     <div className="card w-80 mb-5 bg-base-200 shadow-lg shadow-gray-600 rounded-l-2xl rounded-b-2xl mx-auto">
       <figure>
-        <Image
+        <img
           className="object-cover w-full h-[240px]"
           src={snack.image}
           alt="snack"
