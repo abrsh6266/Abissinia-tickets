@@ -20,6 +20,7 @@ const initialState = {
     pageCount: 10,
   },
   seats: null as TransformedSeat[] | null,
+  validSeatChoose: 0,
 };
 
 const appSlice = createSlice({
@@ -37,7 +38,6 @@ const appSlice = createSlice({
     },
     setSeats(state, action) {
       state.seats = transformSeatData(action.payload);
-      console.log(state.seats)
     },
     setSeat(state, action) {
       const seatId = action.payload.id;
@@ -61,8 +61,13 @@ const appSlice = createSlice({
       }
       if (state.seats)
         state.seats = state.seats?.map((seat) =>
-          seat.seatNumber === seatId ? { ...seat, selected: !seat.selected } : seat
+          seat.seatNumber === seatId
+            ? { ...seat, selected: !seat.selected }
+            : seat
         );
+      if (state.selectedMovie.totalSeat)
+        state.validSeatChoose =
+          state.selectedMovie.totalSeat - state.selectedMovie.seats.length;
     },
     setExtras(state, action) {
       const newExtra = action.payload.selectedExtras;
@@ -166,6 +171,8 @@ const appSlice = createSlice({
               Number.parseInt(newTicket.amount) * 120;
           }
         }
+        if (state.selectedMovie.totalSeat)
+          state.validSeatChoose = state.selectedMovie.totalSeat;
       }
     },
     setMeta(state, action) {

@@ -1,6 +1,5 @@
 import { SnackAndDrink } from "@/app/data";
 import { ExtraItem } from "@/app/features/movie/movieSlice";
-import Image from "next/image";
 import React, { useState } from "react";
 
 const Extra = ({

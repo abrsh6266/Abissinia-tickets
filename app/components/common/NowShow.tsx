@@ -7,12 +7,16 @@ import PaginationContainer from "./PaginationContainer";
 import useFetchData from "@/api/getData";
 import { Movie2 } from "@/app/data";
 import Loading from "./Loading";
+import { useDispatch } from "react-redux";
+import { setSelectedMovie } from "@/app/features/movie/movieSlice";
 
 const NowShow = () => {
   const { data, isLoading, isError } = useFetchData("movies");
   const [movies, setMovies] = useState<Movie2[]>([]);
 
+  const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(setSelectedMovie(null));
     if (data) {
       setMovies(data);
     }

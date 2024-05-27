@@ -25,23 +25,21 @@ const Seats = ({ params }: Props) => {
   const selectedMovie = useSelector(
     (state: RootState) => state.movieState.selectedMovie
   );
-  const { seats } = useSelector((store: RootState) => store.movieState);
+  const { seats, validSeatChoose } = useSelector(
+    (store: RootState) => store.movieState
+  );
+
   const dispatch = useDispatch();
   const router = useRouter();
-  const [validChoose, setValidChoose] = useState(selectedMovie?.totalSeat || 0);
   const handleSelectSeat = (id: number) => {
     const existingSeatIndex = selectedMovie?.seats
       ? selectedMovie?.seats.findIndex((s) => s === id)
       : -1;
-    if (validChoose >= 1 || existingSeatIndex !== -1) {
+    if (validSeatChoose >= 1 || existingSeatIndex !== -1) {
       dispatch(
         setSeat({
           id,
         })
-      );
-
-      setValidChoose(
-        existingSeatIndex !== -1 ? validChoose + 1 : validChoose - 1
       );
     } else {
       toast.error("you have no left seats to choose");
@@ -168,7 +166,7 @@ const Seats = ({ params }: Props) => {
           </button>
           <button
             className="btn border-2  bg-blue-700 rounded-lg px-4"
-            disabled={validChoose !== 0}
+            disabled={validSeatChoose !== 0}
           >
             <Link
               className="btn bg-transparent border-hidden"
