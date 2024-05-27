@@ -1,6 +1,5 @@
 import useFetchData from "@/api/getData";
 import { Movie2, shuffleArray } from "@/app/data";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
