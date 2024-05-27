@@ -12,7 +12,7 @@ const SelectionDetails = ({ movie }: { movie: any }) => {
         <span className="font-medium">{movie?.title}</span>
       </p>
       <p className="flex text-lg border-b border-base-300 pb-2 mb-4">
-        <span className="mr-2">Date : </span>
+        <span className="mr-2">Day : </span>
         <span className="font-medium">{selectedMovie?.day}</span>
       </p>
       <p className="flex text-lg border-b border-base-300 pb-2 mb-4">

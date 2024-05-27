@@ -70,7 +70,7 @@ const appSlice = createSlice({
       if (state.selectedMovie) {
         if (state.selectedMovie.extras) {
           const existingExtraIndex = state.selectedMovie.extras.findIndex(
-            (extra) => extra.snackAndDrink?.id === newExtra.snackAndDrink.id
+            (extra) => extra.snackAndDrink?._id === newExtra.snackAndDrink._id
           );
 
           if (

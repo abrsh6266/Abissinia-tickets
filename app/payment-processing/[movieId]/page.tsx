@@ -2,23 +2,29 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { snackAndDrinkData } from "../../data";
 import { Props } from "@/app/movies/[movieId]/page";
-import { setSelectedMovie } from "@/app/features/movie/movieSlice";
 import { RootState } from "@/app/store/store";
-import { movie as movies } from "@/app/data";
 import SelectionDetails from "@/app/components/movieDetailComponents/SelectionDetails";
 import PaymentProcess from "@/app/components/paymentComponent/PaymentProcess";
 import { toast } from "react-toastify";
+import useFetchData from "@/api/getData";
+import { Movie2, SnackAndDrink } from "@/app/data";
 
 const PaymentDetail = ({ params }: Props) => {
-  const [snacks, setSnacks] = useState(snackAndDrinkData);
   const [id, setId] = useState(params.movieId);
-  const [movie, setMovie] = useState(() => {
-    return movies.find((m) => m.id.toString() === id);
-  });
+  const { data: snacks1 } = useFetchData("snacks");
+  const { data: movie1 } = useFetchData(`movies/${id}`);
+  const [movie, setMovie] = useState<Movie2>(movie1);
+  const [snacks, setSnacks] = useState<SnackAndDrink[]>([]);
+  useEffect(() => {
+    if (snacks1) {
+      setSnacks(snacks1);
+    }
+    if (movie1) {
+      setMovie(movie1);
+    }
+  }, [snacks1, movie1]);
   const selectedMovie = useSelector(
     (state: RootState) => state.movieState.selectedMovie
   );
@@ -56,9 +62,9 @@ const PaymentDetail = ({ params }: Props) => {
             <IoMdArrowRoundBack />
           </h1>
         </div>
-        <Image
-          src={movie?.poster || "img"}
-          alt={movie?.title || "poster"}
+        <img
+          src={movie?.poster}
+          alt={movie?.title}
           className="object-cover w-full h-[200px] md:h-[250px] lg:h-[400px] xl:h-[500px] rounded-lg"
         />
       </div>
