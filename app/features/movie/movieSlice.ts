@@ -27,6 +27,19 @@ const appSlice = createSlice({
   name: "movie",
   initialState,
   reducers: {
+    resetExtraPrice(state) {
+      let amount = 0;
+      if (state.selectedMovie?.extras) {
+        state.selectedMovie.extras = state.selectedMovie?.extras?.map(
+          (extra) => {
+            amount += extra.amount * extra.price;
+            return { ...extra, price: 0, amount: 0 };
+          }
+        );
+        if (state.selectedMovie.totalPrice)
+          state.selectedMovie.totalPrice -= amount;
+      }
+    },
     setSearchTerm(state, action) {
       state.searchTerm = action.payload;
     },
@@ -190,5 +203,6 @@ export const {
   setTickets,
   setSeat,
   setSeats,
+  resetExtraPrice,
 } = appSlice.actions;
 export default appSlice.reducer;

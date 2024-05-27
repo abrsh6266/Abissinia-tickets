@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import Extra from "@/app/components/extrasComponents/Extra";
 import {
   ExtraItem,
+  resetExtraPrice,
   setExtras,
   setSelectedMovie,
 } from "@/app/features/movie/movieSlice";
@@ -48,6 +49,7 @@ const Extras = ({ params }: Props) => {
       });
       handleGoBack();
     }
+    dispatch(resetExtraPrice())
   }, []);
 
   const handleGoBack = () => {
