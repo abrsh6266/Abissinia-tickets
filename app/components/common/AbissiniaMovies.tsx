@@ -1,16 +1,29 @@
-import { gridSquareVariant, Movie, movie as movies, shuffleArray, squareVariant } from "@/app/data";
-import Image from "next/image";
+import {
+  gridSquareVariant,
+  Movie2,
+  shuffleArray,
+  squareVariant,
+} from "@/app/data";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-
+import useFetchData from "@/api/getData";
 
 const AbissiniaMovies = () => {
-  const selectFiveMovies = () => {
-    const shuffledMovies = shuffleArray(movies);
+  const { data, isLoading, isError } = useFetchData("movies");
+
+  const selectFiveMovies = (data: Movie2[]): Movie2[] => {
+    const shuffledMovies = shuffleArray(data);
     return shuffledMovies.slice(0, 6);
   };
-  const [moviess, setMovies] = useState<Movie[]>(selectFiveMovies());
+
+  const [movies, setMovies] = useState<Movie2[]>([]);
+
+  useEffect(() => {
+    if (data && Array.isArray(data)) {
+      setMovies(selectFiveMovies(data));
+    }
+  }, [data]);
 
   return (
     <div className="w-full overflow-hidden">
@@ -21,10 +34,10 @@ const AbissiniaMovies = () => {
           animate="show"
           className="flex flex-wrap lg:grid lg:grid-cols-3"
         >
-          {moviess.map((movie: Movie) => (
-            <motion.section variants={squareVariant} key={movie.id}>
-              <Link href={`/movies/${movie.id}`} className="hover:opacity-75">
-                <Image
+          {movies.map((movie: Movie2) => (
+            <motion.section variants={squareVariant} key={movie._id}>
+              <Link href={`/movies/${movie._id}`} className="hover:opacity-75">
+                <img
                   className="w-40 h-48 object-cover"
                   src={movie.poster}
                   alt={movie.title}

@@ -1,25 +1,25 @@
 import Image from "next/image";
-import { Movie } from "../../data";
+import { Movie, Movie2 } from "../../data";
 import Link from "next/link";
 
 const MovieCard2 = ({
+  _id,
   title,
-  description,
-  id,
+  duration,
   genre,
+  country,
+  starsId,
+  releaseDate,
+  description,
   poster,
-  releasedYear,
-  rating,
-  cast,
-  director,
-  showTime,
-}: Movie) => {
+  reviewId,
+}: Movie2) => {
   return (
     <>
       <div className="mx-auto w-[250px] h-auto border shadow-lg rounded-lg cursor-pointer items-center justify-center font-bold overflow-hidden">
         <div className="relative w-[250px] h-[300px] overflow-hidden">
-          <Link href={`/movies/${id}`}>
-            <Image
+          <Link href={`/movies/${_id}`}>
+            <img
               alt={title}
               className="absolute top-0 left-0 w-full h-full object-cover transition duration-700 transform hover:scale-110"
               src={poster}

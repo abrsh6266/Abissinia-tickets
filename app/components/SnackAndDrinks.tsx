@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { SnackAndDrink } from "../data";
 
 const SnackAndDrinks = ({ snack }: { snack: SnackAndDrink }) => {
@@ -8,10 +7,10 @@ const SnackAndDrinks = ({ snack }: { snack: SnackAndDrink }) => {
       <div className="align-element grid grid-cols-2 items-center gap-16">
         <article>
           <div>
-            <Image
+            <img
               width={200}
               height={200}
-              src={snack.image.src}
+              src={snack.image}
               alt={snack.name}
               className="bg-black object-cover w-full h-full rounded-lg"
             />

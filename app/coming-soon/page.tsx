@@ -6,6 +6,7 @@ import Genre from "../components/comingComponents/Genre";
 import NewMovies from "../components/comingComponents/NewMovies";
 import PaginationContainer from "../components/common/PaginationContainer";
 import useFetchData from "@/api/getData";
+import Loading from "../components/common/Loading";
 
 const ComingSoon = () => {
   const { data, isLoading, isError } = useFetchData("movies");
@@ -24,13 +25,16 @@ const ComingSoon = () => {
   }, [data]);
 
   if (isLoading) {
-    return <div>Loading...</div>; // Show a loading state
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   if (isError) {
     return <div>Error loading data</div>; // Show an error state
   }
-
   return (
     <div className="align-element flex flex-col gap-5 px-3 md:mx-auto lg:flex-row overflow-x-hidden">
       <aside className="hidden py-4 md:w-1/3 lg:w-1/5 lg:block">

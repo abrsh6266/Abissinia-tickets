@@ -1,14 +1,37 @@
 "use client";
-import React, { useState } from "react";
-import { Movie, movie as movies, shuffleArray } from "../data";
+import React, { useEffect, useState } from "react";
+import { Movie2, shuffleArray } from "../data";
 import MovieCard2 from "../components/movieDetailComponents/MovieCard2";
+import Loading from "../components/common/Loading";
+import useFetchData from "@/api/getData";
 
 const Schedule = () => {
-  const selectFiveMovies = () => {
-    const shuffledMovies = shuffleArray(movies);
+  const { data, isLoading, isError } = useFetchData("movies");
+
+  const selectFiveMovies = (data: Movie2[]): Movie2[] => {
+    const shuffledMovies = shuffleArray(data);
     return shuffledMovies.slice(0, 6);
   };
-  const [moviess, setMovies] = useState<Movie[]>(selectFiveMovies());
+
+  const [movies, setMovies] = useState<Movie2[]>([]);
+
+  useEffect(() => {
+    if (data && Array.isArray(data)) {
+      setMovies(selectFiveMovies(data));
+    }
+  }, [data]);
+
+  if (isLoading) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return <div>Error loading data</div>; // Show an error state
+  }
   return (
     <div className="align-element2">
       <div className="">
@@ -27,8 +50,8 @@ const Schedule = () => {
         </div>
       </div>
       <div className="my-5 mx-auto grid grid-cols-1 gap-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 md:gap-4">
-        {moviess.map((movie) => {
-          return <MovieCard2 {...movie} key={movie.id} />;
+        {movies.map((movie) => {
+          return <MovieCard2 {...movie} key={movie._id} />;
         })}
       </div>
     </div>
