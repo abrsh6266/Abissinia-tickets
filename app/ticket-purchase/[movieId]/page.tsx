@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { nanoid } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedMovie, setTickets } from "@/app/features/movie/movieSlice";
+import { setSeats, setSelectedMovie, setTickets } from "@/app/features/movie/movieSlice";
 import { Props } from "@/app/movies/[movieId]/page";
 import MovieSchedule from "@/app/components/movieDetailComponents/MovieSchedule";
 import Link from "next/link";
@@ -32,9 +32,10 @@ const Tickets = ({ params }: Props) => {
     }
     if (schedules) {
       setShows(schedules[0].showTime);
+      dispatch(setSeats(schedules[0].hallId))
     }
   }, [m, schedules]);
-  const { selectedMovie } = useSelector((state: RootState) => state.movieState);
+  const { selectedMovie,seats } = useSelector((state: RootState) => state.movieState);
   const dispatch = useDispatch();
   const router = useRouter();
   const [childAmount, setChildAmount] = useState(

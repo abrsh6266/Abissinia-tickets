@@ -3,11 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setGlobalSeats,
-  setSeat,
-  setSelectedMovie,
-} from "@/app/features/movie/movieSlice";
+import { setSeat, setSelectedMovie } from "@/app/features/movie/movieSlice";
 import { Props } from "@/app/movies/[movieId]/page";
 import Link from "next/link";
 import { toast } from "react-toastify";
@@ -29,7 +25,7 @@ const Seats = ({ params }: Props) => {
   const selectedMovie = useSelector(
     (state: RootState) => state.movieState.selectedMovie
   );
-  const seats = useSelector((store: RootState) => store.movieState.seats);
+  const { seats } = useSelector((store: RootState) => store.movieState);
   const dispatch = useDispatch();
   const router = useRouter();
   const [validChoose, setValidChoose] = useState(selectedMovie?.totalSeat || 0);
@@ -68,7 +64,6 @@ const Seats = ({ params }: Props) => {
         seats: [],
       })
     );
-    dispatch(setGlobalSeats());
     router.back();
   };
 
@@ -127,42 +122,40 @@ const Seats = ({ params }: Props) => {
         <div className="max-w-[600px] mb-[20px]">
           <div>
             <div className="grid grid-cols-8">
-              {seats.map((seat) => {
-                return (
-                  <div
-                    className="md:m-4 md:h-10 md:w-10 m-3 h-6 w-6"
-                    key={seat?.id}
-                  >
-                    <button
-                      onClick={() => {
-                        if (
-                          !seat.booked &&
-                          seat.seatType === selectedMovie?.seatType
-                        )
-                          handleSelectSeat(seat.id);
-                      }}
-                      className={`indicator ${
-                        seat.selected ? "text-blue-700" : ""
-                      } text-2xl md:text-5xl
-                    ${
-                      !(
-                        seat.booked ||
-                        !(seat.seatType === selectedMovie?.seatType)
-                      )
-                        ? "hover:text-blue-700 md:hover:text-6xl hover:text-4xl"
-                        : !(seat.seatType === selectedMovie?.seatType)
-                        ? "text-gray-700"
-                        : "text-red-700"
-                    }  duration-300 `}
+              {seats &&
+                seats?.map((seat) => {
+                  return (
+                    <div
+                      className="md:m-4 md:h-10 md:w-10 m-3 h-6 w-6"
+                      key={seat.seatId}
                     >
-                      <span className="indicator-item badge badge-secondary bg-transparent  border-0">
-                        {seat.id}
-                      </span>
-                      <PiArmchairFill />
-                    </button>
-                  </div>
-                );
-              })}
+                      <button
+                        onClick={() => {
+                          if (
+                            !seat.booked &&
+                            seat.seatType === selectedMovie?.seatType
+                          )
+                            handleSelectSeat(seat.seatNumber);
+                        }}
+                        className={`indicator ${
+                          seat.selected ? "text-blue-700" : ""
+                        } text-2xl md:text-5xl
+        ${
+          !(seat.booked || !(seat.seatType === selectedMovie?.seatType))
+            ? "hover:text-blue-700 md:hover:text-6xl hover:text-4xl"
+            : !(seat.seatType === selectedMovie?.seatType)
+            ? "text-gray-700"
+            : "text-red-700"
+        }  duration-300 `}
+                      >
+                        <span className="indicator-item badge badge-secondary bg-transparent  border-0">
+                          {seat.seatNumber}
+                        </span>
+                        <PiArmchairFill />
+                      </button>
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </div>

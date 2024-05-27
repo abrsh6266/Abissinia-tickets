@@ -28,31 +28,32 @@ export interface Props {
   totalPrice?: number | undefined;
 }
 
-interface Seat {
+export interface Seat {
   seatNumber: number;
   _id: string;
 }
 
-interface Seats {
+export interface Seats {
   sofa: Seat[];
   standard: Seat[];
   premier: Seat[];
 }
 
-interface HallData {
+export interface HallData {
   seats: Seats;
   _id: string;
   name: string;
-  __v: number;
 }
 
-interface TransformedSeat {
+export interface TransformedSeat {
   seatType: string;
   seatNumber: number;
   seatId: string;
+  selected:boolean;
+  booked:boolean;
 }
 
-function transformSeatData(hallData: HallData): TransformedSeat[] {
+export function transformSeatData(hallData: HallData): TransformedSeat[] {
   const { seats } = hallData;
   const transformedSeats: TransformedSeat[] = [];
 
@@ -62,6 +63,8 @@ function transformSeatData(hallData: HallData): TransformedSeat[] {
         seatType,
         seatNumber: seat.seatNumber,
         seatId: seat._id,
+        selected:false,
+        booked:false
       });
     });
   }
