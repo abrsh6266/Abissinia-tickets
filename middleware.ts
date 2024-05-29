@@ -46,7 +46,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(referer);
   }
 
-  // Proceed to the next middleware or the requested page
+  
   return NextResponse.next();
 }
 
