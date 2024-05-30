@@ -17,7 +17,7 @@ const MovieSchedule = ({ times }: Props) => {
       </div>
       <fieldset className="mt-4">
         <legend>Choose the time</legend>
-        <div className="flex gap-4 lg:grid-cols-4">
+        <div className="carousel carousel-end rounded-box flex-wrap justify-center md:justify-start">
           {times?.map((time) => {
             return (
               <button

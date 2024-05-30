@@ -18,9 +18,9 @@ interface Hall {
   _id: string;
   name: string;
   seats: {
-    sofa: any[]; // You might want to create an interface for seats
-    standard: any[]; // You might want to create an interface for seats
-    premier: any[]; // You might want to create an interface for seats
+    sofa: any[];
+    standard: any[];
+    premier: any[];
   };
 }
 

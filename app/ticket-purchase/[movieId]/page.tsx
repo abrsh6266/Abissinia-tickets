@@ -35,7 +35,7 @@ const Tickets = ({ params }: Props) => {
       dispatch(setSeats(schedules[0].hallId))
     }
   }, [m, schedules]);
-  const { selectedMovie,seats } = useSelector((state: RootState) => state.movieState);
+  const { selectedMovie, seats } = useSelector((state: RootState) => state.movieState);
   const dispatch = useDispatch();
   const router = useRouter();
   const [childAmount, setChildAmount] = useState(
@@ -104,15 +104,15 @@ const Tickets = ({ params }: Props) => {
             className="object-cover w-full h-[200px] md:h-[250px] lg:h-[400px] xl:h-[500px] rounded-lg"
           />
         </div>
-        <div>
+        <div className="w-full align-element">
           <label htmlFor="seat" className="capitalize mb-2 block mt-4 ml-2">
             Choose The day
           </label>
           {shows && (
-            <div className="carousel carousel-end rounded-box">
+            <div className="carousel carousel-end rounded-box flex-wrap justify-center md:justify-start">
               {shows.map((show) => {
                 return (
-                  <div key={nanoid()} className="carousel-item">
+                  <div key={nanoid()} className="carousel-item p-1">
                     <button
                       onClick={() => {
                         dispatch(
