@@ -36,7 +36,6 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL("/login", request.url));
       }
 
-      // If server error, redirect to the previous page
       if (status >= 500 && status < 600) {
         console.log("server error, redirect to the previous page");
         return NextResponse.redirect(referer);
