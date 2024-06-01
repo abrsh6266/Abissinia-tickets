@@ -5,11 +5,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "@/app/firebase/firebaseConfig";
+import RatingReview from "./RatingReview";
 
 const Review = () => {
   const [showComment, setShowComment] = useState(false);
   const [visibleMessages, setVisibleMessages] = useState(1);
   const totalMessages = 10;
+  const [rating, setRating] = useState(1);
   const messages = new Array(totalMessages)
     .fill(null)
     .map((_, index) => <Message key={index} />);
@@ -68,7 +70,9 @@ const Review = () => {
                   />
                 </div>
               </div>
+              <RatingReview rating={rating} setRating={setRating} />
             </form>
+            
             <hr />
           </div>
         )}
