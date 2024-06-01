@@ -23,7 +23,7 @@ export async function middleware(request: NextRequest) {
     // If the token verification is not successful, redirect to login page
     if (response.status === 401) {
       console.log("token verification is not successful");
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(referer);
     }
   } catch (error: unknown) {
     // Handle different types of errors
@@ -33,7 +33,7 @@ export async function middleware(request: NextRequest) {
       // If authorization error, redirect to login page
       if (status === 401) {
         console.log("If authorization error, redirect to login page");
-        return NextResponse.redirect(new URL("/login", request.url));
+        return NextResponse.redirect(referer);
       }
 
       if (status >= 500 && status < 600) {

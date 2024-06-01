@@ -1,21 +1,37 @@
 "use client";
 import Link from "next/link";
 import logo from "/public/images/logo2.png";
-import avatar from "/public/profile/avatar.svg";
 import Image from "next/image";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { IoNotificationsSharp } from "react-icons/io5";
 import NavLinks from "./NavLinks";
 import { BiHeart } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowNotification } from "../../features/user/userSlice";
+import { logoutUser, setShowNotification } from "../../features/user/userSlice";
 import { useEffect, useState } from "react";
 import { RootState } from "../../store/store";
-import { getDownloadURL, ref } from "firebase/storage";
-import { storage } from "../../firebase/firebaseConfig";
+import { customFetch } from "@/app/utils";
+import Cookies from "js-cookie";
+
 const Navbar = () => {
   const user = useSelector((state: RootState) => state.userState.user);
   const dispatch = useDispatch();
+  useEffect(() => {
+    const validateUser = async () => {
+      try {
+        if (Cookies.get("token")) {
+          const response = await customFetch.post("verify-token", {
+            token: Cookies.get("token"),
+          });
+          console.log(response.data.data.message);
+        }
+      } catch (error: any) {
+        dispatch(logoutUser());
+        console.log(error.response.data.error.message || "unauthorized");
+      }
+    };
+    validateUser();
+  }, []);
   return (
     <nav>
       <div className="navbar align-element">

@@ -27,14 +27,14 @@ const MovieDetail = ({ movie }: { movie: Movie2 }) => {
       {user?.id ? (
         <Link
           href={`/ticket-purchase/${movie?._id}`}
-          className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
+          className="mt-4 mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
         >
           Get Tickets <RxArrowBottomRight />
         </Link>
       ) : (
         <Link
           href={`/login`}
-          className="mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
+          className="mt-4 mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
         >
           please login to get tickets
           <RxArrowBottomRight />

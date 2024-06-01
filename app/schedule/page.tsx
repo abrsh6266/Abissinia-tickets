@@ -39,8 +39,9 @@ const Schedule = () => {
   const [selectedDay, setSelectedDay] = useState<string>("Monday");
   const [movies, setMovies] = useState<Movie[]>([]);
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     if (data && Array.isArray(data)) {
       const fetchShowTimes = async () => {
         if (!data.length) return;
@@ -59,6 +60,7 @@ const Schedule = () => {
       };
 
       fetchShowTimes();
+      setLoading(false);
     }
   }, [data]);
   useEffect(() => {
@@ -112,9 +114,13 @@ const Schedule = () => {
         </div>
       </div>
       <div className="my-5 mx-auto grid grid-cols-1 gap-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 md:gap-4">
-        {filteredMovies.map((movie) => (
-          <MovieCard2 {...movie} key={movie._id} />
-        ))}
+        {loading ? (
+          <Loading />
+        ) : (
+          filteredMovies.map((movie) => (
+            <MovieCard2 {...movie} key={movie._id} />
+          ))
+        )}
       </div>
     </div>
   );
