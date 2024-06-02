@@ -15,6 +15,13 @@ export async function fetchData(url: string) {
   const response = await customFetch2.get(url);
   return response.data;
 }
+export interface Review {
+  movieId: string;
+  userId: string;
+  rating: number;
+  comment: string;
+  date: string;
+}
 export interface Props {
   times?: string[] | undefined;
   time?: string | undefined;
@@ -22,6 +29,7 @@ export interface Props {
   movie?: Movie | undefined;
   seats?: number[] | undefined;
   extras?: ExtraItem[] | undefined;
+  reviews?: Review[] | undefined;
   tickets?: Ticket[] | undefined;
   seatType?: string | undefined;
   totalSeat?: number | undefined;
@@ -49,8 +57,8 @@ export interface TransformedSeat {
   seatType: string;
   seatNumber: number;
   seatId: string;
-  selected:boolean;
-  booked:boolean;
+  selected: boolean;
+  booked: boolean;
 }
 
 export function transformSeatData(hallData: HallData): TransformedSeat[] {
@@ -63,8 +71,8 @@ export function transformSeatData(hallData: HallData): TransformedSeat[] {
         seatType,
         seatNumber: seat.seatNumber,
         seatId: seat._id,
-        selected:false,
-        booked:false
+        selected: false,
+        booked: false,
       });
     });
   }

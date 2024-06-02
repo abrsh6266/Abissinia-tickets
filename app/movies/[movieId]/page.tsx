@@ -1,5 +1,6 @@
 "use client";
 import useFetchData from "@/api/getData";
+import Loading from "@/app/components/common/Loading";
 import MovieDetail from "@/app/components/movieDetailComponents/MovieDetail";
 import { setSelectedMovie } from "@/app/features/movie/movieSlice";
 import { useEffect, useState } from "react";
@@ -19,8 +20,20 @@ const Details = ({ params }: Props) => {
     dispatch(setSelectedMovie(null));
     if (data) {
       setMovie(data);
+      console.log(data);
     }
   }, [data]);
+  if (isLoading) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return <div>Error loading data</div>;
+  }
   if (movie) {
     return <MovieDetail movie={movie} />;
   }
