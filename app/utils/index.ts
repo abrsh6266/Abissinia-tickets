@@ -16,6 +16,7 @@ export async function fetchData(url: string) {
   return response.data;
 }
 export interface Review {
+  _id: string;
   movieId: string;
   userId: string;
   rating: number;

@@ -118,7 +118,6 @@ export const links = [
   { id: 1, label: "Home", href: "/" },
   { id: 2, label: "Coming soon", href: "/coming-soon" },
   { id: 3, label: "Food and drinks", href: "/food-drink" },
-  { id: 4, label: "Tickets", href: "/film-showtimes-tickets" },
   { id: 5, label: "Abissinia Cinema", href: "/cinema" },
   { id: 6, label: "Schedule", href: "schedule" },
 ];
@@ -200,15 +199,6 @@ export const list = [
       "Lights, camera, action! Get ready for an unforgettable cinematic experience. Explore our schedule, reserve your seats, and get ready to be transported to another world. ",
   },
 ];
-import movie1 from "/public/movies/movie1.jpeg";
-import movie2 from "/public/movies/movie2.jpg";
-import movie3 from "/public/movies/movie3.jpg";
-import movie4 from "/public/movies/movie4.jpg";
-import movie5 from "/public/movies/movie5.jpg";
-import movie6 from "/public/movies/movie6.jpg";
-import movie7 from "/public/movies/movie7.jpg";
-import movie8 from "/public/movies/movie8.jpg";
-import movie10 from "/public/movies/movie10.jpg";
 import { StaticImageData } from "next/image";
 
 const seatTypes = ["sofa", "standard", "premier"];

@@ -24,6 +24,9 @@ const Navbar = () => {
             token: Cookies.get("token"),
           });
           console.log(response.data.data.message);
+        } else {
+          dispatch(logoutUser());
+          console.log("unauthorized");
         }
       } catch (error: any) {
         dispatch(logoutUser());
