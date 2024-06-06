@@ -12,6 +12,7 @@ const RatingReview = ({
       {[1, 2, 3, 4, 5].map((star) => {
         return (
           <span
+            key={star}
             className="start"
             style={{
               cursor: "pointer",
