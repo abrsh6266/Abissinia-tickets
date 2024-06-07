@@ -46,7 +46,7 @@ const MovieDetail = ({ movie }: { movie: Movie2 }) => {
             Reviews
           </h1>
         </div>
-        <Review />
+        <Review reviews={movie.reviewId} movieId={movie._id}/>
       </div>
       {/* <div className="ml-2 col-span-full my-2">
         <h1

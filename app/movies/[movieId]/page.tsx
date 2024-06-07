@@ -20,7 +20,6 @@ const Details = ({ params }: Props) => {
     dispatch(setSelectedMovie(null));
     if (data) {
       setMovie(data);
-      console.log(data);
     }
   }, [data]);
   if (isLoading) {

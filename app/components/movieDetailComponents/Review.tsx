@@ -6,52 +6,72 @@ import { RootState } from "@/app/store/store";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "@/app/firebase/firebaseConfig";
 import RatingReview from "./RatingReview";
+import { Review as ReviewType } from "@/app/data"; // Rename to avoid conflict with component name
+import axios from "axios";
 
-const Review = () => {
+const Review = ({
+  reviews,
+  movieId,
+}: {
+  reviews: ReviewType[];
+  movieId: string;
+}) => {
   const [showComment, setShowComment] = useState(false);
   const [visibleMessages, setVisibleMessages] = useState(1);
-  const totalMessages = 10;
   const [rating, setRating] = useState(1);
-  const messages = new Array(totalMessages)
-    .fill(null)
-    .map((_, index) => <Message key={index} />);
+  const [comment, setComment] = useState("");
+  const user = useSelector((state: RootState) => state.userState.user);
+  const messages = reviews.map((review, index) => <Message key={index} review={review}/>);
 
   const handleSeeMore = () => {
-    setVisibleMessages(Math.min(visibleMessages + 3, totalMessages));
+    setVisibleMessages(Math.min(visibleMessages + 3, reviews.length));
   };
 
   const handleShowLess = () => {
     setVisibleMessages(1);
   };
-  const [avatarURL, setAvatarURL] = useState<string | null>(null);
-  const user = useSelector((state: RootState) => state.userState.user);
-  useEffect(() => {
-    const fetchAvatar = async () => {
-      if (user) {
-        const avatarRef = ref(storage, `images/${user.id}.jpg`); // Path to the user's avatar image
-        try {
-          const url = await getDownloadURL(avatarRef);
-          setAvatarURL(url);
-        } catch (error) {
-          console.error("Error fetching avatar:", error);
-        }
-      }
-    };
 
-    fetchAvatar();
-  }, [user]);
+  
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!comment.trim()) {
+      alert("Comment is required");
+      return;
+    }
+    if (user.id) {
+      try {
+        const response = await axios.post(
+          "https://abissinia-backend.vercel.app/api/reviews",
+          {
+            userId: user.id,
+            rating,
+            comment,
+            date: new Date(),
+            movieId,
+          }
+        );
+        // Handle successful review submission (e.g., refresh reviews, show success message, etc.)
+        console.log("Review submitted:", response.data);
+        setComment(""); // Clear the comment input after successful submission
+      } catch (error) {
+        console.error("Error submitting review:", error);
+      }
+    }
+  };
+
   return (
-    <div className=" overflow-x-hidden">
+    <div className="overflow-x-hidden">
       <div className="p-2 max-w-[900px]">
         {user && (
           <div className="w-full">
-            <form className="w-full">
+            <form className="w-full" onSubmit={handleSubmit}>
               <div className="w-full px-3 mb-2 space-x-2 inline-flex">
                 <div className="chat-image avatar">
                   <div className="w-12 rounded-full">
                     <img
                       src={
-                        avatarURL ||
+                        user.avatar ||
                         "https://firebasestorage.googleapis.com/v0/b/abissinia-tickets.appspot.com/o/images%2Favatar2.png?alt=media&token=e591a9bd-aeb6-4cbc-ba31-2c286f6f6f1c"
                       }
                     />
@@ -59,8 +79,11 @@ const Review = () => {
                 </div>
                 <input
                   type="text"
-                  placeholder="comment here"
+                  placeholder="Comment here"
                   className="input border-hidden input-accent w-full max-w-xs"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  required
                 />
                 <div className="flex justify-end px-4">
                   <input
@@ -72,12 +95,11 @@ const Review = () => {
               </div>
               <RatingReview rating={rating} setRating={setRating} />
             </form>
-            
             <hr />
           </div>
         )}
         {messages.slice(0, visibleMessages)}
-        {visibleMessages < totalMessages ? (
+        {visibleMessages < reviews.length ? (
           <button className="btn rounded-lg hover" onClick={handleSeeMore}>
             See more comments
           </button>

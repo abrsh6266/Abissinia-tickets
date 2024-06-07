@@ -1,5 +1,5 @@
 // reducers.js
-import { dummySeats, SnackAndDrink } from "@/app/data";
+import { dummySeats, Movie2, SnackAndDrink } from "@/app/data";
 import { Props, TransformedSeat, transformSeatData } from "@/app/utils";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface ExtraItem {
@@ -13,6 +13,7 @@ export interface Ticket {
 }
 const initialState = {
   searchTerm: "",
+  movie: null as Movie2|null,
   searchMovies: [],
   selectedMovie: null as Props | null,
   meta: {

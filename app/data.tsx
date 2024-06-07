@@ -144,6 +144,14 @@ export interface Star {
   name: string;
   profilePhoto: string;
 }
+export interface Review {
+  _id: string;
+  movieId: string;
+  userId: string;
+  rating: number;
+  comment: string;
+  date: string;
+}
 export interface Movie2 {
   _id: string;
   duration: string;
@@ -154,7 +162,7 @@ export interface Movie2 {
   country: string;
   description: string;
   releaseDate: string;
-  reviewId: string[];
+  reviewId: Review[];
 }
 
 export interface SnackAndDrink {

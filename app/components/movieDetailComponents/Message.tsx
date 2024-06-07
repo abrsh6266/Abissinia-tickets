@@ -2,20 +2,24 @@ import Link from "next/link";
 import { BiEdit, BiSolidShare } from "react-icons/bi";
 import { SlOptionsVertical } from "react-icons/sl";
 import { AiFillDelete, AiFillLike } from "react-icons/ai";
+import { Review } from "@/app/data";
 
-const Message = () => {
+const Message = ({ review }: { review: any }) => {
+  
+  console.log(review.userId);
+  
   return (
     <div className="chat chat-start max-w-[500px] py-4">
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
           <img
             alt="Tailwind CSS chat bubble component"
-            src="https://firebasestorage.googleapis.com/v0/b/abissinia-tickets.appspot.com/o/images%2Favatar2.png?alt=media&token=e591a9bd-aeb6-4cbc-ba31-2c286f6f6f1c"
+            src={review.userId.avatar}
           />
         </div>
       </div>
       <div className="chat-header">
-        Helina Bikes
+        {review.userId.username}
         <time className="text-xs opacity-50">12:45</time>
         <div className="dropdown ml-6 mb-3">
           <div tabIndex={0} role="0">
@@ -39,17 +43,24 @@ const Message = () => {
           </ul>
         </div>
       </div>
-      <div className="chat-bubble">
-        The best movie I’ve ever seen. I’ve learned a lot from it.
-      </div>
+      <div className="chat-bubble">{review.comment}</div>
       <div className="chat-footer mt-3 flex">
-        10
-        <Link className="hover:text-blue-600" href={""}>
-          <AiFillLike className="mr-4 sm:text-xl" />
-        </Link>
-        <Link href="/" className="link link-hover text-xs sm:text-sm">
-          Reply
-        </Link>
+        {[1, 2, 3, 4, 5].map((star) => {
+          return (
+            <span
+              key={star}
+              className="start"
+              style={{
+                cursor: "pointer",
+                color: review.rating >= star ? "gold" : "gray",
+                fontSize: `35px`,
+              }}
+            >
+              {" "}
+              ★{" "}
+            </span>
+          );
+        })}
         <BiSolidShare className="ml-2 sm:text-xl" />
       </div>
     </div>
