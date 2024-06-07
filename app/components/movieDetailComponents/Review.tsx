@@ -26,7 +26,7 @@ const Review = ({
   };
 
   const handleShowLess = () => {
-    setVisibleMessages(1);
+    setVisibleMessages(3);
   };
 
   
