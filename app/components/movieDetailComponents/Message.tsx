@@ -2,12 +2,8 @@ import Link from "next/link";
 import { BiEdit, BiSolidShare } from "react-icons/bi";
 import { SlOptionsVertical } from "react-icons/sl";
 import { AiFillDelete, AiFillLike } from "react-icons/ai";
-import { Review } from "@/app/data";
 
-const Message = ({ review }: { review: any }) => {
-  
-  console.log(review.userId);
-  
+const Message = ({ review }: { review: any }) => {  
   return (
     <div className="chat chat-start max-w-[500px] py-4">
       <div className="chat-image avatar">

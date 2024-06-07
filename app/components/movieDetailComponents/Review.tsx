@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import Message from "./Message";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store";
-import { getDownloadURL, ref } from "firebase/storage";
-import { storage } from "@/app/firebase/firebaseConfig";
 import RatingReview from "./RatingReview";
 import { Review as ReviewType } from "@/app/data"; // Rename to avoid conflict with component name
 import axios from "axios";
@@ -16,12 +14,12 @@ const Review = ({
   reviews: ReviewType[];
   movieId: string;
 }) => {
-  const [showComment, setShowComment] = useState(false);
-  const [visibleMessages, setVisibleMessages] = useState(1);
+  const [review, setReview] = useState(reviews);
+  const [visibleMessages, setVisibleMessages] = useState(3);
   const [rating, setRating] = useState(1);
   const [comment, setComment] = useState("");
   const user = useSelector((state: RootState) => state.userState.user);
-  const messages = reviews.map((review, index) => <Message key={index} review={review}/>);
+  const messages = review.map((review, index) => <Message key={index} review={review}/>);
 
   const handleSeeMore = () => {
     setVisibleMessages(Math.min(visibleMessages + 3, reviews.length));
@@ -53,6 +51,7 @@ const Review = ({
         );
         // Handle successful review submission (e.g., refresh reviews, show success message, etc.)
         console.log("Review submitted:", response.data);
+        setReview([...review,response.data])
         setComment(""); // Clear the comment input after successful submission
       } catch (error) {
         console.error("Error submitting review:", error);
