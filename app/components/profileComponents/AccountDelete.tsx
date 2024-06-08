@@ -1,6 +1,7 @@
 import { logoutUser } from "@/app/features/user/userSlice";
 import { RootState } from "@/app/store/store";
 import { customFetch2 } from "@/app/utils";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -9,20 +10,23 @@ const AccountDelete = () => {
   const [loading, setLoading] = useState(false);
   const user = useSelector((state: RootState) => state.userState.user);
   const dispatch = useDispatch();
+  const router = useRouter();
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const handleDelete = async () => {
     try {
       if (user.id) {
         setLoading(true);
-        const response = await customFetch2.delete(`user/${user.id}`);
+        const response = await customFetch2.delete(`users/${user.id}`);
+        setLoading(false);
         dispatch(logoutUser());
         dialogRef.current?.close();
-        setLoading(false);
+        router.push("/");
+        toast.success("Account removed successfully");
       }
     } catch (error: any) {
+      setLoading(false);
       console.log(error.response.data.error.message || "some error happened");
       dialogRef.current?.close();
-      setLoading(false);
     }
   };
   const openModal = () => {
@@ -70,7 +74,10 @@ const AccountDelete = () => {
             <form method="dialog">
               <button
                 className="btn mr-4 border rounded-lg border-blue-700"
-                onClick={() => dialogRef.current?.close()}
+                onClick={() => {
+                  setLoading(false);
+                  dialogRef.current?.close();
+                }}
               >
                 No
               </button>

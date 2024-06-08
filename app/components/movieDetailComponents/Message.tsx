@@ -10,12 +10,12 @@ const Message = ({ review }: { review: any }) => {
         <div className="w-10 rounded-full">
           <img
             alt="Tailwind CSS chat bubble component"
-            src={review.userId.avatar}
+            src={review?.userId?.avatar || 'avatar'}
           />
         </div>
       </div>
       <div className="chat-header">
-        {review.userId.username}
+        {review?.userId?.username || 'deleted account'}
         <time className="text-xs opacity-50">12:45</time>
         <div className="dropdown ml-6 mb-3">
           <div tabIndex={0} role="0">
