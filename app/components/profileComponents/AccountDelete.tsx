@@ -1,27 +1,30 @@
-import { loginUser, setUser } from "@/app/features/user/userSlice";
-import { storage } from "@/app/firebase/firebaseConfig";
+import { logoutUser } from "@/app/features/user/userSlice";
 import { RootState } from "@/app/store/store";
-import { customFetch } from "@/app/utils";
-import Cookies from "js-cookie";
-
-import {
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-  UploadTaskSnapshot,
-} from "firebase/storage";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { customFetch2 } from "@/app/utils";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const AccountDelete = () => {
-  const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
-  const [loading2, setLoading2] = useState(false);
   const user = useSelector((state: RootState) => state.userState.user);
   const dispatch = useDispatch();
   const dialogRef = useRef<HTMLDialogElement | null>(null);
-
+  const handleDelete = async () => {
+    try {
+      if (user.id) {
+        setLoading(true);
+        const response = await customFetch2.delete(`user/${user.id}`);
+        dispatch(logoutUser());
+        dialogRef.current?.close();
+        setLoading(false);
+      }
+    } catch (error: any) {
+      console.log(error.response.data.error.message || "some error happened");
+      dialogRef.current?.close();
+      setLoading(false);
+    }
+  };
   const openModal = () => {
     if (dialogRef.current) {
       dialogRef.current.showModal();
@@ -53,9 +56,6 @@ const AccountDelete = () => {
                   className="btn text-base font-medium focus:outline-none  rounded-lg border border-red-700"
                 >
                   Delete Account
-                  {loading2 && (
-                    <span className="loading loading-spinner loading-md"></span>
-                  )}
                 </button>
               </div>
             </div>
@@ -69,17 +69,22 @@ const AccountDelete = () => {
           <div className="modal-action">
             <form method="dialog">
               <button
-                className="btn mr-4"
+                className="btn mr-4 border rounded-lg border-blue-700"
                 onClick={() => dialogRef.current?.close()}
               >
                 No
               </button>
-              <button
-                className="btn ml-4"
-                onClick={() => dialogRef.current?.close()}
+              <a
+                className="btn ml-4 border rounded-lg border-red-600"
+                onClick={() => {
+                  handleDelete();
+                }}
               >
                 Yes
-              </button>
+                {loading && (
+                  <span className="loading loading-spinner loading-md"></span>
+                )}
+              </a>
             </form>
           </div>
         </div>
