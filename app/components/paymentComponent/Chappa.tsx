@@ -57,9 +57,9 @@ const Chappa: React.FC<ChappaProps> = ({
       <input
         type="hidden"
         name="callback_url"
-        value={`${process.env.NEXT_PUBLIC_BASE_URL}/api/verifyPayment?id=${user?.id}`}
+        value={`${process.env.NEXT_PUBLIC_BASE_URL}/verify-payment`}
       />
-      <input type="hidden" name="return_url" value={`${baseUrl}`} />
+      <input type="hidden" name="return_url" value={`${baseUrl}/payment-success`} />
       <input type="hidden" name="meta[title]" value="test" />
       <button
         className="btn"
