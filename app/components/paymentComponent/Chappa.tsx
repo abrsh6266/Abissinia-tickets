@@ -1,3 +1,4 @@
+// frontend/components/Chappa.tsx
 import React, { useEffect, useState } from "react";
 import { RootState } from "@/app/store/store";
 import { useSelector } from "react-redux";
@@ -24,8 +25,24 @@ const Chappa: React.FC<ChappaProps> = ({
   useEffect(() => {
     setCurrentTimeInSeconds(Math.floor(Date.now() / 1000));
   }, []);
+
   // Determine the current base URL
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
+
+  // Construct the query string for the callback URL
+  const params = new URLSearchParams({
+    user_id: user.id,
+    movieTitle: selectedMovie?.movie?.title ?? '',
+    day: selectedMovie?.day ?? '',
+    time: selectedMovie?.time ?? '',
+    seatArea: selectedMovie?.seatType ?? '',
+    seats: selectedMovie?.seats?.join(',') ?? '',
+    extras: selectedMovie?.extras?.map((snack) => snack.snackAndDrink?.name).join(',') ?? '',
+    totalPrice: selectedMovie?.totalPrice?.toString() ?? '',
+  });
+
+  const callbackUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/verify-payment?${params.toString()}`;
+
   return (
     <form method="POST" action="https://api.chapa.co/v1/hosted/pay">
       <input
@@ -54,15 +71,11 @@ const Chappa: React.FC<ChappaProps> = ({
         name="logo"
         value="https://chapa.link/asset/images/chapa_swirl.svg"
       />
-      <input
-        type="hidden"
-        name="callback_url"
-        value={`${process.env.NEXT_PUBLIC_BASE_URL}/verify-payment`}
-      />
+      <input type="hidden" name="callback_url" value={callbackUrl} />
       <input type="hidden" name="return_url" value={`${baseUrl}/payment-success`} />
-      <input type="hidden" name="meta[title]" value="test" />
+
       <button
-        className="btn"
+        className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-300"
         type="submit"
         disabled={
           !firstName ||
