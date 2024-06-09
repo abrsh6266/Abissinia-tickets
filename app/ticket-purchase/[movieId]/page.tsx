@@ -3,7 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { nanoid } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
-import { setSeats, setSelectedMovie, setTickets } from "@/app/features/movie/movieSlice";
+import {
+  setBookedSeat,
+  setSeats,
+  setSelectedMovie,
+  setTickets,
+} from "@/app/features/movie/movieSlice";
 import { Props } from "@/app/movies/[movieId]/page";
 import MovieSchedule from "@/app/components/movieDetailComponents/MovieSchedule";
 import Link from "next/link";
@@ -32,16 +37,18 @@ const Tickets = ({ params }: Props) => {
     }
     if (schedules) {
       setShows(schedules[0].showTime);
-      dispatch(setSeats(schedules[0].hallId))
+      dispatch(setSeats(schedules[0].hallId));
+      dispatch(setBookedSeat(schedules[0].selectedSeat));
     }
   }, [m, schedules]);
-  const { selectedMovie, seats } = useSelector((state: RootState) => state.movieState);
+  const { selectedMovie } = useSelector((state: RootState) => state.movieState);
   const dispatch = useDispatch();
   const router = useRouter();
   const [childAmount, setChildAmount] = useState(
     selectedMovie?.tickets?.find((ticket) => ticket.ticketType === "child")
       ?.amount || 0
   );
+
   const [adultAmount, setAdultAmount] = useState(
     selectedMovie?.tickets?.find((ticket) => ticket.ticketType === "adult")
       ?.amount || 0

@@ -13,7 +13,7 @@ export interface Ticket {
 }
 const initialState = {
   searchTerm: "",
-  movie: null as Movie2|null,
+  movie: null as Movie2 | null,
   searchMovies: [],
   selectedMovie: null as Props | null,
   meta: {
@@ -21,6 +21,7 @@ const initialState = {
     pageCount: 10,
   },
   seats: null as TransformedSeat[] | null,
+  bookedSeat: [] as number[],
   validSeatChoose: 0,
 };
 
@@ -52,6 +53,9 @@ const appSlice = createSlice({
     },
     setSeats(state, action) {
       state.seats = transformSeatData(action.payload);
+    },
+    setBookedSeat(state, action) {
+      state.bookedSeat = action.payload.map((str: string) => parseInt(str));
     },
     setSeat(state, action) {
       const seatId = action.payload.id;
@@ -205,5 +209,6 @@ export const {
   setSeat,
   setSeats,
   resetExtraPrice,
+  setBookedSeat,
 } = appSlice.actions;
 export default appSlice.reducer;

@@ -22,13 +22,13 @@ const Seats = ({ params }: Props) => {
       setMovie(data);
     }
   }, [data]);
-  const selectedMovie = useSelector(
-    (state: RootState) => state.movieState.selectedMovie
+  const { selectedMovie, bookedSeat } = useSelector(
+    (state: RootState) => state.movieState
   );
   const { seats, validSeatChoose } = useSelector(
     (store: RootState) => store.movieState
   );
-
+  console.log(bookedSeat);
   const dispatch = useDispatch();
   const router = useRouter();
   const handleSelectSeat = (id: number) => {
@@ -130,7 +130,7 @@ const Seats = ({ params }: Props) => {
                       <button
                         onClick={() => {
                           if (
-                            !seat.booked &&
+                            !bookedSeat.includes(seat.seatNumber) &&
                             seat.seatType === selectedMovie?.seatType
                           )
                             handleSelectSeat(seat.seatNumber);
@@ -139,12 +139,19 @@ const Seats = ({ params }: Props) => {
                           seat.selected ? "text-blue-700" : ""
                         } text-2xl md:text-5xl
         ${
-          !(seat.booked || !(seat.seatType === selectedMovie?.seatType))
+          !(
+            bookedSeat.includes(seat.seatNumber) ||
+            !(seat.seatType === selectedMovie?.seatType)
+          )
             ? "hover:text-blue-700 md:hover:text-6xl hover:text-4xl"
             : !(seat.seatType === selectedMovie?.seatType)
             ? "text-gray-700"
             : "text-red-700"
-        }  duration-300 `}
+        }  duration-300 ${
+                          bookedSeat.includes(seat.seatNumber)
+                            ? "text-red-700"
+                            : ""
+                        }`}
                       >
                         <span className="indicator-item badge badge-secondary bg-transparent  border-0">
                           {seat.seatNumber}
