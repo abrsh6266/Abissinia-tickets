@@ -2,7 +2,7 @@
 import Link from "next/link";
 import logo from "/public/images/logo2.png";
 import Image from "next/image";
-import { FaBarsStaggered } from "react-icons/fa6";
+import { FaBarsStaggered, FaBookmark } from "react-icons/fa6";
 import { IoNotificationsSharp } from "react-icons/io5";
 import NavLinks from "./NavLinks";
 import { BiHeart } from "react-icons/bi";
@@ -74,7 +74,7 @@ const Navbar = () => {
         {user && (
           <div className="navbar-end space-x-8">
             <Link className="hover:text-gray-200" href="/bookmarks">
-              <BiHeart className="text-2xl" />
+              <FaBookmark className="text-2xl" />
             </Link>
             <button
               onClick={() => dispatch(setShowNotification(true))}

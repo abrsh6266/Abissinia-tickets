@@ -6,6 +6,7 @@ import { RootState } from "@/app/store/store";
 import RatingReview from "./RatingReview";
 import { Review as ReviewType } from "@/app/data"; // Rename to avoid conflict with component name
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Review = ({
   reviews,
@@ -19,7 +20,9 @@ const Review = ({
   const [rating, setRating] = useState(1);
   const [comment, setComment] = useState("");
   const user = useSelector((state: RootState) => state.userState.user);
-  const messages = review.map((review, index) => <Message key={index} review={review}/>);
+  const messages = review.map((review, index) => (
+    <Message key={index} review={review} />
+  ));
 
   const handleSeeMore = () => {
     setVisibleMessages(Math.min(visibleMessages + 3, reviews.length));
@@ -28,8 +31,6 @@ const Review = ({
   const handleShowLess = () => {
     setVisibleMessages(3);
   };
-
-  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,7 +51,10 @@ const Review = ({
           }
         );
         // Handle successful review submission (e.g., refresh reviews, show success message, etc.)
-        setReview([...review,response.data])
+        setReview([...review, response.data]);
+        toast.success(
+          "Thanks for your review. review section will be updated soon."
+        );
         setComment(""); // Clear the comment input after successful submission
       } catch (error) {
         console.error("Error submitting review:", error);
@@ -96,16 +100,18 @@ const Review = ({
             <hr />
           </div>
         )}
-        {messages.slice(0, visibleMessages)}
-        {visibleMessages < reviews.length ? (
-          <button className="btn rounded-lg hover" onClick={handleSeeMore}>
-            See more comments
-          </button>
-        ) : (
-          <button className="btn" onClick={handleShowLess}>
-            Show less
-          </button>
-        )}
+        <div>
+          {messages.slice(0, visibleMessages)}
+          {visibleMessages < reviews.length ? (
+            <button className="btn rounded-lg hover" onClick={handleSeeMore}>
+              See more comments
+            </button>
+          ) : (
+            <button className="btn" onClick={handleShowLess}>
+              Show less
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -48,25 +48,6 @@ const MovieDetail = ({ movie }: { movie: Movie2 }) => {
         </div>
         <Review reviews={movie.reviewId} movieId={movie._id}/>
       </div>
-      {/* <div className="ml-2 col-span-full my-2">
-        <h1
-          id="schedule"
-          className="uppercase tracking-wide no-underline hover:no-underline font-bold  text-xl "
-        >
-          Schedules
-        </h1>
-      </div>
-      <div className=" m-auto lg:flex sm: gap-4">
-        {movie.showTime.map((time, index) => {
-          const { day, times } = time;
-          return (
-            <div key={day} className="lg:col-start-4 lg:col-span-2 my-4 mx-4">
-              <h1 className="text-center">{time.day}</h1>
-              <MovieSchedule times={times} day={day} />
-            </div>
-          );
-        })}
-      </div> */}
     </div>
   );
 };
