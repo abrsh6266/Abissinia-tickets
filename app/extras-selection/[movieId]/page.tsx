@@ -16,12 +16,12 @@ import {
   setSelectedMovie,
 } from "@/app/features/movie/movieSlice";
 import { RootState } from "@/app/store/store";
-import useFetchData from "@/api/getData";
+import { useFetchData2 } from "@/api/getData";
 
 const Extras = ({ params }: Props) => {
   const [id, setId] = useState(params.movieId);
-  const { data: snacks1 } = useFetchData("snacks");
-  const { data: movie1 } = useFetchData(`movies/${id}`);
+  const { data: snacks1 } = useFetchData2("snacks");
+  const { data: movie1 } = useFetchData2(`movies/${id}`);
   const [movie, setMovie] = useState<Movie2>(movie1);
   const [snacks, setSnacks] = useState<SnackAndDrink[]>([]);
   useEffect(() => {
@@ -49,7 +49,7 @@ const Extras = ({ params }: Props) => {
       });
       handleGoBack();
     }
-    dispatch(resetExtraPrice())
+    dispatch(resetExtraPrice());
   }, []);
 
   const handleGoBack = () => {
