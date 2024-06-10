@@ -10,7 +10,7 @@ import { nanoid } from "@reduxjs/toolkit";
 const Page = () => {
   const user = useSelector((state: RootState) => state.userState.user);
   const { data, isLoading, isError } = useFetchData2(
-    `bookings/user/${user.id}`
+    `bookings/user/${user?.id}`
   );
 
   if (isLoading) {
