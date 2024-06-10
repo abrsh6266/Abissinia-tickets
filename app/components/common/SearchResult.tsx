@@ -8,20 +8,18 @@ import {
 import { RootState } from "../../store/store";
 import { gridSquareVariant, Movie2, squareVariant } from "../../data";
 import { motion } from "framer-motion";
-import useFetchData from "@/api/getData";
+import { useFetchData2 } from "@/api/getData";
 import { useEffect } from "react";
 const SearchResult = () => {
   const { searchTerm, searchMovies } = useSelector(
     (state: RootState) => state.movieState
   );
-  const page = useSelector((state: RootState) => state.paginationState.page);
-  const limit = 30;
   const dispatch = useDispatch();
   const {
     data: searchData,
     isLoading: isLoadingSearch,
     isError: isErrorSearch,
-  } = useFetchData(`movies/search?name=${searchTerm}`, page, limit);
+  } = useFetchData2(`movies/search?name=${searchTerm}`);
   useEffect(() => {
     if (searchTerm === "") {
       dispatch(setSearchMovies([]));
