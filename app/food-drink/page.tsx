@@ -3,11 +3,11 @@
 import { SnackAndDrink } from "../data";
 import { useEffect, useState } from "react";
 import SnackAndDrinks from "../components/SnackAndDrinks";
-import useFetchData from "@/api/getData";
+import { useFetchData2 } from "@/api/getData";
 import Loading from "../components/common/Loading";
 
 const Page = () => {
-  const { data: snacks1, isError, isLoading } = useFetchData("snacks");
+  const { data: snacks1, isError, isLoading } = useFetchData2("snacks");
   const [snacks, setSnacks] = useState<SnackAndDrink[]>([]);
   useEffect(() => {
     if (snacks1) {
