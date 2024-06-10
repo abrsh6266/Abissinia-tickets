@@ -28,7 +28,6 @@ const Seats = ({ params }: Props) => {
   const { seats, validSeatChoose } = useSelector(
     (store: RootState) => store.movieState
   );
-  console.log(bookedSeat);
   const dispatch = useDispatch();
   const router = useRouter();
   const handleSelectSeat = (id: number) => {

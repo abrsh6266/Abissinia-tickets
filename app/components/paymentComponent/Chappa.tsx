@@ -45,7 +45,6 @@ const Chappa: React.FC<ChappaProps> = ({
     totalPrice: selectedMovie?.totalPrice?.toString() ?? "",
     tx_ref: `${firstName}-${lastName}-${currentTimeInSeconds}`,
   });
-  console.log(params.toString());
   const callbackUrl = `${
     process.env.NEXT_PUBLIC_BASE_URL
   }/verify-payment?${params.toString()}`;

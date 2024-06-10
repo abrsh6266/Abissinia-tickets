@@ -51,7 +51,6 @@ const Schedule = () => {
             `/movie-shows/by-movie/${movie._id}`
           );
           const result = await response.data;
-          console.log(result);
           return { ...movie, showTime: result };
         });
 

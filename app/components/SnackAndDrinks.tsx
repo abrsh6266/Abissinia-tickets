@@ -21,7 +21,6 @@ const SnackAndDrinks = ({ snack }: { snack: SnackAndDrink }) => {
           <p className="text-base font-semibold text-gray-500">{snack.type}</p>
           <div className="mt-20 ml-2 relative h-10 min-w-[100px] max-w-[200px]">
             <select
-              onChange={() => console.log("value")}
               className="h-full w-full rounded-[7px]  disabled:border-0 select select-bordered"
             >
               <option  value={0}>

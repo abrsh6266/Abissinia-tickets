@@ -16,6 +16,7 @@ import { RootState } from "@/app/store/store";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import useFetchData from "@/api/getData";
 import { Movie2, ShowTime } from "@/app/data";
+import SectionTitle2 from "@/app/components/common/SectionTitle2";
 
 const Tickets = ({ params }: Props) => {
   const [id, setId] = useState(params.movieId);
@@ -110,6 +111,15 @@ const Tickets = ({ params }: Props) => {
             alt={movie?.title || "poster"}
             className="object-cover w-full h-[200px] md:h-[250px] lg:h-[400px] xl:h-[500px] rounded-lg"
           />
+        </div>
+        <div className=" align-element lg-mx-[400px]">
+          {schedules && schedules[0] && (
+            <div>
+              <div className="flex flex-wrap gap-4 text-3xl py-4 font-bold">
+                cinema Hall : <SectionTitle2 text={schedules[0].hallId.name} />
+              </div>
+            </div>
+          )}
         </div>
         <div className=" align-element lg-mx-[400px]">
           <label htmlFor="seat" className="capitalize mb-2 block mt-4 ml-2 ">

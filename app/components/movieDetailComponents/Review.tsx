@@ -50,7 +50,6 @@ const Review = ({
           }
         );
         // Handle successful review submission (e.g., refresh reviews, show success message, etc.)
-        console.log("Review submitted:", response.data);
         setReview([...review,response.data])
         setComment(""); // Clear the comment input after successful submission
       } catch (error) {
