@@ -8,9 +8,14 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import useFetchData from "@/api/getData";
+import { RootState } from "@/app/store/store";
+import { useSelector } from "react-redux";
 
 const AbissiniaMovies = () => {
-  const { data, isLoading, isError } = useFetchData("movies");
+  const page = useSelector((state: RootState) => state.paginationState.page);
+  const limit = 10; // Set the limit as required
+  const { data, isLoading, isError } = useFetchData("movies", page, limit);
+
 
   const selectFiveMovies = (data: Movie2[]): Movie2[] => {
     const shuffledMovies = shuffleArray(data);

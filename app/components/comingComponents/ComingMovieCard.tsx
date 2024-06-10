@@ -1,5 +1,4 @@
 import { Movie2 } from "@/app/data";
-import Image from "next/image";
 import Link from "next/link";
 
 const ComingMovieCard = ({
