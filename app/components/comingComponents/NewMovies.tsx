@@ -6,9 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const NewMovies = () => {
-  const page = useSelector((state: RootState) => state.paginationState.page);
-  const limit = 10; // Set the limit as required
-  const { data, isLoading, isError } = useFetchData("movies", page, limit);
+  const { data } = useFetchData("movies", 1, 10);
 
   const selectFiveMovies = (data: Movie2[]): Movie2[] => {
     const shuffledMovies = shuffleArray(data);
@@ -18,8 +16,8 @@ const NewMovies = () => {
   const [movies, setMovies] = useState<Movie2[]>([]);
 
   useEffect(() => {
-    if (data && Array.isArray(data)) {
-      setMovies(selectFiveMovies(data));
+    if (data.movies && Array.isArray(data.movies)) {
+      setMovies(selectFiveMovies(data.movies));
     }
   }, [data]);
   if (movies)
