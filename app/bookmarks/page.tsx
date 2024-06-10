@@ -6,7 +6,7 @@ import Loading from "../components/common/Loading";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
-const page = () => {
+const Page = () => {
   const user = useSelector((state: RootState) => state.userState.user);
   const { data, isLoading, isError } = useFetchData2(`bookings/user/${user.id}`);
 
@@ -57,4 +57,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
