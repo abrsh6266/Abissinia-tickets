@@ -111,8 +111,8 @@ const Tickets = ({ params }: Props) => {
             className="object-cover w-full h-[200px] md:h-[250px] lg:h-[400px] xl:h-[500px] rounded-lg"
           />
         </div>
-        <div className="w-full align-element">
-          <label htmlFor="seat" className="capitalize mb-2 block mt-4 ml-2">
+        <div className=" align-element lg-mx-[400px]">
+          <label htmlFor="seat" className="capitalize mb-2 block mt-4 ml-2 ">
             Choose The day
           </label>
           {shows && (
