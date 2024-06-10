@@ -1,14 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Bookmark from "../components/bookmarkComponents/Bookmark";
-import {useFetchData2} from "@/api/getData";
+import { useFetchData2 } from "@/api/getData";
 import Loading from "../components/common/Loading";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import { nanoid } from "@reduxjs/toolkit";
 
 const Page = () => {
   const user = useSelector((state: RootState) => state.userState.user);
-  const { data, isLoading, isError } = useFetchData2(`bookings/user/${user.id}`);
+  const { data, isLoading, isError } = useFetchData2(
+    `bookings/user/${user.id}`
+  );
 
   if (isLoading) {
     return (
@@ -28,7 +31,7 @@ const Page = () => {
         <div className="grid lg:grid-cols-3 gap-12 p-6">
           <div className="lg:col-span-2 divide-y">
             {data.map((booking: any) => (
-              <Bookmark key={booking._id} booking={booking} />
+              <Bookmark key={nanoid()} booking={booking} />
             ))}
           </div>
           <div className="shadow-md p-6">
