@@ -1,14 +1,16 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/store";
+import { setPage } from "@/app/features/pagination/paginationSlice";
 
 const PaginationContainer = () => {
-  const meta = useSelector((state:RootState)=>state.paginationState);
+  const dispatch = useDispatch();
+  const meta = useSelector((state: RootState) => state.paginationState);
   const { pageCount, page } = meta;
-  const pages = Array.from({ length: pageCount }, (_, index) => {
-    return index + 1;
-  });
+  const pages = Array.from({ length: pageCount }, (_, index) => index + 1);
 
-  const handlePageChange = (pageNumber: any) => {};
+  const handlePageChange = (pageNumber: number) => {
+    dispatch(setPage(pageNumber));
+  };
 
   if (pageCount < 2) return null;
 
@@ -25,19 +27,17 @@ const PaginationContainer = () => {
         >
           Prev
         </button>
-        {pages.map((pageNumber) => {
-          return (
-            <button
-              onClick={() => handlePageChange(pageNumber)}
-              key={pageNumber}
-              className={`btn btn-xs sm:btn-md border-none join-item ${
-                pageNumber === page ? "bg-base-300 border-base-300" : ""
-              }`}
-            >
-              {pageNumber}
-            </button>
-          );
-        })}
+        {pages.map((pageNumber) => (
+          <button
+            onClick={() => handlePageChange(pageNumber)}
+            key={pageNumber}
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              pageNumber === page ? "bg-base-300 border-base-300" : ""
+            }`}
+          >
+            {pageNumber}
+          </button>
+        ))}
         <button
           className="btn btn-xs sm:btn-md join-item"
           onClick={() => {
@@ -52,4 +52,5 @@ const PaginationContainer = () => {
     </div>
   );
 };
+
 export default PaginationContainer;

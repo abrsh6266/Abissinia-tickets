@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setSeat, setSelectedMovie } from "@/app/features/movie/movieSlice";
@@ -10,12 +9,12 @@ import { toast } from "react-toastify";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { PiArmchairFill } from "react-icons/pi";
 import { RootState } from "@/app/store/store";
-import useFetchData from "@/api/getData";
+import { useFetchData2 } from "@/api/getData";
 import { Movie2 } from "@/app/data";
 
 const Seats = ({ params }: Props) => {
   const [id, setId] = useState(params.movieId);
-  const { data, isLoading, isError } = useFetchData(`movies/${id}`);
+  const { data, isLoading, isError } = useFetchData2(`movies/${id}`);
   const [movie, setMovie] = useState<Movie2>(data);
   useEffect(() => {
     if (data) {

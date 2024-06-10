@@ -3,13 +3,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface PaginationState {
   page: number;
   pageCount: number;
-  // Add other pagination-related properties as needed
 }
 
 const initialState: PaginationState = {
   page: 1,
-  pageCount: 2,
-  // Initialize other properties here
+  pageCount: 1,
 };
 
 const paginationSlice = createSlice({
@@ -22,7 +20,6 @@ const paginationSlice = createSlice({
     setPageCount(state, action: PayloadAction<number>) {
       state.pageCount = action.payload;
     },
-    // Add other reducers for additional pagination-related properties
   },
 });
 

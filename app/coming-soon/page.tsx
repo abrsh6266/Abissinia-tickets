@@ -7,9 +7,16 @@ import NewMovies from "../components/comingComponents/NewMovies";
 import PaginationContainer from "../components/common/PaginationContainer";
 import useFetchData from "@/api/getData";
 import Loading from "../components/common/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { setPage, setPageCount } from "@/app/features/pagination/paginationSlice";
+import { RootState } from "../store/store";
 
 const ComingSoon = () => {
-  const { data, isLoading, isError } = useFetchData("movies");
+  const dispatch = useDispatch();
+  const page = useSelector((state: RootState) => state.paginationState.page);
+  const limit = 3;
+
+  const { data, isLoading, isError } = useFetchData("movies", page, limit);
 
   const selectFiveMovies = (data: Movie2[]): Movie2[] => {
     const shuffledMovies = shuffleArray(data);
@@ -19,10 +26,11 @@ const ComingSoon = () => {
   const [movies, setMovies] = useState<Movie2[]>([]);
 
   useEffect(() => {
-    if (data && Array.isArray(data)) {
-      setMovies(selectFiveMovies(data));
+    if (data && Array.isArray(data.movies)) {
+      setMovies(selectFiveMovies(data.movies));
+      dispatch(setPageCount(data.totalPages));
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   if (isLoading) {
     return (
@@ -35,6 +43,7 @@ const ComingSoon = () => {
   if (isError) {
     return <div>Error loading data</div>; // Show an error state
   }
+
   return (
     <div className="align-element flex flex-col gap-5 px-3 md:mx-auto lg:flex-row overflow-x-hidden">
       <aside className="hidden py-4 md:w-1/3 lg:w-1/5 lg:block">

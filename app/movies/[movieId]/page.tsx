@@ -1,5 +1,5 @@
 "use client";
-import useFetchData from "@/api/getData";
+import { useFetchData2 } from "@/api/getData";
 import Loading from "@/app/components/common/Loading";
 import MovieDetail from "@/app/components/movieDetailComponents/MovieDetail";
 import { setSelectedMovie } from "@/app/features/movie/movieSlice";
@@ -14,7 +14,7 @@ export interface Props {
 const Details = ({ params }: Props) => {
   const dispatch = useDispatch();
   const [id, setId] = useState(params.movieId);
-  const { data, isLoading, isError } = useFetchData(`movies/${id}`);
+  const { data, isLoading, isError } = useFetchData2(`movies/${id}`);
   const [movie, setMovie] = useState(data);
   useEffect(() => {
     dispatch(setSelectedMovie(null));

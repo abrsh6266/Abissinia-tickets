@@ -4,7 +4,15 @@ import { Movie2, ShowTime, shuffleArray } from "../data";
 import MovieCard2 from "../components/movieDetailComponents/MovieCard2";
 import Loading from "../components/common/Loading";
 import useFetchData from "@/api/getData";
+import PaginationContainer from "../components/common/PaginationContainer";
 import { customFetch2 } from "../utils";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setPage,
+  setPageCount,
+} from "@/app/features/pagination/paginationSlice";
+import { RootState } from "../store/store";
+
 const daysOfWeek = [
   "Monday",
   "Tuesday",
@@ -14,6 +22,7 @@ const daysOfWeek = [
   "Saturday",
   "Sunday",
 ];
+
 interface Hall {
   _id: string;
   name: string;
@@ -31,22 +40,33 @@ interface MovieShow {
   movieId: Movie2;
   showTime: ShowTime[];
 }
+
 interface Movie extends Movie2 {
   showTime: MovieShow[];
 }
+
 const Schedule = () => {
-  const { data, isLoading, isError } = useFetchData("movies/scheduled");
+  const dispatch = useDispatch();
+  const page = useSelector((state: RootState) => state.paginationState.page);
+  const limit = 10; // Set the limit as required
+
+  const { data, isLoading, isError } = useFetchData(
+    "movies/scheduled",
+    page,
+    limit
+  );
   const [selectedDay, setSelectedDay] = useState<string>("Monday");
   const [movies, setMovies] = useState<Movie[]>([]);
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     setLoading(true);
-    if (data && Array.isArray(data)) {
+    if (data && Array.isArray(data.movies)) {
       const fetchShowTimes = async () => {
-        if (!data.length) return;
+        if (!data.movies.length) return;
 
-        const promises = data.map(async (movie) => {
+        const promises = data.movies.map(async (movie: any) => {
           const response = await customFetch2(
             `/movie-shows/by-movie/${movie._id}`
           );
@@ -56,12 +76,14 @@ const Schedule = () => {
 
         const moviesWithShowTimes = await Promise.all(promises);
         setMovies(moviesWithShowTimes);
+        dispatch(setPageCount(data.totalPages));
+        setLoading(false);
       };
 
       fetchShowTimes();
-      setLoading(false);
     }
-  }, [data]);
+  }, [data, dispatch]);
+
   useEffect(() => {
     const filterMoviesByDay = () => {
       const filtered = movies.filter(
@@ -121,6 +143,7 @@ const Schedule = () => {
           ))
         )}
       </div>
+      <PaginationContainer />
     </div>
   );
 };

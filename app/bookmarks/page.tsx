@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Bookmark from "../components/bookmarkComponents/Bookmark";
-import useFetchData from "@/api/getData";
+import {useFetchData2} from "@/api/getData";
 import Loading from "../components/common/Loading";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
 const page = () => {
   const user = useSelector((state: RootState) => state.userState.user);
-  const { data, isLoading, isError } = useFetchData(`bookings/user/${user.id}`);
+  const { data, isLoading, isError } = useFetchData2(`bookings/user/${user.id}`);
 
   if (isLoading) {
     return (

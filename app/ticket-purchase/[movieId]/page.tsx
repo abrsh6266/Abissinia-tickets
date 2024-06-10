@@ -14,7 +14,7 @@ import MovieSchedule from "@/app/components/movieDetailComponents/MovieSchedule"
 import Link from "next/link";
 import { RootState } from "@/app/store/store";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import useFetchData from "@/api/getData";
+import { useFetchData2 } from "@/api/getData";
 import { Movie2, ShowTime } from "@/app/data";
 import SectionTitle2 from "@/app/components/common/SectionTitle2";
 
@@ -24,12 +24,12 @@ const Tickets = ({ params }: Props) => {
     data: m,
     isLoading: load,
     isError: err,
-  } = useFetchData(`movies/${id}`);
+  } = useFetchData2(`movies/${id}`);
   const {
     data: schedules,
     isLoading: loading,
     isError: error,
-  } = useFetchData(`movie-shows/by-movie/${id}`);
+  } = useFetchData2(`movie-shows/by-movie/${id}`);
   const [movie, setMovie] = useState<Movie2>(m);
   const [shows, setShows] = useState<ShowTime[] | null>(null);
   useEffect(() => {
