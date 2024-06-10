@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { Props } from "@/app/movies/[movieId]/page";
@@ -8,12 +8,12 @@ import { RootState } from "@/app/store/store";
 import SelectionDetails from "@/app/components/movieDetailComponents/SelectionDetails";
 import PaymentProcess from "@/app/components/paymentComponent/PaymentProcess";
 import { toast } from "react-toastify";
-import useFetchData from "@/api/getData";
+import { useFetchData2 } from "@/api/getData";
 import { Movie2 } from "@/app/data";
 
 const PaymentDetail = ({ params }: Props) => {
   const [id, setId] = useState(params.movieId);
-  const { data: movie1 } = useFetchData(`movies/${id}`);
+  const { data: movie1 } = useFetchData2(`movies/${id}`);
   const [movie, setMovie] = useState<Movie2>(movie1);
   useEffect(() => {
     if (movie1) {
