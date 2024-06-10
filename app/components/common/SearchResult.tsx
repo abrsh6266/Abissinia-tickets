@@ -14,12 +14,14 @@ const SearchResult = () => {
   const { searchTerm, searchMovies } = useSelector(
     (state: RootState) => state.movieState
   );
+  const page = useSelector((state: RootState) => state.paginationState.page);
+  const limit = 30;
   const dispatch = useDispatch();
   const {
     data: searchData,
     isLoading: isLoadingSearch,
     isError: isErrorSearch,
-  } = useFetchData(`movies/search?name=${searchTerm}`);
+  } = useFetchData(`movies/search?name=${searchTerm}`, page, limit);
   useEffect(() => {
     if (searchTerm === "") {
       dispatch(setSearchMovies([]));
