@@ -1,9 +1,8 @@
 import React from "react";
 import SmallSize from "../imagesComponent/SmallSize";
-import { AiFillDelete } from "react-icons/ai";
 
 const Bookmark = ({ booking }: { booking: any }) => {
-  const { movieShowId, seats, order, status } = booking;
+  const { movieShowId, seats, order, status, day, time, bookingDate } = booking;
   const { movieId, hallId, showTime } = movieShowId;
   const snacks = order.snacks
     .map((snack: any) => snack.snackId.name)
@@ -11,7 +10,17 @@ const Bookmark = ({ booking }: { booking: any }) => {
   const seatNumbers = seats.booked
     .map((seat: any) => seat.seatNumber)
     .join(", ");
-
+  function formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    });
+  }
   return (
     <div className="flex items-start max-sm:flex-col gap-8 py-6">
       <SmallSize img={movieId.poster} />
@@ -19,6 +28,9 @@ const Bookmark = ({ booking }: { booking: any }) => {
         <div>
           <h3 className="text-xl font-extrabold mb-6">{movieId.title}</h3>
           <div>
+            <h6 className="text-md mt-2">
+              Date: <strong className="ml-2">{formatDate(bookingDate)}</strong>
+            </h6>
             <h6 className="text-md ">
               Seats: <strong className="ml-2">{seatNumbers}</strong>
             </h6>
@@ -30,6 +42,12 @@ const Bookmark = ({ booking }: { booking: any }) => {
             </h6>
             <h6 className="text-md mt-2">
               Price: <strong className="ml-2">{order.price}ETB</strong>
+            </h6>
+            <h6 className="text-md mt-2">
+              Day: <strong className="ml-2">{day}</strong>
+            </h6>
+            <h6 className="text-md mt-2">
+              Time: <strong className="ml-2">{time}</strong>
             </h6>
           </div>
           <div className="mt-6 flex flex-wrap gap-6">

@@ -1,16 +1,37 @@
-'use client'
+"use client";
 import { useSelector, useDispatch } from "react-redux";
 import { setShowNotification } from "../../features/user/userSlice";
 import { FaTimes } from "react-icons/fa";
 import MessageComponent from "./MessageComponent";
 import { RootState } from "@/app/store/store";
+import { customFetch } from "@/app/utils";
+import { useFetchData2 } from "@/api/getData";
 
 const Notification = () => {
-  const showNotification = useSelector((state:RootState) => state.userState.showNotification);
+  const showNotification = useSelector((state: RootState) => state.userState.showNotification);
+  const user = useSelector((state: RootState) => state.userState.user);
   const dispatch = useDispatch();
+
+  const { data: notifications, isLoading, isError } = useFetchData2(`/notifications/user/${user?.id}`);
 
   const handleCloseNotification = () => {
     dispatch(setShowNotification(false));
+  };
+
+  const handleMarkAsSeen = async (id: string) => {
+    try {
+      await customFetch.patch(`/notifications/${id}/seen`);
+      // Optimistically update the UI
+      if (notifications) {
+        notifications.map((notification: any) => {
+          if (notification._id === id) {
+            notification.seen = true;
+          }
+        });
+      }
+    } catch (error) {
+      console.error("Error marking notification as seen:", error);
+    }
   };
 
   return (
@@ -28,8 +49,19 @@ const Notification = () => {
             <FaTimes className="text-black text-3xl" />
           </div>
         </div>
-        <MessageComponent />
-        <MessageComponent />
+        {isLoading ? (
+          <p>Loading notifications...</p>
+        ) : isError ? (
+          <p>Error loading notifications</p>
+        ) : (
+          notifications?.map((notification: any) => (
+            <MessageComponent
+              key={notification._id}
+              notification={notification}
+              onMarkAsSeen={() => handleMarkAsSeen(notification._id)}
+            />
+          ))
+        )}
       </div>
     </div>
   );
