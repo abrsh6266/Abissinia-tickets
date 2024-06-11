@@ -36,7 +36,7 @@ const userSlice = createSlice({
       state.user = null;
       Cookies.remove("token");
       localStorage.removeItem("user");
-      toast.success("user logout successfully");
+      toast.success("logged out");
     },
   },
 });

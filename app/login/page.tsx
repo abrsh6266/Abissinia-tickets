@@ -31,7 +31,7 @@
           Cookies.set("token", data.jwt);
           dispatch(loginUser({ user: data.user }));
           router.push("/");
-          toast.success("Login successful");
+          toast.success("Logged in");
         } catch (error: any) {
           const errorMessage =
             error?.response?.data?.error?.message ||
