@@ -10,5 +10,8 @@ const useFetchData = (url: string, page: number, limit: number) => {
 export const useFetchData2 = (url: string) => {
   return useQuery(['data', url], () => fetchData(url));
 };
+export const useFetchData3 = (url: string, p0: { onSuccess: (data: any) => void; }) => {
+  return useQuery(['data', url], () => fetchData(url));
+};
 export default useFetchData;
 

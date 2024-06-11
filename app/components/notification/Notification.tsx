@@ -4,15 +4,30 @@ import { setShowNotification } from "../../features/user/userSlice";
 import { FaTimes } from "react-icons/fa";
 import MessageComponent from "./MessageComponent";
 import { RootState } from "@/app/store/store";
-import { customFetch } from "@/app/utils";
+import { customFetch2 } from "@/app/utils";
 import { useFetchData2 } from "@/api/getData";
+import { useState, useEffect } from "react";
 
 const Notification = () => {
-  const showNotification = useSelector((state: RootState) => state.userState.showNotification);
+  const showNotification = useSelector(
+    (state: RootState) => state.userState.showNotification
+  );
   const user = useSelector((state: RootState) => state.userState.user);
   const dispatch = useDispatch();
 
-  const { data: notifications, isLoading, isError } = useFetchData2(`/notifications/user/${user?.id}`);
+  const {
+    data: notifications,
+    isLoading,
+    isError,
+  } = useFetchData2(`/notifications/user/${user?.id}`);
+
+  const [localNotifications, setLocalNotifications] = useState(notifications);
+
+  useEffect(() => {
+    if (notifications) {
+      setLocalNotifications(notifications);
+    }
+  }, [notifications]);
 
   const handleCloseNotification = () => {
     dispatch(setShowNotification(false));
@@ -20,17 +35,29 @@ const Notification = () => {
 
   const handleMarkAsSeen = async (id: string) => {
     try {
-      await customFetch.patch(`/notifications/${id}/seen`);
-      // Optimistically update the UI
-      if (notifications) {
-        notifications.map((notification: any) => {
-          if (notification._id === id) {
-            notification.seen = true;
-          }
-        });
-      }
+      await customFetch2.patch(`/notifications/${id}/seen`, {
+        seen: true,
+      });
+      setLocalNotifications((prevNotifications: any) =>
+        prevNotifications.map((notification: any) =>
+          notification._id === id
+            ? { ...notification, seen: true }
+            : notification
+        )
+      );
     } catch (error) {
       console.error("Error marking notification as seen:", error);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await customFetch2.delete(`/notifications/${id}`);
+      setLocalNotifications((prevNotifications: any) =>
+        prevNotifications.filter((notification: any) => notification._id !== id)
+      );
+    } catch (error) {
+      console.error("Error deleting notification:", error);
     }
   };
 
@@ -54,11 +81,12 @@ const Notification = () => {
         ) : isError ? (
           <p>Error loading notifications</p>
         ) : (
-          notifications?.map((notification: any) => (
+          localNotifications?.map((notification: any) => (
             <MessageComponent
               key={notification._id}
               notification={notification}
               onMarkAsSeen={() => handleMarkAsSeen(notification._id)}
+              onDelete={() => handleDelete(notification._id)}
             />
           ))
         )}
