@@ -7,10 +7,7 @@ import useFetchData from "@/api/getData";
 import PaginationContainer from "../components/common/PaginationContainer";
 import { customFetch2 } from "../utils";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setPage,
-  setPageCount,
-} from "@/app/features/pagination/paginationSlice";
+import { setPageCount } from "@/app/features/pagination/paginationSlice";
 import { RootState } from "../store/store";
 
 const daysOfWeek = [
