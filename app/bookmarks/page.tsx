@@ -9,10 +9,22 @@ import { nanoid } from "@reduxjs/toolkit";
 
 const Page = () => {
   const user = useSelector((state: RootState) => state.userState.user);
+  let [total, setTotal] = useState(0);
   const { data, isLoading, isError } = useFetchData2(
     `bookings/user/${user?.id}`
   );
 
+  useEffect(() => {
+    setTotal((cur) => {
+      let tot = 0;
+      if (data?.length > 0) {
+        data.map((booking: any) => {
+          tot += booking.price;
+        });
+      }
+      return tot;
+    });
+  }, [data]);
   if (isLoading) {
     return (
       <div>
@@ -37,22 +49,10 @@ const Page = () => {
           <div className="shadow-md p-6">
             <h3 className="text-xl font-extrabold border-b pb-4">Summary</h3>
             <ul className="divide-y mt-6">
-              <li className="flex flex-wrap gap-4 text-md py-4">
-                Subtotal <span className="ml-auto font-bold">220ETB</span>
-              </li>
-              <li className="flex flex-wrap gap-4 text-md py-4">
-                Tax <span className="ml-auto font-bold">30ETB</span>
-              </li>
               <li className="flex flex-wrap gap-4 text-md py-4 font-bold">
-                Total <span className="ml-auto">250ETB</span>
+                Total <span className="ml-auto">{total}ETB</span>
               </li>
             </ul>
-            <button
-              type="button"
-              className="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded"
-            >
-              Check out
-            </button>
           </div>
         </div>
       </div>
