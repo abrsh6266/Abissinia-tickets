@@ -21,7 +21,7 @@ const AbissiniaMovies = () => {
   const [movies, setMovies] = useState<Movie2[]>([]);
 
   useEffect(() => {
-    if (data.movies && Array.isArray(data.movies)) {
+    if (data?.movies && Array.isArray(data.movies)) {
       setMovies(selectFiveMovies(data.movies));
     }
   }, [data]);
