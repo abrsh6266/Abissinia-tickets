@@ -12,10 +12,24 @@ import { useEffect, useState } from "react";
 import { RootState } from "../../store/store";
 import { customFetch } from "@/app/utils";
 import Cookies from "js-cookie";
+import { useFetchData2 } from "@/api/getData";
 
 const Navbar = () => {
   const user = useSelector((state: RootState) => state.userState.user);
   const dispatch = useDispatch();
+  const {
+    data: notifications,
+    isLoading,
+    isError,
+  } = useFetchData2(`/notifications/user/${user?.id}`);
+  const [notify, setNotify] = useState(false);
+  useEffect(() => {
+    if (notifications?.length > 0) {
+      setNotify((cur) => {
+        return notifications.find((not: any) => not.seen === false);
+      });
+    }
+  }, [notifications]);
   useEffect(() => {
     const validateUser = async () => {
       try {
@@ -81,10 +95,12 @@ const Navbar = () => {
               className="flex items-center hover:text-gray-200"
             >
               <IoNotificationsSharp className="text-2xl" />
-              <span className="flex absolute -mt-5 ml-5">
-                <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
-              </span>
+              {notify && (
+                <span className="flex absolute -mt-5 ml-5">
+                  <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
+                </span>
+              )}
             </button>
             <Link href="/profile">
               <div className="avatar">
