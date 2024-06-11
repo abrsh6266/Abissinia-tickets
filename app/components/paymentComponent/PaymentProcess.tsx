@@ -15,7 +15,7 @@ const PaymentProcess = () => {
     setSelectedPaymentMethod(paymentMethod);
   };
   return (
-    <form method="dialog" className="p-4 ">
+    <form method="dialog" className="p-4 overflow-y-hidden">
       <div className="space-y-4">
         <label className="input input-bordered flex items-center gap-2">
           <input
