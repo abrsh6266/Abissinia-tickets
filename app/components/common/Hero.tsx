@@ -18,6 +18,7 @@ const Hero = () => {
           href={'/schedule'}
         >
           <HeroBtn />
+          <button>Movie makers</button>
         </Link>
       </div>
     </section>
