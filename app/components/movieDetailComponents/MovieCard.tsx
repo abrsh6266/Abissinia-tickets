@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Movie, Movie2 } from "../../data";
 import { BiStar } from "react-icons/bi";
 import Link from "next/link";
