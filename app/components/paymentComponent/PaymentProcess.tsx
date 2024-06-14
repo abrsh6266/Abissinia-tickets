@@ -41,13 +41,16 @@ const PaymentProcess = () => {
             className="grow"
             placeholder="Email"
             value={email}
+            required
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
         <label className="block">Pay With</label>
         <a
           className={`btn btn-primary rounded-lg ${
-            selectedPaymentMethod === "Chapa"?'border-4 border-green-400 ':''
+            selectedPaymentMethod === "Chapa"
+              ? "border-4 border-green-400 "
+              : ""
           }`}
           onClick={() => handlePaymentMethodSelect("Chapa")}
         >

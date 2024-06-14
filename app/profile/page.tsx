@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import PublicProfile from "../components/profileComponents/PublicProfile";
 import Aside from "../components/profileComponents/Aside";
 import AccountDelete from "../components/profileComponents/AccountDelete";
+import ApprovedBooking from "../components/profileComponents/BookingComponent";
 
 const Profile = () => {
   const [page, setPage] = useState(1);
@@ -25,7 +26,7 @@ const Profile = () => {
       </aside>
       {page===1 && <PublicProfile />}
       {page===2 && <AccountDelete />}
-      {page===3 && <PublicProfile />}
+      {page===3 && <ApprovedBooking />}
     </div>
   );
 };
