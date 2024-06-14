@@ -19,7 +19,7 @@ const Header = () => {
     <header className="bg-neutral py-2 text-neutral-content">
       <div className="align-element flex justify-between items-center">
         <Link href="/" className="text-lg font-bold">
-          MovieApp
+          Abissinia
         </Link>
         <div className="flex gap-x-4 sm:gap-x-8 items-center">
           {user ? (

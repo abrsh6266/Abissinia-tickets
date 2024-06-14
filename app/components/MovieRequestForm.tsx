@@ -11,7 +11,8 @@ import { customFetch2 } from "../utils";
 
 interface FormData {
   title: string;
-  duration: string;
+  durationHours: string;
+  durationMinutes: string;
   releaseDate: string;
   poster: File | null;
   posterURL: string;
@@ -23,7 +24,8 @@ interface FormData {
 const MovieRequestForm = () => {
   const [formData, setFormData] = useState<FormData>({
     title: "",
-    duration: "",
+    durationHours: "",
+    durationMinutes: "",
     releaseDate: "",
     poster: null,
     posterURL: "",
@@ -46,10 +48,13 @@ const MovieRequestForm = () => {
     if (files && files.length > 0) {
       const file = files[0];
       setFormData((prevData) => ({ ...prevData, poster: file }));
-      
+
       const reader = new FileReader();
       reader.onloadend = () => {
-        setFormData((prevData) => ({ ...prevData, posterURL: reader.result as string }));
+        setFormData((prevData) => ({
+          ...prevData,
+          posterURL: reader.result as string,
+        }));
       };
       reader.readAsDataURL(file);
     }
@@ -90,9 +95,13 @@ const MovieRequestForm = () => {
       const posterURL = await handleUpload();
       const formDataWithPosterURL = { ...formData, posterURL };
 
+      const durationInMinutes =
+        parseInt(formDataWithPosterURL.durationHours) * 60 +
+        parseInt(formDataWithPosterURL.durationMinutes);
+
       const requestBody = {
         title: formDataWithPosterURL.title,
-        duration: parseInt(formDataWithPosterURL.duration),
+        duration: durationInMinutes,
         releaseDate: new Date(formDataWithPosterURL.releaseDate),
         posterURL: formDataWithPosterURL.posterURL,
         description: formDataWithPosterURL.description,
@@ -103,6 +112,19 @@ const MovieRequestForm = () => {
       const response = await customFetch2.post(`/movie-requests`, requestBody);
 
       toast.success("Form submitted successfully!");
+
+      // Reset form data to initial values
+      setFormData({
+        title: "",
+        durationHours: "",
+        durationMinutes: "",
+        releaseDate: "",
+        poster: null,
+        posterURL: "",
+        description: "",
+        yourName: "",
+        yourEmail: "",
+      });
     } catch (error) {
       toast.error("Form submission failed. Please try again.");
       console.error(error);
@@ -120,7 +142,7 @@ const MovieRequestForm = () => {
             className="object-cover w-40 h-40 p-1 ring-indigo-300 dark:ring-indigo-500"
             src={
               formData.posterURL ||
-              "https://firebasestorage.googleapis.com/v0/b/abissinia-tickets.appspot.com/o/images%2Favatar2.png?alt=media&token=e591a9bd-aeb6-4cbc-ba31-2c286f6f6f1c"
+              "https://firebasestorage.googleapis.com/v0/b/abissinia-tickets.appspot.com/o/posters%2Fsample.jpg?alt=media&token=627881fa-b6cc-48ef-b679-e797e07f254f"
             }
             alt="Bordered avatar"
           />
@@ -150,16 +172,27 @@ const MovieRequestForm = () => {
         </div>
         <div className="form-control">
           <label className="input input-bordered flex items-center gap-2">
-            Duration
-            <input
-              type="number"
-              name="duration"
-              value={formData.duration}
-              onChange={handleChange}
-              className="grow input input-bordered"
-              placeholder="Enter duration in minutes"
-              required
-            />
+            Duration (Hours and Minutes)
+            <div className="flex space-x-2">
+              <input
+                type="number"
+                name="durationHours"
+                value={formData.durationHours}
+                onChange={handleChange}
+                className="input input-bordered w-24"
+                placeholder="Hours"
+                required
+              />
+              <input
+                type="number"
+                name="durationMinutes"
+                value={formData.durationMinutes}
+                onChange={handleChange}
+                className="input input-bordered w-24"
+                placeholder="Minutes"
+                required
+              />
+            </div>
           </label>
         </div>
         <div className="form-control">
