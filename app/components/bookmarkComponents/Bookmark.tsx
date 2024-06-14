@@ -88,13 +88,6 @@ const Bookmark = ({ booking }: { booking: any }) => {
             </div>
           </div>
         </div>
-        <div className="md:ml-auto md:text-right">
-          <div className="mt-6">
-            <h4 className="text-lg font-bold">
-              <p className="mr-2 font-medium">{order.price}ETB</p>
-            </h4>
-          </div>
-        </div>
       </div>
     </div>
   );

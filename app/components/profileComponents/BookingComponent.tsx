@@ -68,14 +68,6 @@ const ApprovedBooking = () => {
               <Bookmark key={nanoid()} booking={booking} />
             ))}
           </div>
-          <div className="shadow-md p-6">
-            <h3 className="text-xl font-extrabold border-b pb-4">Summary</h3>
-            <ul className="divide-y mt-6">
-              <li className="flex flex-wrap gap-4 text-md py-4 font-bold">
-                Total <span className="ml-auto">{total} ETB</span>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>
