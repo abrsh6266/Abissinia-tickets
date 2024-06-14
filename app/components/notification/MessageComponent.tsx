@@ -1,6 +1,8 @@
 import React from "react";
 import { FaUser, FaTrash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setShowNotification } from "@/app/features/user/userSlice";
 
 interface NotificationProps {
   notification: {
@@ -14,10 +16,19 @@ interface NotificationProps {
   onDelete: () => void;
 }
 
-const MessageComponent: React.FC<NotificationProps> = ({ notification, onMarkAsSeen, onDelete }) => {
+const MessageComponent: React.FC<NotificationProps> = ({
+  notification,
+  onMarkAsSeen,
+  onDelete,
+}) => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
+  const handleCloseNotification = () => {
+    dispatch(setShowNotification(false));
+  };
   const handleClick = () => {
+    handleCloseNotification();
     onMarkAsSeen();
     if (notification.link && notification.link !== "#") {
       router.push(notification.link);
@@ -44,10 +55,7 @@ const MessageComponent: React.FC<NotificationProps> = ({ notification, onMarkAsS
           </p>
         </div>
       </div>
-      <FaTrash
-        className="text-white cursor-pointer"
-        onClick={onDelete}
-      />
+      <FaTrash className="text-white cursor-pointer" onClick={onDelete} />
     </div>
   );
 };
