@@ -1,5 +1,6 @@
 import { BiStar } from "react-icons/bi";
-import { Movie, Movie2 } from "../../data";
+import { Movie2 } from "../../data";
+import { formatDate } from "@/app/utils";
 
 const MovieInfoCard = ({
   _id,
@@ -11,6 +12,7 @@ const MovieInfoCard = ({
   releaseDate,
   description,
   reviewId,
+  averageRating, // Add this line
 }: Movie2) => {
   return (
     <div className="max-w-2xl shadow overflow-hidden sm:rounded-lg">
@@ -32,7 +34,7 @@ const MovieInfoCard = ({
           <div className=" px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-md font-medium ">Released Year</dt>
             <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2">
-              {releaseDate}
+              {formatDate(releaseDate)}
             </dd>
           </div>
           <div className=" px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -43,20 +45,12 @@ const MovieInfoCard = ({
               })}
             </dd>
           </div>
-          {/* <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-md font-medium">Director</dt>
-            <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2">
-              {director.map((d) => {
-                return <span key={d}>{d}, </span>;
-              })}
-            </dd>
-          </div> */}
-          {/* <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-md font-medium">Rating</dt>
-            <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2">
-              <BiStar className="inline mb-2 text-xl" /> {rating}
+            <dd className="mt-1 text-2xl sm:mt-0 sm:col-span-2">
+              <BiStar className="inline mb-2 text-yellow-500" /> {averageRating.toFixed(1)}
             </dd>
-          </div> */}
+          </div>
           <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-md font-medium">Description</dt>
             <dd className="mt-1 text-sm sm:mt-0 sm:col-span-2">

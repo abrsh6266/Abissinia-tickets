@@ -15,7 +15,7 @@ const Hero = () => {
           preferred seats in advance.
         </p>
         <Link
-          href={'/film-showtimes-tickets'}
+          href={'/schedule'}
         >
           <HeroBtn />
         </Link>

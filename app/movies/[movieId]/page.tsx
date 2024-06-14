@@ -19,6 +19,7 @@ const Details = ({ params }: Props) => {
   useEffect(() => {
     dispatch(setSelectedMovie(null));
     if (data) {
+      console.log(data);
       setMovie(data);
     }
   }, [data]);

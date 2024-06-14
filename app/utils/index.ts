@@ -71,3 +71,12 @@ export function transformSeatData(hallData: HallData): TransformedSeat[] {
 
   return transformedSeats;
 }
+
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+}

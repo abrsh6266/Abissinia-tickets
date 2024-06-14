@@ -1,9 +1,8 @@
 import useFetchData from "@/api/getData";
 import { Movie2, shuffleArray } from "@/app/data";
-import { RootState } from "@/app/store/store";
+import { formatDate } from "@/app/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 const NewMovies = () => {
   const { data } = useFetchData("movies", 1, 10);
@@ -16,7 +15,7 @@ const NewMovies = () => {
   const [movies, setMovies] = useState<Movie2[]>([]);
 
   useEffect(() => {
-    if (data.movies && Array.isArray(data.movies)) {
+    if (data?.movies && Array.isArray(data.movies)) {
       setMovies(selectFiveMovies(data.movies));
     }
   }, [data]);
@@ -42,7 +41,9 @@ const NewMovies = () => {
                   <div className="text-white left-5 top-5 p-1 -bottom-16 duration-500 group-hover:-translate-y-40 bg-gray-900 bg-opacity-40 h-16 w-52">
                     <span>{movie.title}</span>
                     <br />
-                    <span className="text-xs">{movie.releaseDate}</span>{" "}
+                    <span className="text-xs">
+                      {formatDate(movie.releaseDate)}
+                    </span>{" "}
                     {/* Display release year */}
                   </div>
                 </Link>
@@ -53,7 +54,9 @@ const NewMovies = () => {
                   className="flex flex-col font-semibold py-2.5 border border-black hover:border-blue-700 rounded-xl"
                 >
                   <span>{movie.title}</span>
-                  <span className="text-xs">({movie.releaseDate})</span>{" "}
+                  <span className="text-xs">
+                    {formatDate(movie.releaseDate)}
+                  </span>{" "}
                   {/* Display release year */}
                 </Link>
               )}

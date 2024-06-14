@@ -162,6 +162,7 @@ export interface Movie2 {
   country: string;
   description: string;
   releaseDate: string;
+  averageRating: number;
   reviewId: Review[];
 }
 
