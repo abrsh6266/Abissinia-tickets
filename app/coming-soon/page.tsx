@@ -7,7 +7,10 @@ import NewMovies from "../components/comingComponents/NewMovies";
 import PaginationContainer from "../components/common/PaginationContainer";
 import Loading from "../components/common/Loading";
 import { useDispatch, useSelector } from "react-redux";
-import { setPage, setPageCount } from "@/app/features/pagination/paginationSlice";
+import {
+  setPage,
+  setPageCount,
+} from "@/app/features/pagination/paginationSlice";
 import { RootState } from "../store/store";
 import useFetchMoviesByGenre from "@/api/fetchData";
 
@@ -15,12 +18,15 @@ const ComingSoon = () => {
   const dispatch = useDispatch();
   const page = useSelector((state: RootState) => state.paginationState.page);
   const limit = 3;
+  const [genre, setGenre] = useState<string>("Action"); // Default genre
 
-  const [selectedGenre, setSelectedGenre] = useState<string>("");
+  const { data, isLoading, isError } = useFetchMoviesByGenre(
+    genre,
+    page,
+    limit
+  );
 
-  const { data, isLoading, isError } = useFetchMoviesByGenre(selectedGenre, page, limit);
-
-  const selectThreeMovies = (data: Movie2[]): Movie2[] => {
+  const selectFiveMovies = (data: Movie2[]): Movie2[] => {
     const shuffledMovies = shuffleArray(data);
     return shuffledMovies.slice(0, 3);
   };
@@ -29,15 +35,10 @@ const ComingSoon = () => {
 
   useEffect(() => {
     if (data && Array.isArray(data.movies)) {
-      setMovies(selectThreeMovies(data.movies));
+      setMovies(selectFiveMovies(data.movies));
       dispatch(setPageCount(data.totalPages));
     }
   }, [data, dispatch]);
-
-  const handleGenreSelect = (genre: string) => {
-    setSelectedGenre(genre);
-    dispatch(setPage(1)); // Reset to the first page on genre change
-  };
 
   if (isLoading) {
     return (
@@ -54,10 +55,12 @@ const ComingSoon = () => {
   return (
     <div className="align-element flex flex-col gap-5 px-3 md:mx-auto lg:flex-row overflow-x-hidden">
       <aside className="hidden py-4 md:w-1/3 lg:w-1/5 lg:block">
-        <Genre onGenreSelect={handleGenreSelect} />
+        <Genre setGenre={setGenre} /> {/* Pass setGenre to Genre component */}
       </aside>
       <div>
-        <h2 className="pl-3 mb-4 text-3xl font-semibold mt-10">Upcoming Movies</h2>
+        <h2 className="pl-3 mb-4 text-3xl font-semibold mt-10">
+          Upcoming Movies
+        </h2>
         {movies.length > 0 ? (
           movies.map((m) => <ComingMovieCard {...m} key={m._id} />)
         ) : (
