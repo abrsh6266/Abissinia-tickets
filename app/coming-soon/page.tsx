@@ -5,20 +5,22 @@ import ComingMovieCard from "../components/comingComponents/ComingMovieCard";
 import Genre from "../components/comingComponents/Genre";
 import NewMovies from "../components/comingComponents/NewMovies";
 import PaginationContainer from "../components/common/PaginationContainer";
-import useFetchData from "@/api/getData";
 import Loading from "../components/common/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { setPage, setPageCount } from "@/app/features/pagination/paginationSlice";
 import { RootState } from "../store/store";
+import useFetchMoviesByGenre from "@/api/fetchData";
 
 const ComingSoon = () => {
   const dispatch = useDispatch();
   const page = useSelector((state: RootState) => state.paginationState.page);
   const limit = 3;
 
-  const { data, isLoading, isError } = useFetchData("movies", page, limit);
+  const [selectedGenre, setSelectedGenre] = useState<string>("");
 
-  const selectFiveMovies = (data: Movie2[]): Movie2[] => {
+  const { data, isLoading, isError } = useFetchMoviesByGenre(selectedGenre, page, limit);
+
+  const selectThreeMovies = (data: Movie2[]): Movie2[] => {
     const shuffledMovies = shuffleArray(data);
     return shuffledMovies.slice(0, 3);
   };
@@ -27,10 +29,15 @@ const ComingSoon = () => {
 
   useEffect(() => {
     if (data && Array.isArray(data.movies)) {
-      setMovies(selectFiveMovies(data.movies));
+      setMovies(selectThreeMovies(data.movies));
       dispatch(setPageCount(data.totalPages));
     }
   }, [data, dispatch]);
+
+  const handleGenreSelect = (genre: string) => {
+    setSelectedGenre(genre);
+    dispatch(setPage(1)); // Reset to the first page on genre change
+  };
 
   if (isLoading) {
     return (
@@ -47,7 +54,7 @@ const ComingSoon = () => {
   return (
     <div className="align-element flex flex-col gap-5 px-3 md:mx-auto lg:flex-row overflow-x-hidden">
       <aside className="hidden py-4 md:w-1/3 lg:w-1/5 lg:block">
-        <Genre />
+        <Genre onGenreSelect={handleGenreSelect} />
       </aside>
       <div>
         <h2 className="pl-3 mb-4 text-3xl font-semibold mt-10">Upcoming Movies</h2>
