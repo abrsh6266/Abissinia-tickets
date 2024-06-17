@@ -59,7 +59,7 @@ const Schedule = () => {
 
   const getDayOfWeek = (dateString: string) => {
     const date = new Date(dateString);
-    return daysOfWeek[date.getUTCDay()]; // getUTCDay() returns the day of the week (0-6) where 0 is Sunday
+    return daysOfWeek[date.getUTCDay()];
   };
 
   useEffect(() => {

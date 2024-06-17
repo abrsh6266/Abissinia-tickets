@@ -1,30 +1,38 @@
 import React from "react";
 import SmallSize from "../imagesComponent/SmallSize";
 
-// Define a type for the days of the week
-type DayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday";
+interface BookingProps {
+  booking: {
+    movieShowId: {
+      movieId: {
+        poster: string;
+        title: string;
+      };
+      hallId: {
+        name: string;
+      };
+      showTime: any[];
+    };
+    seats: {
+      booked: { seatNumber: string }[];
+    };
+    order: {
+      snacks: { snackId: { name: string } }[];
+      price: number;
+    };
+    status: string;
+    day: string; // assuming this is still needed for some other reason
+    time: string;
+    bookingDate: string;
+  };
+}
 
-// Mapping of days to their index for comparison
-const daysOfWeek: Record<DayOfWeek, number> = {
-  Monday: 1,
-  Tuesday: 2,
-  Wednesday: 3,
-  Thursday: 4,
-  Friday: 5,
-  Saturday: 6,
-  Sunday: 7,
-};
+const Bookmark = ({ booking }: BookingProps) => {
+  const { movieShowId, seats, order, bookingDate,day } = booking;
+  const { movieId, hallId } = movieShowId;
+  const snacks = order.snacks.map((snack) => snack.snackId.name).join(", ");
+  const seatNumbers = seats.booked.map((seat) => seat.seatNumber).join(", ");
 
-const Bookmark = ({ booking }: { booking: any }) => {
-  const { movieShowId, seats, order, status, day, time, bookingDate } = booking;
-  const { movieId, hallId, showTime } = movieShowId;
-  const snacks = order.snacks
-    .map((snack: any) => snack.snackId.name)
-    .join(", ");
-  const seatNumbers = seats.booked
-    .map((seat: any) => seat.seatNumber)
-    .join(", ");
-  
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -37,21 +45,18 @@ const Bookmark = ({ booking }: { booking: any }) => {
     });
   }
 
-  function isWatched(bookedDay: DayOfWeek, bookedTime: string): boolean {
-    const currentDayIndex = new Date().getDay() === 0 ? 7 : new Date().getDay(); // getDay() returns 0 for Sunday
-    const bookedDayIndex = daysOfWeek[bookedDay];
+  function isWatched(bookedDate: string, bookedTime: string): boolean {
+    const currentDateTime = new Date();
+    const bookedDateTime = new Date(
+      `${bookedDate}T${bookedTime}`.substring(0, 24)
+    );
+    console.log("CURRENT TIME", currentDateTime);
+    console.log("BOOKED TIME", bookedDateTime);
 
-    if (currentDayIndex > bookedDayIndex) {
-      return true;
-    } else if (currentDayIndex === bookedDayIndex) {
-      const currentTime = new Date().toLocaleTimeString("en-US", { hour: '2-digit', minute: '2-digit', hour12: true });
-      return currentTime > bookedTime;
-    } else {
-      return false;
-    }
+    return currentDateTime > bookedDateTime;
   }
 
-  const watched = isWatched(day as DayOfWeek, time);
+  const watched = isWatched(day, booking.time);
 
   return (
     <div className="flex items-start max-sm:flex-col gap-8 py-6">
@@ -63,7 +68,7 @@ const Bookmark = ({ booking }: { booking: any }) => {
             <h6 className="text-md mt-2">
               Date: <strong className="ml-2">{formatDate(bookingDate)}</strong>
             </h6>
-            <h6 className="text-md ">
+            <h6 className="text-md">
               Seats: <strong className="ml-2">{seatNumbers}</strong>
             </h6>
             <h6 className="text-md mt-2">
@@ -73,18 +78,24 @@ const Bookmark = ({ booking }: { booking: any }) => {
               Hall: <strong className="ml-2">{hallId.name}</strong>
             </h6>
             <h6 className="text-md mt-2">
-              Price: <strong className="ml-2">{order.price}ETB</strong>
+              Price: <strong className="ml-2">{order.price} ETB</strong>
             </h6>
             <h6 className="text-md mt-2">
-              Day: <strong className="ml-2">{day}</strong>
+              Day: <strong className="ml-2">{booking.day}</strong>
             </h6>
             <h6 className="text-md mt-2">
-              Time: <strong className="ml-2">{time}</strong>
+              Time: <strong className="ml-2">{booking.time}</strong>
             </h6>
           </div>
           <div className="mt-6 flex flex-wrap gap-6">
-            <div className={`badge ${watched ? 'badge-accent border rounded-md border-green-500 text-green-400' : 'badge-secondary border rounded-md border-yellow-500 text-yellow-400'}`}>
-              {watched ? 'Watched' : 'Pending'}
+            <div
+              className={`badge ${
+                watched
+                  ? "badge-accent border rounded-md border-green-500 text-green-400"
+                  : "badge-secondary border rounded-md border-yellow-500 text-yellow-400"
+              }`}
+            >
+              {watched ? "Watched" : "Pending"}
             </div>
           </div>
         </div>
