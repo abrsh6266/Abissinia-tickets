@@ -6,8 +6,19 @@ import Review from "./Review";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store/store";
+import { useEffect, useState } from "react";
+import { customFetch2 } from "@/app/utils";
 
 const MovieDetail = ({ movie }: { movie: Movie2 }) => {
+  const [scheduled, setScheduled] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await customFetch2(`/movie-shows/by-movie/${movie._id}`);
+      const result = await response.data;
+      setScheduled(result.length > 0);
+    };
+    fetchData();
+  }, []);
   const { user } = useSelector((state: RootState) => state.userState);
   return (
     <div className="align-element shadow-gray-700 shadow-xl mb-6">
@@ -24,29 +35,30 @@ const MovieDetail = ({ movie }: { movie: Movie2 }) => {
           <MovieInfoCard {...movie} />
         </div>
       </div>
-      {user?.id ? (
-        <Link
-          href={`/ticket-purchase/${movie?._id}`}
-          className="mt-4 mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
-        >
-          Get Tickets <RxArrowBottomRight />
-        </Link>
-      ) : (
-        <Link
-          href={`/login`}
-          className="mt-4 mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
-        >
-          please login to get tickets
-          <RxArrowBottomRight />
-        </Link>
-      )}
+      {scheduled &&
+        (user?.id ? (
+          <Link
+            href={`/ticket-purchase/${movie?._id}`}
+            className="mt-4 mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
+          >
+            Get Tickets <RxArrowBottomRight />
+          </Link>
+        ) : (
+          <Link
+            href={`/login`}
+            className="mt-4 mx-20 align-element btn glass bg-blue-700 hover:bg-blue-800 rounded duration-300"
+          >
+            please login to get tickets
+            <RxArrowBottomRight />
+          </Link>
+        ))}
       <div>
         <div className="ml-2 col-span-full my-2">
           <h1 className="uppercase tracking-wide no-underline hover:no-underline font-bold  text-xl ">
             Reviews
           </h1>
         </div>
-        <Review reviews={movie.reviewId} movieId={movie._id}/>
+        <Review reviews={movie.reviewId} movieId={movie._id} />
       </div>
     </div>
   );
