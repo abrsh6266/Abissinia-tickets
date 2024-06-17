@@ -30,7 +30,7 @@ const SlickCarousel = () => {
                   <Image
                     src={image}
                     alt={name}
-                    className="bg-black object-cover w-full h-full rounded-lg"
+                    className="object-cover w-full h-full rounded-lg"
                   />
                   <div className="absolute left-2 top-20 lg:w-[400px] lg:left-[450px] xl:w-[600px]  text-center text-white bg-black bg-opacity-50 rounded-lg">
                     <p className="text-xl">{quote}</p>

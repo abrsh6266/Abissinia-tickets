@@ -28,7 +28,7 @@ interface BookingProps {
 }
 
 const Bookmark = ({ booking }: BookingProps) => {
-  const { movieShowId, seats, order, bookingDate,day } = booking;
+  const { movieShowId, seats, order, bookingDate, day } = booking;
   const { movieId, hallId } = movieShowId;
   const snacks = order.snacks.map((snack) => snack.snackId.name).join(", ");
   const seatNumbers = seats.booked.map((seat) => seat.seatNumber).join(", ");
@@ -91,8 +91,8 @@ const Bookmark = ({ booking }: BookingProps) => {
             <div
               className={`badge ${
                 watched
-                  ? "badge-accent border rounded-md border-green-500 text-green-400"
-                  : "badge-secondary border rounded-md border-yellow-500 text-yellow-400"
+                  ? "badge-accent border rounded-md border-green-500"
+                  : "badge-secondary border rounded-md border-yellow-500"
               }`}
             >
               {watched ? "Watched" : "Pending"}
