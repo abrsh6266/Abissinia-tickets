@@ -27,7 +27,7 @@ interface FormData {
 const MovieRequestForm = () => {
   const user = useSelector((state: RootState) => state.userState.user);
   const [formData, setFormData] = useState<FormData>({
-    userId: user.id,
+    userId: user?.id,
     title: "",
     durationHours: "",
     durationMinutes: "",
@@ -121,7 +121,7 @@ const MovieRequestForm = () => {
 
       // Reset form data to initial values
       setFormData({
-        userId: user.id,
+        userId: user?.id,
         title: "",
         durationHours: "",
         durationMinutes: "",
