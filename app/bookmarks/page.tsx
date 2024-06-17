@@ -34,7 +34,7 @@ const Page = () => {
   }
 
   if (isError) {
-    return <div>Error loading data</div>; // Show an error state
+    return <div>No booking history</div>; // Show an error state
   }
 
   return (
