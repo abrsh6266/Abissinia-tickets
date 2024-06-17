@@ -8,8 +8,11 @@ import {
 import { storage } from "@/app/firebase/firebaseConfig";
 import { toast } from "react-toastify";
 import { customFetch2 } from "../utils";
+import { RootState } from "../store/store";
+import { useSelector } from "react-redux";
 
 interface FormData {
+  userId: string;
   title: string;
   durationHours: string;
   durationMinutes: string;
@@ -22,7 +25,9 @@ interface FormData {
 }
 
 const MovieRequestForm = () => {
+  const user = useSelector((state: RootState) => state.userState.user);
   const [formData, setFormData] = useState<FormData>({
+    userId: user.id,
     title: "",
     durationHours: "",
     durationMinutes: "",
@@ -100,6 +105,7 @@ const MovieRequestForm = () => {
         parseInt(formDataWithPosterURL.durationMinutes);
 
       const requestBody = {
+        userId: formData.userId,
         title: formDataWithPosterURL.title,
         duration: durationInMinutes,
         releaseDate: new Date(formDataWithPosterURL.releaseDate),
@@ -115,6 +121,7 @@ const MovieRequestForm = () => {
 
       // Reset form data to initial values
       setFormData({
+        userId: user.id,
         title: "",
         durationHours: "",
         durationMinutes: "",
