@@ -57,6 +57,11 @@ const Schedule = () => {
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
 
+  const getDayOfWeek = (dateString: string) => {
+    const date = new Date(dateString);
+    return daysOfWeek[date.getUTCDay()]; // getUTCDay() returns the day of the week (0-6) where 0 is Sunday
+  };
+
   useEffect(() => {
     setLoading(true);
     if (data && Array.isArray(data.movies)) {
@@ -87,7 +92,9 @@ const Schedule = () => {
         (movie) =>
           movie.showTime &&
           movie.showTime.some((show) =>
-            show.showTime.some((week) => week.day === selectedDay)
+            show.showTime.some(
+              (week) => getDayOfWeek(week.day) === selectedDay
+            )
           )
       );
       setFilteredMovies(filtered);
