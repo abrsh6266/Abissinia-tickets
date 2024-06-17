@@ -27,11 +27,11 @@ const Page = () => {
   }
 
   return (
-    <>
+    <div>
       {snacks.map((snack) => (
         <SnackAndDrinks key={snack._id} snack={snack} />
       ))}
-    </>
+    </div>
   );
 };
 
