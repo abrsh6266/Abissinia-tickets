@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const Genre = ({ setGenre }: { setGenre: (genre: string) => void }) => {
   return (
     <motion.div
-      className="sticky flex flex-col gap-2 p-4 text-sm md:border-r overflow-auto h-[500px]"
+      className="sticky flex flex-col gap-2 p-4 text-sm md:border-r"
       variants={gridSquareVariant}
       initial="hidden"
       animate="show"

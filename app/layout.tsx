@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <StoreProvider>
-      <html lang="en" data-theme="black">
+      <html lang="en" data-theme="dark">
         <TanstackProvider>
           <body className={inter.className}>
             <NextTopLoader

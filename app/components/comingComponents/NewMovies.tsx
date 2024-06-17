@@ -51,7 +51,7 @@ const NewMovies = () => {
                 <Link
                   key={movie._id}
                   href={`/movies/${movie._id}`}
-                  className="flex flex-col font-semibold py-2.5 border border-black hover:border-blue-700 rounded-xl"
+                  className="flex flex-col w-[170px] font-semibold py-2.5 border hover:border-blue-700 rounded-xl p-2"
                 >
                   <span>{movie.title}</span>
                   <span className="text-xs">

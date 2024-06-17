@@ -19,7 +19,7 @@ const SlickCarousel = () => {
     pauseOnHover: true,
   };
   return (
-    <section className="overflow-hidden bg-black rounded-lg">
+    <section className="overflow-hidden  rounded-lg">
       <div className="carousel-wrapper">
         <Slider {...settings}>
           {people.map((p) => {
