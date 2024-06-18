@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../features/user/userSlice";
 import { RootState } from "../../store/store";
@@ -25,19 +25,27 @@ const Header = () => {
           {user ? (
             <>
               <p className="text-xs sm:text-sm">Hello, {user.username}</p>
-              <Link href="/movie-request" className="btn btn-xs rounded-lg">
-                Request a Movie
-              </Link>
+              {user?.role === "Filmmaker" && (
+                <Link href="/movie-request" className="btn btn-xs rounded-lg">
+                  Request a Movie
+                </Link>
+              )}
               <button className="btn btn-xs rounded-lg" onClick={handleLogout}>
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link href="/login" className="link link-hover text-xs sm:text-sm">
+              <Link
+                href="/login"
+                className="link link-hover text-xs sm:text-sm"
+              >
                 Sign in
               </Link>
-              <Link href="/signup" className="link link-hover text-xs sm:text-sm">
+              <Link
+                href="/signup"
+                className="link link-hover text-xs sm:text-sm"
+              >
                 Create an Account
               </Link>
             </>
