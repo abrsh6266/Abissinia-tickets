@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import SmallSize from "../imagesComponent/SmallSize";
 
 interface BookingProps {
@@ -32,8 +32,6 @@ const Bookmark = ({ booking }: BookingProps) => {
   const { movieId, hallId } = movieShowId;
   const snacks = order.snacks.map((snack) => snack.snackId.name).join(", ");
   const seatNumbers = seats.booked.map((seat) => seat.seatNumber).join(", ");
-  
-  const printRef = useRef<HTMLDivElement>(null);
 
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -58,68 +56,104 @@ const Bookmark = ({ booking }: BookingProps) => {
 
   const watched = isWatched(day, booking.time);
 
-  const handlePrint = () => {
-    if (printRef.current) {
-      const printContent = printRef.current.innerHTML;
-      const originalContent = document.body.innerHTML;
+  function generatePrintableTicket(booking: BookingProps["booking"]): string {
+    const { movieShowId, seats, order, bookingDate, day, time } = booking;
+    const { movieId, hallId } = movieShowId;
+    const snacks = order.snacks.map((snack) => snack.snackId.name).join(", ");
+    const seatNumbers = seats.booked.map((seat) => seat.seatNumber).join(", ");
 
-      document.body.innerHTML = printContent;
-      window.print();
-      document.body.innerHTML = originalContent;
-      window.location.reload(); // Reload the page to restore original content
+    const formattedDate = formatDate(bookingDate);
+
+    return `
+      <div class="ticket">
+        <h2>Movie Ticket</h2>
+        <p><strong>Movie:</strong> ${movieId.title}</p>
+        <p><strong>Date:</strong> ${formattedDate}</p>
+        <p><strong>Time:</strong> ${day} ${time}</p>
+        <p><strong>Hall:</strong> ${hallId.name}</p>
+        <p><strong>Seats:</strong> ${seatNumbers}</p>
+        <p><strong>Snacks:</strong> ${snacks}</p>
+        <p><strong>Price:</strong> ${order.price} ETB</p>
+      </div>
+      <style>
+        .ticket {
+          font-family: Arial, sans-serif;
+          border: 1px solid #ddd;
+          padding: 20px;
+          margin: 20px;
+          width: 300px;
+        }
+        .ticket h2 {
+          text-align: center;
+          border-bottom: 1px solid #ddd;
+          padding-bottom: 10px;
+          margin-bottom: 20px;
+        }
+        .ticket p {
+          margin: 5px 0;
+        }
+      </style>
+    `;
+  }
+
+  function handlePrintClick() {
+    const printableTicket = generatePrintableTicket(booking);
+
+    const printWindow = window.open();
+    if (printWindow) {
+      printWindow.document.write(printableTicket);
+      printWindow.document.close();
+      printWindow.focus();
+      printWindow.print();
+      printWindow.close();
     }
-  };
+  }
 
   return (
     <div className="flex items-start max-sm:flex-col gap-8 py-6">
-      <div ref={printRef} className="printable-content">
-        <SmallSize img={movieId.poster} />
-        <div className="flex items-start gap-6 max-md:flex-col w-full">
+      <SmallSize img={movieId.poster} />
+      <div className="flex items-start gap-6 max-md:flex-col w-full">
+        <div>
+          <h3 className="text-xl font-extrabold mb-6">{movieId.title}</h3>
           <div>
-            <h3 className="text-xl font-extrabold mb-6">{movieId.title}</h3>
-            <div>
-              <h6 className="text-md mt-2">
-                Date: <strong className="ml-2">{formatDate(bookingDate)}</strong>
-              </h6>
-              <h6 className="text-md">
-                Seats: <strong className="ml-2">{seatNumbers}</strong>
-              </h6>
-              <h6 className="text-md mt-2">
-                Snacks: <strong className="ml-2">{snacks}</strong>
-              </h6>
-              <h6 className="text-md mt-2">
-                Hall: <strong className="ml-2">{hallId.name}</strong>
-              </h6>
-              <h6 className="text-md mt-2">
-                Price: <strong className="ml-2">{order.price} ETB</strong>
-              </h6>
-              <h6 className="text-md mt-2">
-                Day: <strong className="ml-2">{booking.day}</strong>
-              </h6>
-              <h6 className="text-md mt-2">
-                Time: <strong className="ml-2">{booking.time}</strong>
-              </h6>
+            <h6 className="text-md mt-2">
+              Date: <strong className="ml-2">{formatDate(bookingDate)}</strong>
+            </h6>
+            <h6 className="text-md">
+              Seats: <strong className="ml-2">{seatNumbers}</strong>
+            </h6>
+            <h6 className="text-md mt-2">
+              Snacks: <strong className="ml-2">{snacks}</strong>
+            </h6>
+            <h6 className="text-md mt-2">
+              Hall: <strong className="ml-2">{hallId.name}</strong>
+            </h6>
+            <h6 className="text-md mt-2">
+              Price: <strong className="ml-2">{order.price} ETB</strong>
+            </h6>
+            <h6 className="text-md mt-2">
+              Day: <strong className="ml-2">{booking.day}</strong>
+            </h6>
+            <h6 className="text-md mt-2">
+              Time: <strong className="ml-2">{booking.time}</strong>
+            </h6>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-6">
+            <div
+              className={`badge ${
+                watched
+                  ? "badge-accent border rounded-md border-green-500"
+                  : "badge-secondary border rounded-md border-yellow-500"
+              }`}
+            >
+              {watched ? "Watched" : "Pending"}
             </div>
-            <div className="mt-6 flex flex-wrap gap-6">
-              <div
-                className={`badge ${
-                  watched
-                    ? "badge-accent border rounded-md border-green-500"
-                    : "badge-secondary border rounded-md border-yellow-500"
-                }`}
-              >
-                {watched ? "Watched" : "Pending"}
-              </div>
-            </div>
+            <button className="btn btn-primary mt-6" onClick={handlePrintClick}>
+              Print Ticket
+            </button>
           </div>
         </div>
       </div>
-      <button
-        onClick={handlePrint}
-        className="bg-blue-500 text-white font-bold px-6 py-2 rounded-lg"
-      >
-        Print Ticket
-      </button>
     </div>
   );
 };
